@@ -1,7 +1,8 @@
 import * as React from "react";
-import { styled, alpha } from "@mui/material/styles";
+import { styled, alpha, useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import { Kanit } from "next/font/google";
-import { AppBar, Box, Toolbar, Typography, Button } from "@mui/material";
+import { AppBar, Box, Toolbar, Typography, Button, IconButton, Drawer, useMediaQuery } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import InputBase from "@mui/material/InputBase";
 
 const kanit = Kanit({
@@ -10,8 +11,6 @@ const kanit = Kanit({
 });
 
 type SearchAppBarProps = {
-  busqueda: string;
-  setBusqueda: React.Dispatch<React.SetStateAction<string>>;
   onFilter: (moneda?: string) => void;
 };
 
@@ -25,56 +24,72 @@ const monedas = [
   "cripto",
 ];
 
-const Search = styled("div")(({ theme }) => ({
-  position: "relative",
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  "&:hover": {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginLeft: 0,
-  width: "100%",
-  [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(1),
-    width: "auto",
-  },
-}));
+  // const theme = createTheme({
+  // palette: {
+  //   primary: {
+  //     main: '#5cbd00',
+  //   },
+  // },
+  // });
 
-const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: "100%",
-  position: "absolute",
-  pointerEvents: "none",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-}));
+export default function SearchAppBar({ onFilter }: SearchAppBarProps) {
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  width: "100%",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
-    },
-  },
-}));
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
+  }
 
-export default function SearchAppBar({
-  busqueda,
-  setBusqueda,
-  onFilter,
-}: SearchAppBarProps) {
+  console.log(theme)
+
+  const drawer = (
+    <Box
+      onClick={handleDrawerToggle}
+      sx={{
+        textAlign: 'center',
+        backgroundColor: 'green', 
+        height: '100%' 
+      }}
+    >
+      <Typography
+        variant="h6"
+        noWrap
+        component="div"
+        sx={{
+          flexGrow: 1,
+          color: 'white',
+          padding: '10px' 
+        }}
+      >
+        verdurita
+      </Typography>
+      {monedas.map((moneda) => (
+        <Button
+          key={moneda}
+          onClick={() => onFilter(moneda)}
+          sx={{ color: 'white', display: 'block', margin: '5px 0' }} 
+        >
+          {moneda}
+        </Button>
+      ))}
+    </Box>
+  );
+  
   return (
+    <ThemeProvider theme={theme}>
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="fixed" style={{ background: "green" }}>
         <Toolbar>
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2, display: { sm: 'none' } }}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography
             variant="h6"
             noWrap
@@ -87,11 +102,11 @@ export default function SearchAppBar({
           >
             verdurita
           </Typography>
-          {monedas.map((moneda) => (
+          {isMobile ? null : monedas.map((moneda) => (
             <Button
               key={moneda}
               onClick={() => onFilter(moneda)}
-              sx={{ color: "white" }}
+              sx={{ color: 'white' }}
             >
               {moneda}
             </Button>
@@ -110,10 +125,18 @@ export default function SearchAppBar({
             }}
           >
             {" "}
-            Limpiar
+            Todas
           </Button>
         </Toolbar>
       </AppBar>
+      <Drawer
+        anchor='left'
+        open={drawerOpen}
+        onClose={handleDrawerToggle}
+      >
+        {drawer}
+      </Drawer>
     </Box>
+    </ThemeProvider>
   );
 }
