@@ -6,7 +6,6 @@ import styles from "@/styles/Home.module.css";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import Grid from "@mui/material/Grid";
-import SearchAppBar from "@/core/components/MenuBar";
 
 const inter = Inter({ subsets: ["latin"] });
 const API_URL = "https://dolarapi.com/v1/dolares";
@@ -63,11 +62,6 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <SearchAppBar
-        busqueda={busqueda}
-        setBusqueda={setBusqueda}
-        onFilter={handleFilter}
-      />
       <main className={`${styles.main} ${inter.className}`}>
         {resultadosFiltrados
           .filter((moneda) =>
