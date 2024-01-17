@@ -1,11 +1,5 @@
-import * as React from "react";
-import {
-  styled,
-  alpha,
-  useTheme,
-  ThemeProvider,
-  createTheme,
-} from "@mui/material/styles";
+import React, { useState } from "react";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { Kanit } from "next/font/google";
 import {
   AppBar,
@@ -18,14 +12,15 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import { MonedaButton } from "../MonedaButton";
 
 const kanit = Kanit({
   subsets: ["latin"],
   weight: "400",
 });
 
-type SearchAppBarProps = {
-  onFilter: (moneda?: string) => void;
+type MenuBarProps = {
+  onFilter: (moneda?: string | undefined) => void;
 };
 
 const monedas = [
@@ -46,13 +41,23 @@ const theme = createTheme({
   },
 });
 
-export default function SearchAppBar({ onFilter }: SearchAppBarProps) {
+export default function MenuBar({ onFilter }: MenuBarProps) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  // const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const [selectedMoneda, setSelectedMoneda] = useState<string | null>(null);
 
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
+  };
+
+  const handleMonedaChange = (moneda: string) => {
+    if (selectedMoneda === moneda) {
+      setSelectedMoneda(null);
+      onFilter();
+    } else {
+      setSelectedMoneda(moneda);
+      onFilter(moneda);
+    }
   };
 
   const drawer = (
@@ -76,6 +81,16 @@ export default function SearchAppBar({ onFilter }: SearchAppBarProps) {
       >
         verdurita
       </Typography>
+      <Button
+        onClick={() => onFilter()}
+        sx={{
+          color: "white",
+          borderColor: "white",
+          marginLeft: "1"
+        }}
+      >
+        Todas
+      </Button>
       {monedas.map((moneda) => (
         <Button
           key={moneda}
@@ -113,38 +128,23 @@ export default function SearchAppBar({ onFilter }: SearchAppBarProps) {
               component="div"
               sx={{
                 flexGrow: 1,
-                display: { xs: "none", sm: "block" },
+                display: { xs: "block", sm: "none", md: "block" },
                 fontFamily: kanit.style.fontFamily,
               }}
             >
               verdurita
             </Typography>
-            <Button
-              onClick={() => onFilter()}
-              variant="outlined"
-              sx={{
-                color: "white",
-                borderColor: "white",
-                "&:hover": {
-                  borderColor: "white",
-                  backgroundColor: "white",
-                  color: "green",
-                },
-              }}
-            >
-              {" "}
-              Todas
-            </Button>
             {isMobile
               ? null
-              : monedas.map((moneda) => (
-                  <Button
+              : monedas.map((moneda, index) => (
+                  <MonedaButton
                     key={moneda}
-                    onClick={() => onFilter(moneda)}
-                    sx={{ color: "white" }}
-                  >
-                    {moneda}
-                  </Button>
+                    moneda={moneda}
+                    onFilter={handleMonedaChange}
+                    selected={selectedMoneda === moneda}
+                    isFirst={index === 0}
+                    isLast={index === monedas.length - 1}
+                  />
                 ))}
           </Toolbar>
         </AppBar>

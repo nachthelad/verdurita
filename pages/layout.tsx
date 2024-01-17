@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchAppBar from "@/core/components/MenuBar";
+import MenuBar from "@/core/components/MenuBar";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -9,7 +9,7 @@ type LayoutProps = {
 const Layout = ({ children, onFilter }: LayoutProps) => {
   return (
     <>
-      <SearchAppBar 
+      <MenuBar 
         onFilter={onFilter} 
       />      
       <div>{children}</div>
