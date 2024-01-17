@@ -7,6 +7,7 @@ import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import Grid from "@mui/material/Grid";
 import MenuBar from "@/core/components/MenuBar";
+import Footer from "@/core/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const API_URL = "https://dolarapi.com/v1/dolares";
@@ -99,6 +100,7 @@ export default function Home() {
                 </Grid>
               </React.Fragment>
             ))}
+          <Footer />
         </main>
       </div>
     </>

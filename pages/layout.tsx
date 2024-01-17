@@ -18,4 +18,3 @@ const Layout = ({ children, onFilter }: LayoutProps) => {
 };
 
 export default Layout;
-
