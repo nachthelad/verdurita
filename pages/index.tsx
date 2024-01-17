@@ -62,11 +62,6 @@ export default function Home() {
     );
   };
 
-  const mainStyle: React.CSSProperties = {
-    overflowY: "auto",
-    maxHeight: "calc(100vh - 1120px)", // Ajusta los 64px según la altura de tu MenuBar
-  };
-
   return (
     <>
       <Head>
@@ -79,7 +74,7 @@ export default function Home() {
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}
       >
         <MenuBar onFilter={handleFilter} />
-        <main className={`${styles.main} ${inter.className}`} style={mainStyle}>
+        <main className={`${styles.main} ${inter.className}`}>
           {resultadosFiltrados
             .filter((moneda) =>
               moneda.casa
