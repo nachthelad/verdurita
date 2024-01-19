@@ -8,6 +8,7 @@ import TitleItem from "@/core/components/TitleItem";
 import Grid from "@mui/material/Grid";
 import MenuBar from "@/core/components/MenuBar";
 import Footer from "@/core/components/Footer";
+import Box from "@mui/material/Box"
 
 const inter = Inter({ subsets: ["latin"] });
 const API_URL = "https://dolarapi.com/v1/dolares";
@@ -72,10 +73,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}
+        style={{ display: "flex", flexDirection: "column", height: "100vh", overflow:'hidden' }}
       >
-        <MenuBar onFilter={handleFilter} />
-        <main className={`${styles.main} ${inter.className}`}>
+        <main style={{padding: 16}}  className={`${styles.main} ${inter.className}`}>
+          <MenuBar onFilter={handleFilter} />
+          <Box sx={{overflow:'scroll', width:'100%'}}>
+
           {resultadosFiltrados
             .filter((moneda) =>
               moneda.casa
@@ -100,6 +103,7 @@ export default function Home() {
                 </Grid>
               </React.Fragment>
             ))}
+          </Box>
           <Footer />
         </main>
       </div>
