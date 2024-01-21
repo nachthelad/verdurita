@@ -20,7 +20,7 @@ export default function Home() {
   const handleFilter = (filtro?: string) => {
     setBusqueda(filtro ?? "");
   };
-  
+
   return (
     <>
       <CustomHead 
