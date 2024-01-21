@@ -4,17 +4,24 @@ import axios from "axios";
 
 const API_DOLAR_URL = "https://dolarapi.com/v1/dolares";
 const API_REAL_URL = "https://dolarapi.com/v1/cotizaciones/brl";
+const ordenMonedas = ["Oficial", "Blue", "Tarjeta", "Cripto", "Real Brasileño"];
 
 const useCurrencyData = () => {
   const [monedas, setMonedas] = useState<Moneda[]>([]);
   const [resultadosFiltrados, setResultadosFiltrados] = useState<Moneda[]>([]);
-  const ordenMonedas = ["Oficial", "Blue", "Tarjeta", "Cripto"];
 
   useEffect(() => {
     const cargarDatos = async () => {
       try {
-        const response = await axios.get<Moneda[]>(API_DOLAR_URL);
-        let datosProcesados = response.data
+        const [responseDolar, responseReal] = await Promise.all([
+          axios.get<Moneda[]>(API_DOLAR_URL),
+          axios.get<Moneda[]>(API_REAL_URL),
+        ]);
+  
+        const datosDolar = responseDolar.data;
+        const datosReal = Array.isArray(responseReal.data) ? responseReal.data : [responseReal.data];
+  
+        const datosProcesados = [...datosDolar, ...datosReal]
           .map((moneda) => ({
             ...moneda,
             promedio: (moneda.compra + moneda.venta) / 2,
@@ -27,29 +34,31 @@ const useCurrencyData = () => {
               (indexB === -1 ? ordenMonedas.length : indexB)
             );
           });
-
+  
         setMonedas(datosProcesados);
         setResultadosFiltrados(datosProcesados);
       } catch (error) {
         console.error("Hubo un error al cargar los datos", error);
       }
     };
-
+  
     cargarDatos();
   }, []);
 
   const handleFilter = (filtro?: string) => {
     setResultadosFiltrados(
       monedas.filter((moneda) =>
-        filtro
-          ? moneda.casa.toLowerCase() ===
-            filtro.replaceAll(" ", "").toLowerCase()
-          : true
-      )
-    );
-  };
-
-  return { monedas, handleFilter, resultadosFiltrados };
+      filtro
+      ? moneda.nombre.toLowerCase().includes(
+        filtro.trim().toLowerCase()
+        )
+        : true
+        )
+        );
+      };
+      
+      
+      return { monedas, handleFilter, resultadosFiltrados };
+      
 };
-
 export default useCurrencyData;
