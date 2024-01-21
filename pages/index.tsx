@@ -27,25 +27,25 @@ export default function Home() {
         title="verdurita" 
         description="Cotizaciones en tiempo real" 
         metaTags={[
-          { name: 'robots', content: 'index,follow' },
-          { name: 'keywords', content: 'currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio' },
-          { name: 'geo.region', content: 'AR' },
-          { name: 'geo.placename', content: 'Argentina' },
-          { name: 'geo.position', content: '-38.419264;-63.598919' }, 
-          { name: 'ICBM', content: '-38.419264, -63.598919' },
-          { name: 'language', content: 'ES' }, 
-          { property: 'og:type', content: 'website' },
-          { property: 'og:site_name', content: 'verdurita' }, 
-          { property: 'og:title', content: 'verdurita' },
-          { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
-          { property: 'og:image', content: 'URL to your image' }, // Replace with the URL to your image
-          { property: 'og:url', content: 'https://verdurita.vercel.app/' }, // Replace with the URL to your page
-          { property: 'og:locale', content: 'es_AR' }, 
-          { name: 'twitter:card', content: 'summary' },
-          { name: 'twitter:site', content: '@verdurita_app' }, // Replace with your Twitter handle
-          { name: 'twitter:title', content: 'verdurita' },
-          { name: 'twitter:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' },
-          { name: 'twitter:image', content: 'URL to your image' }, // Replace with the URL to your image
+          // { name: 'robots', content: 'index,follow' },
+          // { name: 'keywords', content: 'currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio' },
+          // { name: 'geo.region', content: 'AR' },
+          // { name: 'geo.placename', content: 'Argentina' },
+          // { name: 'geo.position', content: '-38.419264;-63.598919' }, 
+          // { name: 'ICBM', content: '-38.419264, -63.598919' },
+          // { name: 'language', content: 'ES' }, 
+          // { property: 'og:type', content: 'website' },
+          // { property: 'og:site_name', content: 'verdurita' }, 
+          // { property: 'og:title', content: 'verdurita' },
+          // { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
+          // { property: 'og:image', content: 'URL to your image' }, // Replace with the URL to your image
+          // { property: 'og:url', content: 'https://verdurita.vercel.app/' }, // Replace with the URL to your page
+          // { property: 'og:locale', content: 'es_AR' }, 
+          // { name: 'twitter:card', content: 'summary' },
+          // { name: 'twitter:site', content: '@verdurita_app' }, // Replace with your Twitter handle
+          // { name: 'twitter:title', content: 'verdurita' },
+          // { name: 'twitter:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' },
+          // { name: 'twitter:image', content: 'URL to your image' }, // Replace with the URL to your image
         ]}
       />
       <div
