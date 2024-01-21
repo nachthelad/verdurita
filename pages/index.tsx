@@ -30,24 +30,6 @@ export default function Home() {
           <meta name="robots" content="index,follow" />
           <meta name="keywords" content="currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio" />
         </Head>
-      {/* <CustomHead 
-        title="verdurita" 
-        description="Cotizaciones en tiempo real" 
-        metaTags={[
-          { name: 'robots', content: 'index,follow' },
-          { name: 'keywords', content: 'currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio' },
-          { name: 'geo.region', content: 'AR' },
-          { name: 'geo.placename', content: 'Argentina' },
-          { name: 'language', content: 'ES' }, 
-          { property: 'og:type', content: 'website' },
-          { property: 'og:site_name', content: 'verdurita' }, 
-          { property: 'og:title', content: 'verdurita' },
-          { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
-          { property: 'og:image', content: 'URL to your image' }, // Replace with the URL to your image
-          { property: 'og:url', content: 'https://verdurita.vercel.app/' }, // Replace with the URL to your page
-          { property: 'og:locale', content: 'es_AR' }, 
-        ]}
-      /> */}
       <div
         style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
         <main
@@ -65,7 +47,7 @@ export default function Home() {
               .filter((moneda) =>
                 moneda.nombre
                   .toLowerCase()
-                  .includes(busqueda.replaceAll(" ", "").toLowerCase())
+                  .includes(busqueda.toLowerCase())
               )
               .map((moneda: Moneda, index: number) => (
                 <React.Fragment key={index}>

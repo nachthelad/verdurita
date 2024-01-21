@@ -49,8 +49,7 @@ const useCurrencyData = () => {
     setResultadosFiltrados(
       monedas.filter((moneda) =>
         filtro
-          ? moneda.casa.toLowerCase() ===
-            filtro.replaceAll(" ", "").toLowerCase()
+          ? moneda.casa.toLowerCase()
           : true
       )
     );

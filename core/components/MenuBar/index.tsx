@@ -30,7 +30,7 @@ const monedas = [
   "tarjeta",
   "cripto",
   "real",
-  "contado",
+  "contado con liqui",
   "mayorista",
 ];
 
