@@ -1,12 +1,12 @@
 import Head from "next/head";
 
-interface MetaProps {
+type MetaProps = {
   name?: string;
   content?: string;
   property?: string;
 }
 
-interface CustomHeadProps {
+type CustomHeadProps = {
   title?: string;
   description?: string;
   metaTags?: MetaProps[];
