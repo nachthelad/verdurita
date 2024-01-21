@@ -23,16 +23,16 @@ type MenuBarProps = {
   onFilter: (moneda?: string | undefined) => void;
 };
 
-const monedas = [
-  "oficial",
-  "blue",
-  "bolsa",
-  "tarjeta",
-  "cripto",
-  "real",
-  "contado con liqui",
-  "mayorista",
-];
+const monedas: { [key: string]: string } = {
+  "oficial": "oficial",
+  "blue": "blue",
+  "bolsa": "bolsa",
+  "tarjeta": "tarjeta",
+  "cripto": "cripto",
+  "real": "real",
+  "ccl":"contado con liqui",
+  "mayorista": "mayorista",
+};
 
 const theme = createTheme({
   palette: {
@@ -92,10 +92,10 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
       >
         Todas
       </Button>
-      {monedas.map((moneda) => (
-        <Button
-          key={moneda}
-          onClick={() => onFilter(moneda)}
+      {Object.keys(monedas).map((key) => (
+      <Button
+        key={key}
+        onClick={() => onFilter(monedas[key])}
           sx={{
             color: "white",
             display: "flex",
@@ -103,7 +103,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
             margin: "5px 0",
           }}
         >
-          {moneda}
+          {key}
         </Button>
       ))}
     </Box>
@@ -137,15 +137,15 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
             </Typography>
             {isMobile
               ? null
-              : monedas.map((moneda, index) => (
-                  <MonedaButton
-                    key={moneda}
-                    moneda={moneda}
-                    onFilter={handleMonedaChange}
-                    selected={selectedMoneda === moneda}
-                    isFirst={index === 0}
-                    isLast={index === monedas.length - 1}
-                  />
+              : Object.keys(monedas).map((key, index) => (
+                <MonedaButton
+                  key={key}
+                  moneda={key}
+                  onFilter={() => handleMonedaChange(monedas[key])}
+                  selected={selectedMoneda === monedas[key]}
+                  isFirst={index === 0}
+                  isLast={index === Object.keys(monedas).length - 1}
+                />
                 ))}
           </Toolbar>
         </AppBar>
