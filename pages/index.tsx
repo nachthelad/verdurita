@@ -23,15 +23,6 @@ export default function Home() {
 
   return (
     <>
-      {/*<Head>
-        <title>verdurita</title>
-        <meta name="description" content="Cotizaciones en tiempo real" />
-        <meta name="robots" content="index,follow" />
-        <meta
-          name="keywords"
-          content="currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio"
-        />
-      </Head>*/}
       <CustomHead 
         title="verdurita" 
         description="Cotizaciones en tiempo real" 
@@ -45,8 +36,8 @@ export default function Home() {
           { property: 'og:site_name', content: 'verdurita' }, 
           { property: 'og:title', content: 'verdurita' },
           { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
-          { property: 'og:image', content: 'URL to your image' }, // Replace with the URL to your image
-          { property: 'og:url', content: 'https://verdurita.vercel.app/' }, // Replace with the URL to your page
+          { property: 'og:image', content: '@/public/logo.png' },
+          { property: 'og:url', content: 'https://verdurita.vercel.app/' },
           { property: 'og:locale', content: 'es_AR' }, 
         ]}
       />
