@@ -18,7 +18,6 @@ const CustomHead: React.FC<CustomHeadProps> = ({
   metaTags = [],
 }) => (
   <Head>
-    <html lang="es" />
     <title>{title}</title>
     <meta charSet="UTF-8" />
     <meta name="description" content={description} />
