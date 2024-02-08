@@ -17,6 +17,8 @@ const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     background-color: #f5f5f5;
     border-radius: 10px;
+    max-height: 90vh; 
+    overflow-y: auto;
   }
 `;
 
