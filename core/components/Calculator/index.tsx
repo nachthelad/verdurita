@@ -85,23 +85,34 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nuevoMontoPesos = e.target.value || "";
-    const montoEnDolares = nuevoMontoPesos
-      ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", { locale: es })
-      : "";
-    setMontoPesos(e.target.value || "");
-    setMontoDolares(montoEnDolares);
+    const valor = e.target.value;
+    const esNumero = /^[0-9]*$/.test(valor);
+  
+    if (esNumero) {
+      const nuevoMontoPesos = valor || "";
+      const montoEnDolares = nuevoMontoPesos
+        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", { locale: es })
+        : "";
+      setMontoPesos(valor || "");
+      setMontoDolares(montoEnDolares);
+    }
   };
+  
 
   const handleDollarAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const nuevoMontoDolares = e.target.value || "";
-    const montoEnPesos = nuevoMontoDolares
-      ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
-          locale: es,
-        })
-      : "";
-    setMontoDolares(e.target.value || "");
-    setMontoPesos(montoEnPesos);
+    const valor = e.target.value;
+    const esNumero = /^[0-9]*$/.test(valor);
+  
+    if (esNumero) {
+      const nuevoMontoDolares = valor || "";
+      const montoEnPesos = nuevoMontoDolares
+        ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
+            locale: es,
+          })
+        : "";
+      setMontoDolares(valor || "");
+      setMontoPesos(montoEnPesos);
+    }
   };
 
   const formatOnBlurPesos = () => {
