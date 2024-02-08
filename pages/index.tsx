@@ -37,7 +37,7 @@ export default function Home() {
           { property: 'og:title', content: 'verdurita' },
           { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
           { property: 'og:image', content: '@/public/logo.png' },
-          { property: 'og:url', content: 'https://verdurita.vercel.app/' },
+          { property: 'og:url', content: 'https://verdurita.com.ar/' },
           { property: 'og:locale', content: 'es_AR' }, 
         ]}
       />
@@ -75,13 +75,13 @@ export default function Home() {
                       <TitleItem titulo={moneda.nombre} />
                     </Grid>
                     <Grid item xs={16} sm={7} md={4} lg={4}>
-                      <CardItem texto={"Vendé a:"} precio={moneda.compra} />
+                      <CardItem texto={"Vendé a:"} precio={moneda.compra}  esRealBrasileño={moneda.nombre === "Real Brasileño"}/>
                     </Grid>
                     <Grid item xs={16} sm={7} md={4} lg={4}>
-                      <CardItem texto={"Comprá a:"} precio={moneda.venta} />
+                      <CardItem texto={"Comprá a:"} precio={moneda.venta}  esRealBrasileño={moneda.nombre === "Real Brasileño"}/>
                     </Grid>
                     <Grid item xs={16} sm={7} md={4} lg={4}>
-                      <CardItem texto={"Promedio:"} precio={moneda.promedio} />
+                      <CardItem texto={"Promedio:"} precio={moneda.promedio}  esRealBrasileño={moneda.nombre === "Real Brasileño"}/>
                     </Grid>
                   </Grid>
                 </React.Fragment>

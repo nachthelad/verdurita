@@ -12,7 +12,7 @@
           { property: 'og:title', content: 'verdurita' },
           { property: 'og:description', content: 'Cotizaciones en tiempo real, tipo de cambio, verdurita, usd, real' }, 
           { property: 'og:image', content: 'URL to your image' }, // Replace with the URL to your image
-          { property: 'og:url', content: 'https://verdurita.vercel.app/' }, // Replace with the URL to your page
+          { property: 'og:url', content: 'https://verdurita.com.ar/' }, // Replace with the URL to your page
           { property: 'og:locale', content: 'es_AR' }, 
         ]}
       /> */}

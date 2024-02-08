@@ -24,12 +24,12 @@ type MenuBarProps = {
 };
 
 const monedas: { [key: string]: string } = {
-  "oficial": "oficial",
   "blue": "blue",
+  "oficial": "oficial",
   "tarjeta": "tarjeta",
+  "bolsa": "bolsa",
   "cripto": "cripto",
   "real": "real",
-  "bolsa": "bolsa",
   "ccl":"contado con liqui",
   "mayorista": "mayorista",
 };

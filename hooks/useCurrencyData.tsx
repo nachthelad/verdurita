@@ -4,7 +4,7 @@ import axios from "axios";
 
 const API_DOLAR_URL = "https://dolarapi.com/v1/dolares";
 const API_REAL_URL = "https://dolarapi.com/v1/cotizaciones/brl";
-const ordenMonedas = ["Oficial", "Blue", "Tarjeta", "Cripto", "Real Brasileño"];
+const ordenMonedas = [ "Blue", "Oficial", "Tarjeta", "Bolsa", "Cripto", "Real Brasileño"];
 
 const useCurrencyData = () => {
   const [monedas, setMonedas] = useState<Moneda[]>([]);
