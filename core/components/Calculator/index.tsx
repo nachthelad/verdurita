@@ -148,7 +148,8 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             margin="dense"
             id="montoDolares"
             label="Monto en dólares"
-            type="text"
+            type="tel"
+            inputMode="numeric"
             fullWidth
             variant="outlined"
             value={montoDolares || ""}
@@ -163,7 +164,8 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             margin="dense"
             id="cantidad"
             label={esRealBrasileño ? "Monto en reales" : "Monto en pesos"}
-            type="text"
+            type="tel"
+            inputMode="numeric"
             fullWidth
             variant="outlined"
             value={montoPesos || ""}
