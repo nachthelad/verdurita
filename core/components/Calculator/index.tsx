@@ -17,7 +17,7 @@ const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     background-color: #f5f5f5;
     border-radius: 10px;
-    max-height: 90vh;
+    max-height: 90vh; 
     overflow-y: auto;
   }
 `;
@@ -68,10 +68,6 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   const [open, setOpen] = useState(false);
   const [montoPesos, setMontoPesos] = useState("0");
   const [montoDolares, setMontoDolares] = useState("0");
-  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
-
-  const handleInputFocus = () => setIsKeyboardOpen(true);
-  const handleInputBlur = () => setIsKeyboardOpen(false);
 
   const tituloDialogo =
     tipoOperacion === "venta"
@@ -93,23 +89,22 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-
+  
     if (esNumero) {
       const nuevoMontoPesos = valor || "";
       const montoEnDolares = nuevoMontoPesos
-        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
-            locale: es,
-          })
+        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", { locale: es })
         : "";
       setMontoPesos(valor || "");
       setMontoDolares(montoEnDolares);
     }
   };
+  
 
   const handleDollarAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-
+  
     if (esNumero) {
       const nuevoMontoDolares = valor || "";
       const montoEnPesos = nuevoMontoDolares
@@ -147,15 +142,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           onClick={handleClickOpen}
         />
       </Box>
-      <StyledDialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            marginTop: isKeyboardOpen ? "0vh" : "10vh", // Ajusta este valor según sea necesario
-          },
-        }}
-      >
+      <StyledDialog open={open} onClose={handleClose}>
         <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
         <DialogContent>
           <StyledTextField
@@ -169,13 +156,11 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
+            onBlur={formatOnBlurDolares}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
-            // onBlur={formatOnBlurDolares}
-            // onFocus={(e) => e.target.select()}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
+            onFocus={(e) => e.target.select()}
           />
           <StyledTextField
             margin="dense"
@@ -187,13 +172,11 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
+            onBlur={formatOnBlurPesos}
             onKeyDown={(e) =>
-                ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
-            // onBlur={formatOnBlurDolares}
-            // onFocus={(e) => e.target.select()}
-            onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
+            onFocus={(e) => e.target.select()}
           />
         </DialogContent>
         <DialogActions>
