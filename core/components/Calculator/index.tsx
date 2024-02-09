@@ -147,14 +147,14 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           onClick={handleClickOpen}
         />
       </Box>
-      <StyledDialog 
-      open={open} 
-      onClose={handleClose}
-      PaperProps={{
-        style: {
-          marginTop: isKeyboardOpen ? '0vh' : '10vh', // Ajusta este valor según sea necesario
-        },
-      }}
+      <StyledDialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            marginTop: isKeyboardOpen ? "0vh" : "10vh", // Ajusta este valor según sea necesario
+          },
+        }}
       >
         <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
         <DialogContent>
@@ -169,11 +169,13 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
-            onBlur={formatOnBlurDolares}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
-            onFocus={(e) => e.target.select()}
+            // onBlur={formatOnBlurDolares}
+            // onFocus={(e) => e.target.select()}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
           />
           <StyledTextField
             margin="dense"
@@ -185,11 +187,13 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
-            onBlur={formatOnBlurPesos}
             onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+                ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
-            onFocus={(e) => e.target.select()}
+            // onBlur={formatOnBlurDolares}
+            // onFocus={(e) => e.target.select()}
+            onFocus={handleInputFocus}
+            onBlur={handleInputBlur}
           />
         </DialogContent>
         <DialogActions>
