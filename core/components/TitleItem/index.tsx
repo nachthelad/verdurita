@@ -5,14 +5,15 @@ interface TitleItemProp {
   titulo: string;
 }
 
-const titleItem = ({ titulo }: TitleItemProp) => {
+const TitleItem = ({ titulo }: TitleItemProp) => {
   return (
     <Typography 
       variant="h5" 
       component="div"
       sx={{ 
-        mt: 2,
-        mb: -1
+        mt: 2, 
+        mb: -1, 
+        textAlign: 'center', // Centra el texto
       }}
     >
       {titulo}
@@ -20,4 +21,4 @@ const titleItem = ({ titulo }: TitleItemProp) => {
   );
 }
 
-export default titleItem;
+export default TitleItem;

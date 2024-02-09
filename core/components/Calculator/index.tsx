@@ -17,7 +17,7 @@ const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     background-color: #f5f5f5;
     border-radius: 10px;
-    max-height: 90vh; 
+    max-height: 90vh;
     overflow-y: auto;
   }
 `;
@@ -68,13 +68,17 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   const [open, setOpen] = useState(false);
   const [montoPesos, setMontoPesos] = useState("0");
   const [montoDolares, setMontoDolares] = useState("0");
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  const handleInputFocus = () => setIsKeyboardOpen(true);
+  const handleInputBlur = () => setIsKeyboardOpen(false);
 
   const tituloDialogo =
     tipoOperacion === "venta"
       ? "¿Cuánto querés vender?"
       : tipoOperacion === "compra"
       ? "¿Cuánto querés comprar?"
-      : "Compra o vende al precio promedio";
+      : "Cambiá al precio promedio";
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -89,22 +93,23 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-  
+
     if (esNumero) {
       const nuevoMontoPesos = valor || "";
       const montoEnDolares = nuevoMontoPesos
-        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", { locale: es })
+        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
+            locale: es,
+          })
         : "";
       setMontoPesos(valor || "");
       setMontoDolares(montoEnDolares);
     }
   };
-  
 
   const handleDollarAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-  
+
     if (esNumero) {
       const nuevoMontoDolares = valor || "";
       const montoEnPesos = nuevoMontoDolares
@@ -142,7 +147,15 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           onClick={handleClickOpen}
         />
       </Box>
-      <StyledDialog open={open} onClose={handleClose}>
+      <StyledDialog 
+      open={open} 
+      onClose={handleClose}
+      PaperProps={{
+        style: {
+          marginTop: isKeyboardOpen ? '0vh' : '10vh', // Ajusta este valor según sea necesario
+        },
+      }}
+      >
         <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
         <DialogContent>
           <StyledTextField
