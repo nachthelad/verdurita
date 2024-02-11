@@ -17,7 +17,7 @@ const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     background-color: #f5f5f5;
     border-radius: 10px;
-    max-height: 90vh; 
+    max-height: 90vh;
     overflow-y: auto;
   }
 `;
@@ -58,12 +58,16 @@ interface CurrencyCalculatorButtonProps {
   precioMoneda: number;
   tipoOperacion: "venta" | "compra" | "promedio";
   esRealBrasileño?: boolean;
+  EsEuroO?: boolean;
+  EsEuroB?: boolean;
 }
 
 const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   precioMoneda,
   tipoOperacion,
   esRealBrasileño = false,
+  EsEuroO = false,
+  EsEuroB = false,
 }) => {
   const [open, setOpen] = useState(false);
   const [montoPesos, setMontoPesos] = useState("0");
@@ -89,22 +93,23 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-  
+
     if (esNumero) {
       const nuevoMontoPesos = valor || "";
       const montoEnDolares = nuevoMontoPesos
-        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", { locale: es })
+        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
+            locale: es,
+          })
         : "";
       setMontoPesos(valor || "");
       setMontoDolares(montoEnDolares);
     }
   };
-  
 
   const handleDollarAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
     const esNumero = /^[0-9]*$/.test(valor);
-  
+
     if (esNumero) {
       const nuevoMontoDolares = valor || "";
       const montoEnPesos = nuevoMontoDolares
@@ -149,7 +154,16 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             autoFocus
             margin="dense"
             id="montoDolares"
-            label="Monto en dólares"
+            // label="Monto en dólares"
+            label={
+              esRealBrasileño
+                ? "Monto en pesos"
+                : EsEuroB
+                ? "Monto en pesos"
+                : EsEuroO
+                ? "Monto en pesos"
+                : "Monto en dólares"
+            }
             type="tel"
             inputMode="numeric"
             fullWidth
@@ -165,7 +179,15 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           <StyledTextField
             margin="dense"
             id="cantidad"
-            label={esRealBrasileño ? "Monto en reales" : "Monto en pesos"}
+            label={
+              esRealBrasileño
+                ? "Monto en reales"
+                : EsEuroO
+                ? "Monto en Euro oficial"
+                : EsEuroB
+                ? "Monto en Euro blue"
+                : "Monto en pesos"
+            }
             type="tel"
             inputMode="numeric"
             fullWidth

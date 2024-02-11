@@ -24,14 +24,16 @@ type MenuBarProps = {
 };
 
 const monedas: { [key: string]: string } = {
-  "blue": "blue",
-  "oficial": "oficial",
-  "tarjeta": "tarjeta",
-  "bolsa": "bolsa",
-  "cripto": "cripto",
-  "real": "real",
-  "ccl":"contado con liqui",
-  "mayorista": "mayorista",
+  "dólar blue": "Dólar Blue",
+  "dólar oficial": "Dólar Oficial",
+  "euro oficial": "Euro Oficial",
+  "euro blue": "Euro Blue",
+  "dólar tarjeta": "tarjeta",
+  "dólar bolsa": "bolsa",
+  "dólar cripto": "cripto",
+  "dólar ccl": "contado con liqui",
+  "dólar mayorista": "mayorista", 
+  "real brasileño": "real",
 };
 
 const theme = createTheme({
@@ -68,8 +70,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         textAlign: "center",
         backgroundColor: theme.palette.primary.main,
         height: "100%",
-      }}
-    >
+      }}>
       <Typography
         variant="h6"
         noWrap
@@ -78,8 +79,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
           color: "white",
           padding: "10px",
           fontFamily: kanit.style.fontFamily,
-        }}
-      >
+        }}>
         verdurita
       </Typography>
       <Button
@@ -87,22 +87,20 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         sx={{
           color: "white",
           borderColor: "white",
-          marginLeft: "1"
-        }}
-      >
+          marginLeft: "1",
+        }}>
         Todas
       </Button>
       {Object.keys(monedas).map((key) => (
-      <Button
-        key={key}
-        onClick={() => onFilter(monedas[key])}
+        <Button
+          key={key}
+          onClick={() => onFilter(monedas[key])}
           sx={{
             color: "white",
             display: "flex",
             justifyContent: "flex-start",
             margin: "5px 0",
-          }}
-        >
+          }}>
           {key}
         </Button>
       ))}
@@ -119,8 +117,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}
-            >
+              sx={{ mr: 2, display: { sm: "none" } }}>
               <MenuIcon />
             </IconButton>
             <Typography
@@ -131,21 +128,20 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
                 flexGrow: 1,
                 display: { xs: "block", sm: "none", md: "block" },
                 fontFamily: kanit.style.fontFamily,
-              }}
-            >
+              }}>
               verdurita
             </Typography>
             {isMobile
               ? null
               : Object.keys(monedas).map((key, index) => (
-                <MonedaButton
-                  key={key}
-                  moneda={key}
-                  onFilter={() => handleMonedaChange(monedas[key])}
-                  selected={selectedMoneda === monedas[key]}
-                  isFirst={index === 0}
-                  isLast={index === Object.keys(monedas).length - 1}
-                />
+                  <MonedaButton
+                    key={key}
+                    moneda={key}
+                    onFilter={() => handleMonedaChange(monedas[key])}
+                    selected={selectedMoneda === monedas[key]}
+                    isFirst={index === 0}
+                    isLast={index === Object.keys(monedas).length - 1}
+                  />
                 ))}
           </Toolbar>
         </AppBar>
