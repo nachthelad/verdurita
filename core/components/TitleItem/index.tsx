@@ -13,7 +13,7 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
       sx={{ 
         mt: 2, 
         mb: -1, 
-        textAlign: 'center', // Centra el texto
+        textAlign: 'center', 
       }}
     >
       {titulo}

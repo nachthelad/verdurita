@@ -4,15 +4,23 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CurrencyCalculatorButton from "../Calculator";
 import { format } from "numerable";
-import { es } from 'numerable/locale';
+import { es } from "numerable/locale";
 
 interface CardItemProps {
   texto: string;
   precio: number;
   esRealBrasileño?: boolean;
+  EsEuroO?: boolean;
+  EsEuroB?: boolean;
 }
 
-const CardItem = ({ texto, precio, esRealBrasileño = false  }: CardItemProps) => {
+const CardItem = ({
+  texto,
+  precio,
+  esRealBrasileño = false,
+  EsEuroO = false,
+  EsEuroB = false,
+}: CardItemProps) => {
   let tipoOperacion;
   switch (texto) {
     case "Vendé a:":
@@ -25,7 +33,7 @@ const CardItem = ({ texto, precio, esRealBrasileño = false  }: CardItemProps) =
       tipoOperacion = "promedio";
       break;
     default:
-      tipoOperacion = ""; 
+      tipoOperacion = "";
   }
 
   return (
@@ -35,21 +43,22 @@ const CardItem = ({ texto, precio, esRealBrasileño = false  }: CardItemProps) =
         minWidth: 180,
         mx: 0,
         boxShadow: 3,
-      }}
-    >
+      }}>
       <CardContent sx={{ padding: 2, display: "flex", alignItems: "center" }}>
         <div style={{ flex: 1 }}>
           <Typography variant="h5" component="div">
             {texto}
           </Typography>
           <Typography variant="h5" color="text.secondary">
-            ${format(precio, '0,0.00', { locale: es })}
+            ${format(precio, "0,0.00", { locale: es })}
           </Typography>
         </div>
         <CurrencyCalculatorButton
           precioMoneda={Number(precio)}
           tipoOperacion={tipoOperacion as "venta" | "compra" | "promedio"}
-          esRealBrasileño={esRealBrasileño} 
+          esRealBrasileño={esRealBrasileño}
+          EsEuroO={EsEuroO}
+          EsEuroB={EsEuroB}
         />
       </CardContent>
     </Card>
