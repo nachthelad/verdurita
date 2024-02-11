@@ -154,14 +154,13 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             autoFocus
             margin="dense"
             id="montoDolares"
-            // label="Monto en dólares"
             label={
               esRealBrasileño
-                ? "Monto en pesos"
+                ? "Monto en reales"
                 : EsEuroB
-                ? "Monto en pesos"
+                ? "Monto en euro blue"
                 : EsEuroO
-                ? "Monto en pesos"
+                ? "Monto en euro oficial"
                 : "Monto en dólares"
             }
             type="tel"
@@ -179,15 +178,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           <StyledTextField
             margin="dense"
             id="cantidad"
-            label={
-              esRealBrasileño
-                ? "Monto en reales"
-                : EsEuroO
-                ? "Monto en Euro oficial"
-                : EsEuroB
-                ? "Monto en Euro blue"
-                : "Monto en pesos"
-            }
+            label="Monto en pesos"
             type="tel"
             inputMode="numeric"
             fullWidth
