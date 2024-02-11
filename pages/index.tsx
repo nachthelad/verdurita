@@ -21,7 +21,6 @@ export default function Home() {
     if (!filtro) {
       setBusqueda("");
     } else {
-      // Establece el filtro tal cual viene, sin remover "Dólar" o "Euro"
       setBusqueda(filtro);
     }
   };

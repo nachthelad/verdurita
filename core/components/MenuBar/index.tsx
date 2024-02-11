@@ -26,8 +26,8 @@ type MenuBarProps = {
 const monedas: { [key: string]: string } = {
   "dólar blue": "Dólar Blue",
   "dólar oficial": "Dólar Oficial",
-  "euro oficial": "Euro Oficial",
   "euro blue": "Euro Blue",
+  "euro oficial": "Euro Oficial",
   "dólar tarjeta": "tarjeta",
   "dólar bolsa": "bolsa",
   "dólar cripto": "cripto",
