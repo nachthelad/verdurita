@@ -12,7 +12,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MonedaButton } from "../MonedaButton";
+import { MonedaCheckbox } from "@/core/components/MonedaCheckbox";
+import {MonedaButton} from "@/core/components/MonedaButton";
 
 const kanit = Kanit({
   subsets: ["latin"],
