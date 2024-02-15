@@ -29,7 +29,7 @@ export default function Home() {
     <>
       <CustomHead />
       <div
-        style={{ display: "flex", flexDirection: "column", height: "100vh" }}>
+        style={{ display: "flex", flexDirection: "column", alignContent: "center", height: "100vh" }}>
         <main
           style={{ flex: 1, padding: 1 }}
           className={`${styles.main} ${inter.className}`}>
@@ -53,11 +53,17 @@ export default function Home() {
                     justifyContent="center"
                     alignItems="center"
                     sx={{
-                      paddingLeft: "5%",
-                      paddingRight: "5%",
-                      width: "auto",
-                      margin: "0 auto",
-                    }}>
+                      marginTop: "0.1%",
+                      width: "100%", // Ancho completo del contenedor
+                      marginX: "auto", // Margen automático en los lados para centrarlo horizontalmente
+                      paddingLeft: "1%", // Ajuste de margen izquierdo para xs
+                      paddingRight: "5%", // Ajuste de margen derecho para xs
+                      "@media (min-width: 600px)": { // A partir de este breakpoint, ajustar los márgenes laterales
+                        paddingLeft: "5%", // Margen izquierdo para dispositivos más grandes
+                        paddingRight: "5%", // Margen derecho para dispositivos más grandes
+                      },
+                    }}
+                  >
                     <Grid item xs={16}>
                       <TitleItem titulo={moneda.nombre} />
                     </Grid>
