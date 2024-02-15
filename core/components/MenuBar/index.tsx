@@ -40,7 +40,7 @@ const monedas: { [key: string]: string } = {
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#008000",
+      main: "#698550",
     },
   },
 });
@@ -111,7 +111,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" style={{ background: "green" }}>
+        <AppBar position="fixed" style={{ background: theme.palette.primary.main }}>
           <Toolbar>
             <IconButton
               color="inherit"
@@ -123,7 +123,6 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
             </IconButton>
             <Typography
               variant="h6"
-              noWrap
               component="div"
               sx={{
                 flexGrow: 1,

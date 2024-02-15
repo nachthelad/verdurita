@@ -14,6 +14,7 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
         mt: 2, 
         mb: -1, 
         textAlign: 'center', 
+        color: '#001100'
       }}
     >
       {titulo}
