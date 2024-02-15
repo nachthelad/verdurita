@@ -23,26 +23,26 @@ const StyledDialog = styled(Dialog)`
 `;
 
 const StyledDialogTitle = styled(DialogTitle)`
-  color: #333;
+  color: #001100;
   font-size: 1.5rem;
 `;
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#45a049",
+    color: "#698550",
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#45a049",
+    borderBottomColor: "#698550",
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#45a049",
+      borderColor: "#698550",
     },
     "&:hover fieldset": {
-      borderColor: "#45a049",
+      borderColor: "#698550",
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#45a049",
+      borderColor: "#698550",
     },
   },
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
@@ -143,7 +143,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
       <Box>
         <CalculateIcon
           fontSize="large"
-          style={{ color: "#45a049", cursor: "pointer" }}
+          style={{ color: "#698550", cursor: "pointer" }}
           onClick={handleClickOpen}
         />
       </Box>
@@ -193,7 +193,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} style={{ color: "#45a049" }}>
+          <Button onClick={handleClose} style={{ color: "#698550" }}>
             Cerrar
           </Button>
         </DialogActions>

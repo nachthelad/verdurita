@@ -82,7 +82,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #008000; /* Color de la barra de desplazamiento */
+  background: #698550; /* Color de la barra de desplazamiento */
   border-radius: 4px; /* Redondear los bordes */
 }
 
@@ -91,7 +91,7 @@
   padding: 0;
   margin: 0;
   scrollbar-width: thin; /* "auto" o "thin" */
-  scrollbar-color: #008000 transparent; /* Color de la barra y color de la pista */
+  scrollbar-color: #698550 transparent; /* Color de la barra y color de la pista */
 }
 
 html,

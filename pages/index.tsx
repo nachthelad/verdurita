@@ -54,13 +54,13 @@ export default function Home() {
                     alignItems="center"
                     sx={{
                       marginTop: "0.1%",
-                      width: "100%", // Ancho completo del contenedor
-                      marginX: "auto", // Margen automático en los lados para centrarlo horizontalmente
-                      paddingLeft: "1%", // Ajuste de margen izquierdo para xs
-                      paddingRight: "5%", // Ajuste de margen derecho para xs
-                      "@media (min-width: 600px)": { // A partir de este breakpoint, ajustar los márgenes laterales
-                        paddingLeft: "5%", // Margen izquierdo para dispositivos más grandes
-                        paddingRight: "5%", // Margen derecho para dispositivos más grandes
+                      width: "100%", 
+                      marginX: "auto",
+                      paddingLeft: "1%", 
+                      paddingRight: "5%",                      
+                      "@media (min-width: 600px)": { 
+                        paddingLeft: "5%", 
+                        paddingRight: "5%", 
                       },
                     }}
                   >
