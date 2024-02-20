@@ -6,13 +6,13 @@ type CustomHeadProps = {
   keywords?: string;
   imageUrl?: string;
   url?: string;
-}
+};
 
 const CustomHead: React.FC<CustomHeadProps> = ({
   title = "verdurita",
   description = "Cotizaciones en tiempo real",
   keywords = "currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio",
-  imageUrl="@/public/logo.png",
+  imageUrl = "@/public/logo.png",
   url = "https://verdurita.com.ar/",
 }) => (
   <Head>
@@ -33,6 +33,9 @@ const CustomHead: React.FC<CustomHeadProps> = ({
     <meta property="og:url" content={url} />
     <meta property="og:locale" content="es_AR" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" href="/icon-512x512.png" />
+    <meta name="theme-color" content="#35f635" />
   </Head>
 );
 
