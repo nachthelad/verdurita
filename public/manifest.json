@@ -1,12 +1,13 @@
 {
+    "id": "1",
+    "name": "verdurita",
+    "short_name": "verdurita",
+    "description": "Una simple app para ver las cotizaciones del d\u00f3lar al momento",
     "theme_color": "#35f635",
     "background_color": "#35f635",
     "display": "standalone",
     "scope": "/",
     "start_url": "/",
-    "name": "verdurita",
-    "short_name": "verdurita",
-    "description": "Una simple app para ver las cotizaciones del d\u00f3lar al momento",
     "icons": [
         {
             "src": "/icon-192x192.png",
