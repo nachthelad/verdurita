@@ -7,19 +7,17 @@ interface TitleItemProp {
 
 const TitleItem = ({ titulo }: TitleItemProp) => {
   return (
-    <Typography 
-      variant="h5" 
+    <Typography
+      variant="h1"
+      fontSize="1.5rem"
       component="div"
-      sx={{ 
-        mt: 2, 
-        mb: -1, 
-        textAlign: 'center', 
-        color: '#001100'
-      }}
-    >
+      sx={{
+        textAlign: "center",
+        color: "#001100",
+      }}>
       {titulo}
     </Typography>
   );
-}
+};
 
 export default TitleItem;
