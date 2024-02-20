@@ -35,7 +35,7 @@ const CustomHead: React.FC<CustomHeadProps> = ({
     <link rel="icon" href="/favicon.ico" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/icon-512x512.png" />
-    <meta name="theme-color" content="#35f635" />
+    <meta name="theme-color" content="#698550" />
   </Head>
 );
 
