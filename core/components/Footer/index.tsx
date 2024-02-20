@@ -5,7 +5,7 @@ const Footer: React.FC = () => {
   return (
     <Box component="footer" sx={{ padding: 1, textAlign: "center" }}>
       <Typography variant="body2" color="black" sx={{ whiteSpace: "nowrap" }}>
-        Copyright ©{" "}
+        Creado por{" "}
         <Link
           href="https://nachthelad.com.ar"
           target="_blank"
