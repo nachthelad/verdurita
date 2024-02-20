@@ -44,7 +44,12 @@ const CardItem = ({
         mx: 0,
         boxShadow: 3,
       }}>
-      <CardContent sx={{ padding: 2, display: "flex", alignItems: "center" }}>
+      <CardContent
+        sx={{
+          padding: 2,
+          display: "flex",
+          alignItems: "center",
+        }}>
         <div style={{ flex: 1 }}>
           <Typography variant="h5" component="div">
             {texto}
