@@ -1,9 +1,9 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-interface TitleItemProp {
+type TitleItemProp = {
   titulo: string;
-}
+};
 
 const TitleItem = ({ titulo }: TitleItemProp) => {
   return (
