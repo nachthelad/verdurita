@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { Kanit } from "next/font/google";
+import { kanit } from "@/fonts/fonts";
 import {
   AppBar,
   Box,
@@ -13,12 +13,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { MonedaCheckbox } from "@/core/components/MonedaCheckbox";
-import {MonedaButton} from "@/core/components/MonedaButton";
-
-const kanit = Kanit({
-  subsets: ["latin"],
-  weight: "400",
-});
+import { MonedaButton } from "@/core/components/MonedaButton";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | undefined) => void;
@@ -33,7 +28,7 @@ const monedas: { [key: string]: string } = {
   "dólar bolsa": "bolsa",
   "dólar cripto": "cripto",
   "dólar ccl": "contado con liqui",
-  "dólar mayorista": "mayorista", 
+  "dólar mayorista": "mayorista",
   "real brasileño": "real",
 };
 
@@ -111,7 +106,9 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="fixed" style={{ background: theme.palette.primary.main }}>
+        <AppBar
+          position="fixed"
+          style={{ background: theme.palette.primary.main }}>
           <Toolbar>
             <IconButton
               color="inherit"

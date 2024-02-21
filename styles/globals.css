@@ -102,8 +102,8 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-    /* background-color: #206420; */
-    background-color: #F0FFF0;
+  /* background-color: #206420; */
+  background-color: #f0fff0;
 }
 
 a {

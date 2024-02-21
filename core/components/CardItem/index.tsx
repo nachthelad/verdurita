@@ -6,13 +6,13 @@ import CurrencyCalculatorButton from "../Calculator";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 
-interface CardItemProps {
+type CardItemProps = {
   texto: string;
   precio: number;
   esRealBrasileño?: boolean;
   EsEuroO?: boolean;
   EsEuroB?: boolean;
-}
+};
 
 const CardItem = ({
   texto,
@@ -39,14 +39,11 @@ const CardItem = ({
   return (
     <Card
       sx={{
-        maxWidth: { xs: "100%", sm: "450px" },
-        minWidth: 180,
-        mx: 0,
+        maxWidth: { xs: "100%", sm: "400px" },
         boxShadow: 3,
       }}>
       <CardContent
         sx={{
-          padding: 2,
           display: "flex",
           alignItems: "center",
         }}>
