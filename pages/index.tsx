@@ -11,6 +11,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import { Moneda } from "@/types/moneda";
 import { inter } from "@/fonts/fonts";
+import PullToRefresh from "pulltorefreshjs";
 
 export default function Home() {
   const [busqueda, setBusqueda] = useState("");
@@ -23,6 +24,18 @@ export default function Home() {
       setBusqueda(filtro);
     }
   };
+
+  const standalone =
+    typeof window !== "undefined" &&
+    window.matchMedia("(display-mode: standalone)").matches;
+
+  if (standalone) {
+    PullToRefresh.init({
+      onRefresh() {
+        window.location.reload();
+      },
+    });
+  }
 
   return (
     <>
