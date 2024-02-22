@@ -29,10 +29,22 @@ export default function Home() {
     typeof window !== "undefined" &&
     window.matchMedia("(display-mode: standalone)").matches;
 
+  // if (standalone) {
+  //   PullToRefresh.init({
+  //     onRefresh() {
+  //       window.location.reload();
+  //     },
+  //   });
+  // }
+
   if (standalone) {
     PullToRefresh.init({
-      onRefresh() {
-        window.location.reload();
+      mainElement: "#main", // above which element?
+      onRefresh: (done?: () => Promise<void>) => {
+        setTimeout(() => {
+          done?.(); // end pull to refresh
+          alert("refresh");
+        }, 1500);
       },
     });
   }
