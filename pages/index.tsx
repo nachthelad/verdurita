@@ -109,7 +109,7 @@ export default function Home() {
                 </React.Fragment>
               ))}
           </Box>
-          <Footer />
+          {/* <Footer /> */}
         </main>
       </div>
     </>

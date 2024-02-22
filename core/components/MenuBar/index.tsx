@@ -14,6 +14,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { MonedaCheckbox } from "@/core/components/MonedaCheckbox";
 import { MonedaButton } from "@/core/components/MonedaButton";
+import LogoText from "../LogoText";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | undefined) => void;
@@ -42,7 +43,7 @@ const theme = createTheme({
 
 export default function MenuBar({ onFilter }: MenuBarProps) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery(theme.breakpoints.down("xl"));
   const [selectedMoneda, setSelectedMoneda] = useState<string | null>(null);
 
   const handleDrawerToggle = () => {
@@ -67,23 +68,15 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         backgroundColor: theme.palette.primary.main,
         height: "100%",
       }}>
-      <Typography
-        variant="h6"
-        noWrap
-        sx={{
-          flexGrow: 1,
-          color: "white",
-          padding: "10px",
-          fontFamily: kanit.style.fontFamily,
-        }}>
-        verdurita
-      </Typography>
+      <LogoText />
       <Button
         onClick={() => onFilter()}
         sx={{
           color: "white",
           borderColor: "white",
           marginLeft: "1",
+          display: "flex",
+          fontWeight: "bold",
         }}>
         Todas
       </Button>
@@ -109,25 +102,16 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         <AppBar
           position="fixed"
           style={{ background: theme.palette.primary.main }}>
-          <Toolbar>
+          <Toolbar sx={{ justifyContent: "flex-end" }}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { sm: "none" } }}>
+              sx={{ mr: 2, display: { xl: "none" } }}>
               <MenuIcon />
             </IconButton>
-            <Typography
-              variant="h6"
-              component="div"
-              sx={{
-                flexGrow: 1,
-                display: { xs: "block", sm: "none", md: "block" },
-                fontFamily: kanit.style.fontFamily,
-              }}>
-              verdurita
-            </Typography>
+            <LogoText />
             {isMobile
               ? null
               : Object.keys(monedas).map((key, index) => (

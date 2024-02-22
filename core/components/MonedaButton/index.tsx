@@ -1,5 +1,5 @@
 import React from "react";
-import { ToggleButton } from "@mui/material";
+import { ToggleButton, Box } from "@mui/material";
 import { createTheme } from "@mui/material/styles";
 
 type BotonMonedasProps = {
@@ -47,8 +47,7 @@ export const MonedaButton: React.FC<BotonMonedasProps> = ({
       "&:hover": {
         backgroundColor: "rgba(255, 255, 255, 0.08)",
       },
-    }}
-  >
+    }}>
     {moneda}
   </ToggleButton>
 );
