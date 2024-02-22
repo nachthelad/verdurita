@@ -1,5 +1,6 @@
-import React from 'react';
+import React from "react";
 import MenuBar from "@/core/components/MenuBar";
+import Footer from "@/core/components/Footer";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -9,10 +10,9 @@ type LayoutProps = {
 const Layout = ({ children, onFilter }: LayoutProps) => {
   return (
     <>
-      <MenuBar 
-        onFilter={onFilter} 
-      />      
+      <MenuBar onFilter={onFilter} />
       <div>{children}</div>
+      <Footer />
     </>
   );
 };

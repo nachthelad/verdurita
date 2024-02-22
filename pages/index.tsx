@@ -4,7 +4,6 @@ import styles from "@/styles/Home.module.css";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import MenuBar from "@/core/components/MenuBar";
-import Footer from "@/core/components/Footer";
 import useCurrencyData from "@/hooks/useCurrencyData";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -96,7 +95,6 @@ export default function Home() {
                 </React.Fragment>
               ))}
           </Box>
-          <Footer />
         </main>
       </div>
     </>
