@@ -28,7 +28,7 @@ export default function Home() {
         }}>
         <MenuBar onFilter={handleFilter} />
         <main
-          style={{ paddingTop: 50 }}
+          style={{ paddingTop: 0 }}
           className={`${styles.main} ${inter.className}`}>
           <MainContainer busqueda={busqueda} />
           {/* <Footer /> */}

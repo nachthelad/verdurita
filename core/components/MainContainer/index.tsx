@@ -33,7 +33,7 @@ export default function MainContainer({
         sx={{
           overflowX: "hidden",
           overflowY: "auto",
-          height: "calc(100vh - 60px)",
+          //   height: "calc(100vh - 60px)",
           width: "100vw",
         }}>
         {resultadosFiltrados
@@ -45,7 +45,7 @@ export default function MainContainer({
               <Container maxWidth="lg">
                 <Grid
                   container
-                  spacing={2}
+                  spacing={1}
                   justifyContent="center"
                   alignItems="center"
                   sx={{

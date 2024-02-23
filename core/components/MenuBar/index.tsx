@@ -101,9 +101,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
   return (
     <ThemeProvider theme={theme}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar
-          position="fixed"
-          style={{ background: theme.palette.primary.main }}>
+        <AppBar position="fixed">
           <Toolbar sx={{ justifyContent: "flex-end" }}>
             <IconButton
               color="inherit"
@@ -128,6 +126,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
                 ))}
           </Toolbar>
         </AppBar>
+        <Toolbar />{" "}
         <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
           {drawer}
         </Drawer>
