@@ -55,7 +55,7 @@ export default function Home() {
             sx={{
               overflowX: "hidden",
               overflowY: "auto",
-              height: "calc(100vh - 100px)",
+              height: "calc(100vh - 60px)",
               width: "100vw",
             }}>
             {resultadosFiltrados
@@ -67,12 +67,11 @@ export default function Home() {
                   <Container maxWidth="lg">
                     <Grid
                       container
-                      spacing={3}
+                      spacing={2}
                       justifyContent="center"
                       alignItems="center"
                       sx={{
-                        marginTop: "0.1%",
-                        marginBottom: "0.3%",
+                        marginTop: "0.9%",
                       }}>
                       <Grid item xs={16}>
                         <TitleItem titulo={moneda.nombre} />

@@ -41,6 +41,7 @@ const CardItem = ({
       sx={{
         maxWidth: { xs: "100%", sm: "400px" },
         boxShadow: 3,
+        marginBottom: "1%",
       }}>
       <CardContent
         sx={{

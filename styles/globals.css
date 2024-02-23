@@ -90,8 +90,8 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  scrollbar-width: thin; /* "auto" o "thin" */
-  scrollbar-color: #698550 transparent; /* Color de la barra y color de la pista */
+  scrollbar-width: thin;
+  scrollbar-color: #698550 transparent;
 }
 
 html,
@@ -102,7 +102,6 @@ body {
 
 body {
   color: rgb(var(--foreground-rgb));
-  /* background-color: #206420; */
   background-color: #f0fff0;
 }
 
