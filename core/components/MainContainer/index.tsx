@@ -10,7 +10,9 @@ type MainContainerProps = {
   busqueda: string;
 };
 
-const MainContainer: React.FC<MainContainerProps> = ({ busqueda }) => {
+export default function MainContainer({
+  busqueda,
+}: MainContainerProps): React.ReactElement {
   const { resultadosFiltrados } = useCurrencyData();
 
   const standalone =
@@ -24,6 +26,7 @@ const MainContainer: React.FC<MainContainerProps> = ({ busqueda }) => {
       },
     });
   }
+
   return (
     <div>
       <Box
@@ -85,6 +88,4 @@ const MainContainer: React.FC<MainContainerProps> = ({ busqueda }) => {
       </Box>
     </div>
   );
-};
-
-export default MainContainer;
+}
