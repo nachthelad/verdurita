@@ -12,10 +12,11 @@ import Box from "@mui/material/Box";
 import { Moneda } from "@/types/moneda";
 import { inter } from "@/fonts/fonts";
 import PullToRefresh from "pulltorefreshjs";
+import MainContainer from "@/core/components/MainContainer";
 
 export default function Home() {
   const [busqueda, setBusqueda] = useState("");
-  const { resultadosFiltrados } = useCurrencyData();
+  // const { resultadosFiltrados } = useCurrencyData();
 
   const handleFilter = (filtro?: string) => {
     if (!filtro) {
@@ -25,17 +26,17 @@ export default function Home() {
     }
   };
 
-  const standalone =
-    typeof window !== "undefined" &&
-    window.matchMedia("(display-mode: standalone)").matches;
+  // const standalone =
+  //   typeof window !== "undefined" &&
+  //   window.matchMedia("(display-mode: standalone)").matches;
 
-  if (standalone) {
-    PullToRefresh.init({
-      onRefresh() {
-        window.location.reload();
-      },
-    });
-  }
+  // if (standalone) {
+  //   PullToRefresh.init({
+  //     onRefresh() {
+  //       window.location.reload();
+  //     },
+  //   });
+  // }
 
   return (
     <>
@@ -51,7 +52,8 @@ export default function Home() {
           style={{ flex: 1, padding: 1 }}
           className={`${styles.main} ${inter.className}`}>
           <MenuBar onFilter={handleFilter} />
-          <Box
+          <MainContainer busqueda={busqueda} />
+          {/* <Box
             sx={{
               overflowX: "hidden",
               overflowY: "auto",
@@ -107,7 +109,7 @@ export default function Home() {
                   </Container>
                 </React.Fragment>
               ))}
-          </Box>
+          </Box> */}
           {/* <Footer /> */}
         </main>
       </div>

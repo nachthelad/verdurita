@@ -1,34 +1,60 @@
-import { Typography, Button } from "@mui/material";
-import { useRouter } from "next/router";
+import { Typography, Button, Box } from "@mui/material";
 import { kanit } from "@/fonts/fonts";
+import { useState } from "react";
 
 const LogoButton: React.FC = () => {
-  const router = useRouter();
+  const [refresh, setRefresh] = useState(false);
 
   const handleRefresh = () => {
-    router.reload();
+    setRefresh(true);
   };
 
+  //   if (refresh) {
+  //     return <Home />;
+  //   }
+
   return (
-    <Button
-      onClick={handleRefresh}
+    <Box
       sx={{
-        padding: "10px",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-start",
         flexGrow: 1,
-        justifyContent: "flex-start",
       }}>
-      <Typography
-        variant="h6"
-        noWrap
+      <Button
+        onClick={handleRefresh}
         sx={{
-          color: "white",
-          fontFamily: kanit.style.fontFamily,
-          textTransform: "lowercase",
-          fontSize: "1.5rem",
+          padding: "0",
         }}>
-        verdurita
+        <Typography
+          variant="h6"
+          noWrap
+          sx={{
+            color: "white",
+            fontFamily: kanit.style.fontFamily,
+            textTransform: "lowercase",
+            fontSize: "1.5rem",
+            lineHeight: "1.2",
+          }}>
+          verdurita
+        </Typography>
+      </Button>
+      <Button
+        sx={{
+          padding: "0",
+        }}></Button>
+      <Typography
+        variant="caption"
+        sx={{
+          whiteSpace: "nowrap",
+          color: "white",
+          fontSize: "0.6rem",
+          fontStyle: "italic",
+          textTransform: "lowercase",
+        }}>
+        by nachthelad
       </Typography>
-    </Button>
+    </Box>
   );
 };
 

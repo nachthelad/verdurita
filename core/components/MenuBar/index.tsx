@@ -68,7 +68,9 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         backgroundColor: theme.palette.primary.main,
         height: "100%",
       }}>
-      <LogoText />
+      <Box sx={{ paddingLeft: "5%", paddingY: "5%" }}>
+        <LogoText />
+      </Box>
       <Button
         onClick={() => onFilter()}
         sx={{
