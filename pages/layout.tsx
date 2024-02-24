@@ -10,7 +10,7 @@ const Layout = ({ children, onFilter }: LayoutProps) => {
   return (
     <>
       <MenuBar onFilter={onFilter} />
-      <div>{children}</div>
+      {children}
     </>
   );
 };

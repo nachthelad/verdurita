@@ -4,6 +4,7 @@ import styles from "@/styles/Home.module.css";
 import MenuBar from "@/core/components/MenuBar";
 import { inter } from "@/fonts/fonts";
 import MainContainer from "@/core/components/MainContainer";
+import Layout from "./layout";
 
 export default function Home() {
   const [busqueda, setBusqueda] = useState("");
@@ -17,23 +18,19 @@ export default function Home() {
   };
 
   return (
-    <>
+    <Layout onFilter={handleFilter}>
       <CustomHead />
-      <div
+      <main
+        className={`${styles.main} ${inter.className}`}
         style={{
-          display: "flex",
-          flexDirection: "column",
-          alignContent: "center",
-          height: "100vh",
-        }}>
-        <MenuBar onFilter={handleFilter} />
-        <main
-          style={{ paddingTop: 0 }}
-          className={`${styles.main} ${inter.className}`}>
-          <MainContainer busqueda={busqueda} />
-          {/* <Footer /> */}
-        </main>
-      </div>
-    </>
+          height: "calc(100vh - 64px)",
+          overflow: "auto",
+          paddingTop: "32px",
+        }}
+      >
+        <MainContainer busqueda={busqueda} />
+        {/* <Footer /> */}
+      </main>
+    </Layout>
   );
 }

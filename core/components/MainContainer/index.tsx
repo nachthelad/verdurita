@@ -28,64 +28,94 @@ export default function MainContainer({
   }
 
   return (
-    <div>
-      <Box
-        sx={{
-          overflowX: "hidden",
-          overflowY: "auto",
-          //   height: "calc(100vh - 60px)",
-          width: "100vw",
-        }}>
-        {resultadosFiltrados
-          .filter((moneda) =>
-            moneda.nombre.toLowerCase().includes(busqueda.toLowerCase())
-          )
-          .map((moneda: Moneda, index: number) => (
-            <React.Fragment key={index}>
-              <Container maxWidth="lg">
-                <Grid
-                  container
-                  spacing={1}
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    marginTop: "0.9%",
-                  }}>
-                  <Grid item xs={16}>
-                    <TitleItem titulo={moneda.nombre} />
-                  </Grid>
-                  <Grid item xs={16} sm={7} md={4} lg={4}>
-                    <CardItem
-                      texto={"Vendé a:"}
-                      precio={moneda.compra}
-                      esRealBrasileño={moneda.nombre === "Real Brasileño"}
-                      EsEuroO={moneda.nombre === "Euro Oficial"}
-                      EsEuroB={moneda.nombre === "Euro Blue"}
-                    />
-                  </Grid>
-                  <Grid item xs={16} sm={7} md={4} lg={4}>
-                    <CardItem
-                      texto={"Comprá a:"}
-                      precio={moneda.venta}
-                      esRealBrasileño={moneda.nombre === "Real Brasileño"}
-                      EsEuroO={moneda.nombre === "Euro Oficial"}
-                      EsEuroB={moneda.nombre === "Euro Blue"}
-                    />
-                  </Grid>
-                  <Grid item xs={16} sm={7} md={4} lg={4}>
-                    <CardItem
-                      texto={"Promedio:"}
-                      precio={moneda.promedio}
-                      esRealBrasileño={moneda.nombre === "Real Brasileño"}
-                      EsEuroO={moneda.nombre === "Euro Oficial"}
-                      EsEuroB={moneda.nombre === "Euro Blue"}
-                    />
-                  </Grid>
-                </Grid>
-              </Container>
-            </React.Fragment>
-          ))}
-      </Box>
-    </div>
+    <>
+      {resultadosFiltrados
+        .filter((moneda) =>
+          moneda.nombre.toLowerCase().includes(busqueda.toLowerCase())
+        )
+        .map((moneda: Moneda, index: number) => (
+          <Grid
+            key={`${moneda?.nombre}-${index}`}
+            container
+            spacing={2}
+            sx={{
+              maxWidth: 1440,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              mb: 5,
+            }}
+          >
+            <Grid
+              item
+              xs={12}
+              sx={
+                {
+                  // mb: 2,
+                }
+              }
+            >
+              <TitleItem titulo={moneda.nombre} />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              md={4}
+              lg={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CardItem
+                texto={"Vendé a:"}
+                precio={moneda.compra}
+                esRealBrasileño={moneda.nombre === "Real Brasileño"}
+                EsEuroO={moneda.nombre === "Euro Oficial"}
+                EsEuroB={moneda.nombre === "Euro Blue"}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              md={4}
+              lg={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CardItem
+                texto={"Comprá a:"}
+                precio={moneda.venta}
+                esRealBrasileño={moneda.nombre === "Real Brasileño"}
+                EsEuroO={moneda.nombre === "Euro Oficial"}
+                EsEuroB={moneda.nombre === "Euro Blue"}
+              />
+            </Grid>
+            <Grid
+              item
+              xs={12}
+              sm={7}
+              md={4}
+              lg={4}
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <CardItem
+                texto={"Promedio:"}
+                precio={moneda.promedio}
+                esRealBrasileño={moneda.nombre === "Real Brasileño"}
+                EsEuroO={moneda.nombre === "Euro Oficial"}
+                EsEuroB={moneda.nombre === "Euro Blue"}
+              />
+            </Grid>
+          </Grid>
+        ))}
+    </>
   );
 }
