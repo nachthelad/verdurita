@@ -67,7 +67,8 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         textAlign: "center",
         backgroundColor: theme.palette.primary.main,
         height: "100%",
-      }}>
+      }}
+    >
       <Box sx={{ paddingLeft: "5%", paddingY: "5%" }}>
         <LogoText />
       </Box>
@@ -79,7 +80,8 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
           marginLeft: "1",
           display: "flex",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         Todas
       </Button>
       {Object.keys(monedas).map((key) => (
@@ -91,7 +93,8 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
             display: "flex",
             justifyContent: "flex-start",
             margin: "5px 0",
-          }}>
+          }}
+        >
           {key}
         </Button>
       ))}
@@ -108,7 +111,8 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { xl: "none" } }}>
+              sx={{ mr: 2, display: { xl: "none" } }}
+            >
               <MenuIcon />
             </IconButton>
             <LogoText />
@@ -126,7 +130,6 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
                 ))}
           </Toolbar>
         </AppBar>
-        <Toolbar />{" "}
         <Drawer anchor="left" open={drawerOpen} onClose={handleDrawerToggle}>
           {drawer}
         </Drawer>

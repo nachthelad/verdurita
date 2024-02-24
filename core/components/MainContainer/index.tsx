@@ -28,7 +28,14 @@ export default function MainContainer({
   }
 
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        px: 4,
+      }}
+    >
       {resultadosFiltrados
         .filter((moneda) =>
           moneda.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -116,6 +123,6 @@ export default function MainContainer({
             </Grid>
           </Grid>
         ))}
-    </>
+    </Box>
   );
 }
