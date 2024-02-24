@@ -3,7 +3,6 @@ import { Box, Container, Grid } from "@mui/material";
 import useCurrencyData from "@/hooks/useCurrencyData";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
-import PullToRefresh from "pulltorefreshjs";
 import { Moneda } from "@/types/moneda";
 
 type MainContainerProps = {
@@ -14,18 +13,6 @@ export default function MainContainer({
   busqueda,
 }: MainContainerProps): React.ReactElement {
   const { resultadosFiltrados } = useCurrencyData();
-
-  const standalone =
-    typeof window !== "undefined" &&
-    window.matchMedia("(display-mode: standalone)").matches;
-
-  if (standalone) {
-    PullToRefresh.init({
-      onRefresh() {
-        window.location.reload();
-      },
-    });
-  }
 
   return (
     <Box
