@@ -3,7 +3,6 @@ import { Box, Container, Grid } from "@mui/material";
 import useCurrencyData from "@/hooks/useCurrencyData";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
-import PullToRefresh from "pulltorefreshjs";
 import { Moneda } from "@/types/moneda";
 
 type MainContainerProps = {
@@ -15,20 +14,15 @@ export default function MainContainer({
 }: MainContainerProps): React.ReactElement {
   const { resultadosFiltrados } = useCurrencyData();
 
-  const standalone =
-    typeof window !== "undefined" &&
-    window.matchMedia("(display-mode: standalone)").matches;
-
-  if (standalone) {
-    PullToRefresh.init({
-      onRefresh() {
-        window.location.reload();
-      },
-    });
-  }
-
   return (
-    <>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        px: 4,
+      }}
+    >
       {resultadosFiltrados
         .filter((moneda) =>
           moneda.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -116,6 +110,6 @@ export default function MainContainer({
             </Grid>
           </Grid>
         ))}
-    </>
+    </Box>
   );
 }
