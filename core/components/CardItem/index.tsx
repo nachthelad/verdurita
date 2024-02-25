@@ -42,7 +42,6 @@ const CardItem = ({
   return (
     <Card
       sx={{
-        // maxWidth: { xs: "100%", sm: "400px" },
         flexGrow: 1,
         boxShadow: 3,
         marginBottom: "1%",

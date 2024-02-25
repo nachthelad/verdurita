@@ -15,10 +15,6 @@ const LogoButton = ({ refreshData, setSelectedMoneda }: LogoButtonProps) => {
     setSelectedMoneda(null);
   };
 
-  //   if (refresh) {
-  //     return <Home />;
-  //   }
-
   return (
     <Box
       sx={{
