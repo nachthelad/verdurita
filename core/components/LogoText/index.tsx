@@ -2,16 +2,18 @@ import { Typography, Button, Box } from "@mui/material";
 import { kanit } from "@/fonts/fonts";
 import { useState } from "react";
 
-const LogoButton: React.FC = () => {
+export type LogoButtonProps = {
+  refreshData: () => void;
+  setSelectedMoneda: (moneda: string | null) => void;
+};
+
+const LogoButton = ({ refreshData, setSelectedMoneda }: LogoButtonProps) => {
   const [refresh, setRefresh] = useState(false);
 
   const handleRefresh = () => {
-    setRefresh(true);
+    refreshData();
+    setSelectedMoneda(null);
   };
-
-  //   if (refresh) {
-  //     return <Home />;
-  //   }
 
   return (
     <Box
@@ -39,10 +41,6 @@ const LogoButton: React.FC = () => {
           verdurita
         </Typography>
       </Button>
-      <Button
-        sx={{
-          padding: "0",
-        }}></Button>
       <Typography
         variant="caption"
         sx={{
@@ -51,6 +49,7 @@ const LogoButton: React.FC = () => {
           fontSize: "0.6rem",
           fontStyle: "italic",
           textTransform: "lowercase",
+          userSelect: "none",
         }}>
         by nachthelad
       </Typography>

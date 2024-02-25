@@ -1,23 +1,21 @@
 import React, { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { kanit } from "@/fonts/fonts";
 import {
   AppBar,
   Box,
   Toolbar,
-  Typography,
   Button,
   IconButton,
   Drawer,
   useMediaQuery,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import { MonedaCheckbox } from "@/core/components/MonedaCheckbox";
 import { MonedaButton } from "@/core/components/MonedaButton";
 import LogoText from "../LogoText";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | undefined) => void;
+  refreshData: () => void;
 };
 
 const monedas: { [key: string]: string } = {
@@ -41,7 +39,7 @@ const theme = createTheme({
   },
 });
 
-export default function MenuBar({ onFilter }: MenuBarProps) {
+export default function MenuBar({ onFilter, refreshData }: MenuBarProps) {
   const [drawerOpen, setDrawerOpen] = React.useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("xl"));
   const [selectedMoneda, setSelectedMoneda] = useState<string | null>(null);
@@ -67,10 +65,12 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
         textAlign: "center",
         backgroundColor: theme.palette.primary.main,
         height: "100%",
-      }}
-    >
+      }}>
       <Box sx={{ paddingLeft: "5%", paddingY: "5%" }}>
-        <LogoText />
+        <LogoText
+          setSelectedMoneda={setSelectedMoneda}
+          refreshData={refreshData}
+        />
       </Box>
       <Button
         onClick={() => onFilter()}
@@ -80,8 +80,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
           marginLeft: "1",
           display: "flex",
           fontWeight: "bold",
-        }}
-      >
+        }}>
         Todas
       </Button>
       {Object.keys(monedas).map((key) => (
@@ -93,8 +92,7 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
             display: "flex",
             justifyContent: "flex-start",
             margin: "5px 0",
-          }}
-        >
+          }}>
           {key}
         </Button>
       ))}
@@ -111,11 +109,13 @@ export default function MenuBar({ onFilter }: MenuBarProps) {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ mr: 2, display: { xl: "none" } }}
-            >
+              sx={{ mr: 2, display: { xl: "none" } }}>
               <MenuIcon />
             </IconButton>
-            <LogoText />
+            <LogoText
+              setSelectedMoneda={setSelectedMoneda}
+              refreshData={refreshData}
+            />
             {isMobile
               ? null
               : Object.keys(monedas).map((key, index) => (
