@@ -20,7 +20,6 @@ export default function MainContainer({
         flexDirection: "column",
         alignItems: "center",
         px: 4,
-        backgroundColor: "#f0fff0",
       }}>
       {resultadosFiltrados.map((moneda: Moneda, index: number) => (
         <Grid
@@ -34,7 +33,10 @@ export default function MainContainer({
             alignItems: "center",
             mb: 5,
           }}>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ marginTop: index === 0 ? "5rem" : undefined }}>
             <TitleItem titulo={moneda.nombre} />
           </Grid>
           <Grid

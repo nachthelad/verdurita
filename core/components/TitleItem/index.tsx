@@ -9,11 +9,11 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
   return (
     <Typography
       variant="h1"
-      fontSize="1.5rem"
       component="div"
       sx={{
         textAlign: "center",
         color: "#001100",
+        fontSize: "1.5rem",
       }}>
       {titulo}
     </Typography>

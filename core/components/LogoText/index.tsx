@@ -1,6 +1,5 @@
 import { Typography, Button, Box } from "@mui/material";
 import { kanit } from "@/fonts/fonts";
-import { useState } from "react";
 
 export type LogoButtonProps = {
   refreshData: () => void;
@@ -8,8 +7,6 @@ export type LogoButtonProps = {
 };
 
 const LogoButton = ({ refreshData, setSelectedMoneda }: LogoButtonProps) => {
-  const [refresh, setRefresh] = useState(false);
-
   const handleRefresh = () => {
     refreshData();
     setSelectedMoneda(null);
