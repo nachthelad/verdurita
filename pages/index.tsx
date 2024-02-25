@@ -6,59 +6,7 @@ import { useState, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
 import axios from "axios";
 import { Box } from "@mui/material";
-
-const defaultResults = [
-  {
-    moneda: "USD",
-    casa: "blue",
-    nombre: "Dólar Blue",
-  },
-  {
-    moneda: "USD",
-    casa: "oficial",
-    nombre: "Dólar Oficial",
-  },
-  {
-    moneda: "EUR",
-    casa: "Euro",
-    nombre: "Euro Blue",
-  },
-  {
-    moneda: "EUR",
-    casa: "Euro",
-    nombre: "Euro Oficial",
-  },
-  {
-    moneda: "USD",
-    casa: "tarjeta",
-    nombre: "Dólar Tarjeta",
-  },
-  {
-    moneda: "USD",
-    casa: "bolsa",
-    nombre: "Dólar Bolsa",
-  },
-  {
-    moneda: "USD",
-    casa: "cripto",
-    nombre: "Dólar Cripto",
-  },
-  {
-    moneda: "USD",
-    casa: "contadoconliqui",
-    nombre: "Dólar Contado con liquidación",
-  },
-  {
-    moneda: "USD",
-    casa: "mayorista",
-    nombre: "Dólar Mayorista",
-  },
-  {
-    moneda: "BRL",
-    casa: "oficial",
-    nombre: "Real Brasileño",
-  },
-];
+import { defaultResults } from "@/constants/defaultResults";
 
 export default function Home() {
   const [monedas, setMonedas] = useState<Moneda[]>(defaultResults);
