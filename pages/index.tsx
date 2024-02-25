@@ -5,6 +5,7 @@ import Layout from "./layout";
 import { useState, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
 import axios from "axios";
+import { Box } from "@mui/material";
 
 const defaultResults = [
   {
@@ -97,18 +98,19 @@ export default function Home() {
   return (
     <Layout onFilter={handleFilter} refreshData={cargarDatos}>
       <CustomHead />
-      <main
+      <Box
+        component="main"
         className={`${inter.className}`}
-        style={{
-          marginTop: "70px",
+        sx={{
+          marginTop: "sm: 56px, md: 64px",
           backgroundColor: "#f0fff0",
-          minHeight: "calc(100vh - 70px)",
+          minHeight: "calc(100vh - 60px)",
         }}>
         <MainContainer
           loadingData={loadingData}
           resultadosFiltrados={resultadosFiltrados}
         />
-      </main>
+      </Box>
     </Layout>
   );
 }

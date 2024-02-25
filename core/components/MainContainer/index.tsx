@@ -33,7 +33,10 @@ export default function MainContainer({
             alignItems: "center",
             mb: 5,
           }}>
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ marginTop: index === 0 ? "5rem" : undefined }}>
             <TitleItem titulo={moneda.nombre} />
           </Grid>
           <Grid
