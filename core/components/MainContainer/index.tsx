@@ -20,7 +20,6 @@ export default function MainContainer({
         flexDirection: "column",
         alignItems: "center",
         px: 4,
-        backgroundColor: "#f0fff0",
       }}>
       {resultadosFiltrados.map((moneda: Moneda, index: number) => (
         <Grid

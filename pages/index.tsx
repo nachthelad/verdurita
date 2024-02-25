@@ -101,6 +101,7 @@ export default function Home() {
         className={`${inter.className}`}
         style={{
           marginTop: "70px",
+          backgroundColor: "#f0fff0",
         }}>
         <MainContainer
           loadingData={loadingData}
