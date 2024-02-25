@@ -4,13 +4,14 @@ import MenuBar from "@/core/components/MenuBar";
 type LayoutProps = {
   children: React.ReactNode;
   onFilter: () => void;
+  refreshData: () => void;
 };
 
-const Layout = ({ children, onFilter }: LayoutProps) => {
+const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
   return (
     <>
-      <MenuBar onFilter={onFilter} />
-      <div>{children}</div>
+      <MenuBar refreshData={refreshData} onFilter={onFilter} />
+      {children}
     </>
   );
 };

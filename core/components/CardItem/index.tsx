@@ -5,13 +5,15 @@ import Typography from "@mui/material/Typography";
 import CurrencyCalculatorButton from "../Calculator";
 import { format } from "numerable";
 import { es } from "numerable/locale";
+import Skeleton from "@mui/material/Skeleton";
 
 type CardItemProps = {
   texto: string;
-  precio: number;
+  precio?: number;
   esRealBrasileño?: boolean;
   EsEuroO?: boolean;
   EsEuroB?: boolean;
+  loadingData: boolean;
 };
 
 const CardItem = ({
@@ -20,6 +22,7 @@ const CardItem = ({
   esRealBrasileño = false,
   EsEuroO = false,
   EsEuroB = false,
+  loadingData,
 }: CardItemProps) => {
   let tipoOperacion;
   switch (texto) {
@@ -39,7 +42,7 @@ const CardItem = ({
   return (
     <Card
       sx={{
-        maxWidth: { xs: "100%", sm: "400px" },
+        flexGrow: 1,
         boxShadow: 3,
         marginBottom: "1%",
       }}>
@@ -49,14 +52,29 @@ const CardItem = ({
           alignItems: "center",
         }}>
         <div style={{ flex: 1 }}>
-          <Typography variant="h5" component="div">
-            {texto}
-          </Typography>
-          <Typography variant="h5" color="text.secondary">
-            ${format(precio, "0,0.00", { locale: es })}
-          </Typography>
+          {loadingData ? (
+            <Skeleton
+              variant="text"
+              sx={{ fontSize: "1.5rem", height: 32, width: "30%" }}
+            />
+          ) : (
+            <Typography variant="h5" component="div">
+              {texto}
+            </Typography>
+          )}
+          {loadingData ? (
+            <Skeleton
+              variant="text"
+              sx={{ fontSize: "1.5rem", height: 32, width: "35%" }}
+            />
+          ) : (
+            <Typography variant="h5" color="text.secondary">
+              ${format(precio, "0,0.00", { locale: es })}
+            </Typography>
+          )}
         </div>
         <CurrencyCalculatorButton
+          loadingData={loadingData}
           precioMoneda={Number(precio)}
           tipoOperacion={tipoOperacion as "venta" | "compra" | "promedio"}
           esRealBrasileño={esRealBrasileño}

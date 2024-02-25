@@ -60,6 +60,7 @@ interface CurrencyCalculatorButtonProps {
   esRealBrasileño?: boolean;
   EsEuroO?: boolean;
   EsEuroB?: boolean;
+  loadingData: boolean;
 }
 
 const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
@@ -68,6 +69,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
   esRealBrasileño = false,
   EsEuroO = false,
   EsEuroB = false,
+  loadingData,
 }) => {
   const [open, setOpen] = useState(false);
   const [montoPesos, setMontoPesos] = useState("0");
@@ -81,6 +83,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
       : "Cambiá al precio promedio";
 
   const handleClickOpen = () => {
+    if (loadingData) return;
     setOpen(true);
   };
 
