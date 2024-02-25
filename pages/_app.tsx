@@ -1,23 +1,23 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import { CssBaseline } from "@mui/material";
-import PullToRefresh from "pulltorefreshjs";
+// import { CssBaseline } from "@mui/material";
+// import PullToRefresh from "pulltorefreshjs";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const standalone =
-    typeof window !== "undefined" &&
-    window.matchMedia("(display-mode: standalone)").matches;
+  // const standalone =
+  //   typeof window !== "undefined" &&
+  //   window.matchMedia("(display-mode: standalone)").matches;
 
-  if (standalone) {
-    PullToRefresh.init({
-      onRefresh() {
-        window.location.reload();
-      },
-    });
-  }
+  // if (standalone) {
+  //   PullToRefresh.init({
+  //     onRefresh() {
+  //       window.location.reload();
+  //     },
+  //   });
+  // }
   return (
     <>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <Component {...pageProps} />
     </>
   );

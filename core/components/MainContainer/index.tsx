@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Box, Container, Grid } from "@mui/material";
+import React from "react";
+import { Box, Grid } from "@mui/material";
 import useCurrencyData from "@/hooks/useCurrencyData";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
@@ -21,8 +21,8 @@ export default function MainContainer({
         flexDirection: "column",
         alignItems: "center",
         px: 4,
-      }}
-    >
+        backgroundColor: "#f0fff0",
+      }}>
       {resultadosFiltrados
         .filter((moneda) =>
           moneda.nombre.toLowerCase().includes(busqueda.toLowerCase())
@@ -38,17 +38,8 @@ export default function MainContainer({
               justifyContent: "center",
               alignItems: "center",
               mb: 5,
-            }}
-          >
-            <Grid
-              item
-              xs={12}
-              sx={
-                {
-                  // mb: 2,
-                }
-              }
-            >
+            }}>
+            <Grid item xs={12}>
               <TitleItem titulo={moneda.nombre} />
             </Grid>
             <Grid
@@ -60,8 +51,7 @@ export default function MainContainer({
               sx={{
                 display: "flex",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <CardItem
                 texto={"Vendé a:"}
                 precio={moneda.compra}
@@ -79,8 +69,7 @@ export default function MainContainer({
               sx={{
                 display: "flex",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <CardItem
                 texto={"Comprá a:"}
                 precio={moneda.venta}
@@ -98,8 +87,7 @@ export default function MainContainer({
               sx={{
                 display: "flex",
                 justifyContent: "center",
-              }}
-            >
+              }}>
               <CardItem
                 texto={"Promedio:"}
                 precio={moneda.promedio}
