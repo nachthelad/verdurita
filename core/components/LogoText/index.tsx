@@ -4,13 +4,15 @@ import { useState } from "react";
 
 export type LogoButtonProps = {
   refreshData: () => void;
+  setSelectedMoneda: (moneda: string | null) => void;
 };
 
-const LogoButton = ({ refreshData }: LogoButtonProps) => {
+const LogoButton = ({ refreshData, setSelectedMoneda }: LogoButtonProps) => {
   const [refresh, setRefresh] = useState(false);
 
   const handleRefresh = () => {
     refreshData();
+    setSelectedMoneda(null);
   };
 
   //   if (refresh) {

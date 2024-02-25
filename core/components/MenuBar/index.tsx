@@ -68,7 +68,10 @@ export default function MenuBar({ onFilter, refreshData }: MenuBarProps) {
         height: "100%",
       }}>
       <Box sx={{ paddingLeft: "5%", paddingY: "5%" }}>
-        <LogoText refreshData={refreshData} />
+        <LogoText
+          setSelectedMoneda={setSelectedMoneda}
+          refreshData={refreshData}
+        />
       </Box>
       <Button
         onClick={() => onFilter()}
@@ -110,7 +113,10 @@ export default function MenuBar({ onFilter, refreshData }: MenuBarProps) {
               sx={{ mr: 2, display: { xl: "none" } }}>
               <MenuIcon />
             </IconButton>
-            <LogoText refreshData={refreshData} />
+            <LogoText
+              setSelectedMoneda={setSelectedMoneda}
+              refreshData={refreshData}
+            />
             {isMobile
               ? null
               : Object.keys(monedas).map((key, index) => (
