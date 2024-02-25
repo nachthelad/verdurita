@@ -102,6 +102,7 @@ export default function Home() {
         style={{
           marginTop: "70px",
           backgroundColor: "#f0fff0",
+          minHeight: "calc(100vh - 70px)",
         }}>
         <MainContainer
           loadingData={loadingData}
