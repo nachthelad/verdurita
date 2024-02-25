@@ -155,7 +155,6 @@ export default function Home() {
   }, []);
 
   const handleFilter = (filtro?: string) => {
-    console.log(filtro);
     if (!filtro) {
       setResultadosFiltrados(monedas);
     } else {
@@ -166,8 +165,6 @@ export default function Home() {
       setResultadosFiltrados(monedasFiltradas);
     }
   };
-
-  console.log(resultadosFiltrados);
 
   return (
     <Layout onFilter={handleFilter} refreshData={cargarDatos}>
