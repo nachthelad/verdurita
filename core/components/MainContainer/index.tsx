@@ -3,16 +3,26 @@ import { Box, Grid } from "@mui/material";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
+import LogoButton from "@/core/components/LogoButton";
+import { useMediaQuery, Theme } from "@mui/material";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
   loadingData: boolean;
+  onFilter: () => void;
+  refreshData: () => void;
 };
 
 export default function MainContainer({
   resultadosFiltrados,
   loadingData,
+  onFilter,
+  refreshData,
 }: MainContainerProps): React.ReactElement {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+
   return (
     <Box
       sx={{
@@ -21,6 +31,7 @@ export default function MainContainer({
         alignItems: "center",
         px: 4,
       }}>
+      <LogoButton onFilter={onFilter} refreshData={refreshData} />
       {resultadosFiltrados.map((moneda: Moneda, index: number) => (
         <Grid
           key={`${moneda?.nombre}-${index}`}
@@ -31,12 +42,14 @@ export default function MainContainer({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            mb: 5,
+            mb: isMobile ? 1 : 5,
           }}>
           <Grid
             item
             xs={12}
-            sx={{ marginTop: index === 0 ? "5rem" : undefined }}>
+            sx={{
+              marginTop: isMobile ? "1rem" : index === 0 ? "3rem" : undefined,
+            }}>
             <TitleItem titulo={moneda.nombre} />
           </Grid>
           <Grid

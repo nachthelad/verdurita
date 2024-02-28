@@ -12,10 +12,11 @@ import CalculateIcon from "@mui/icons-material/Calculate";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import styled from "styled-components";
+import { theme } from "@/theme/theme";
 
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
-    background-color: #f5f5f5;
+    background-color: ${theme.palette.secondary.main};
     border-radius: 10px;
     max-height: 90vh;
     overflow-y: auto;
@@ -23,26 +24,26 @@ const StyledDialog = styled(Dialog)`
 `;
 
 const StyledDialogTitle = styled(DialogTitle)`
-  color: #001100;
+  color: #000;
   font-size: 1.5rem;
 `;
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#698550",
+    color: theme.palette.primary.main,
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#698550",
+    borderBottomColor: theme.palette.primary.main,
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
     "&:hover fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
   },
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
@@ -146,7 +147,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
       <Box>
         <CalculateIcon
           fontSize="large"
-          style={{ color: "#698550", cursor: "pointer" }}
+          style={{ color: theme.palette.primary.main, cursor: "pointer" }}
           onClick={handleClickOpen}
         />
       </Box>
@@ -196,7 +197,9 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} style={{ color: "#698550" }}>
+          <Button
+            onClick={handleClose}
+            style={{ color: theme.palette.primary.main }}>
             Cerrar
           </Button>
         </DialogActions>
