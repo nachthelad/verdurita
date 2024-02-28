@@ -12,7 +12,20 @@ export default function App({ Component, pageProps }: AppProps) {
 
   if (standalone) {
     PullToRefresh.init({
-      instructionsPullToRefresh: "jejejjee",
+      instructionsPullToRefresh: "Deslizá para actualizar",
+      instructionsReleaseToRefresh: "Soltá para actualizar",
+      instructionsRefreshing: "Actualizando...",
+      getStyles: () => `
+        .ptr-arrow {
+          fill: ${theme.palette.primary.main};
+        }
+        .ptr-loading {
+          color: ${theme.palette.primary.main};
+        }
+        .ptr-font-size {
+          font-size: 1.5rem;
+        }
+      `,
       onRefresh() {
         window.location.reload();
       },
