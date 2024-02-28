@@ -1,18 +1,20 @@
 import CustomHead from "@/core/components/CustomHead";
-import { inter } from "@/fonts/fonts";
 import MainContainer from "@/core/components/MainContainer";
 import Layout from "./layout";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
-import axios from "axios";
+import { inter } from "@/fonts/fonts";
 import { Box } from "@mui/material";
 import { defaultResults } from "@/constants/defaultResults";
+import { theme } from "@/theme/theme";
 
 export default function Home() {
   const [monedas, setMonedas] = useState<Moneda[]>(defaultResults);
   const [resultadosFiltrados, setResultadosFiltrados] =
     useState<Moneda[]>(defaultResults);
   const [loadingData, setLoadingData] = useState(true);
+  const [filterApplied, setFilterApplied] = useState(false);
 
   const cargarDatos = async () => {
     try {
@@ -33,12 +35,14 @@ export default function Home() {
 
   const handleFilter = (filtro?: string) => {
     if (!filtro) {
+      setFilterApplied(false);
       setResultadosFiltrados(monedas);
+      cargarDatos();
     } else {
+      setFilterApplied(true);
       const monedasFiltradas = monedas.filter((moneda: { nombre: string }) =>
         moneda.nombre.toLowerCase().includes(filtro.toLowerCase())
       );
-
       setResultadosFiltrados(monedasFiltradas);
     }
   };
@@ -51,12 +55,15 @@ export default function Home() {
         className={`${inter.className}`}
         sx={{
           marginTop: "sm: 56px, md: 64px",
-          backgroundColor: "#f0fff0",
+          backgroundColor: theme.palette.primary.contrastText,
           minHeight: "calc(100vh - 60px)",
         }}>
         <MainContainer
+          filterApplied={filterApplied}
           loadingData={loadingData}
           resultadosFiltrados={resultadosFiltrados}
+          onFilter={handleFilter}
+          refreshData={cargarDatos}
         />
       </Box>
     </Layout>

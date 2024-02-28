@@ -1,18 +1,32 @@
-import React from "react";
 import { Box, Grid } from "@mui/material";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
+import LogoButton from "@/core/components/LogoButton";
+import { useMediaQuery, Theme } from "@mui/material";
+import Button from "@mui/material/Button";
+import { theme } from "@/theme/theme";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
   loadingData: boolean;
+  onFilter: () => void;
+  refreshData: () => void;
+  filterApplied: boolean;
 };
 
 export default function MainContainer({
   resultadosFiltrados,
   loadingData,
+  onFilter,
+  refreshData,
+  filterApplied,
 }: MainContainerProps): React.ReactElement {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+
   return (
     <Box
       sx={{
@@ -21,6 +35,7 @@ export default function MainContainer({
         alignItems: "center",
         px: 4,
       }}>
+      <LogoButton onFilter={onFilter} refreshData={refreshData} />
       {resultadosFiltrados.map((moneda: Moneda, index: number) => (
         <Grid
           key={`${moneda?.nombre}-${index}`}
@@ -31,12 +46,15 @@ export default function MainContainer({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            mb: 5,
+            marginBottom:
+              isMobile && index === resultadosFiltrados.length - 1 ? 10 : 2,
           }}>
           <Grid
             item
             xs={12}
-            sx={{ marginTop: index === 0 ? "5rem" : undefined }}>
+            sx={{
+              marginTop: isMobile ? "1rem" : index === 0 ? "3rem" : undefined,
+            }}>
             <TitleItem titulo={moneda.nombre} />
           </Grid>
           <Grid
@@ -95,6 +113,36 @@ export default function MainContainer({
               EsEuroO={moneda.nombre === "Euro Oficial"}
               EsEuroB={moneda.nombre === "Euro Blue"}
             />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}>
+            {filterApplied && (
+              <Button
+                onClick={() => {
+                  onFilter();
+                }}
+                variant="text"
+                size="large"
+                startIcon={<FilterAltOffIcon />}
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "20px",
+                  // marginTop: 2,
+                  backgroundColor: theme.palette.primary.contrastText,
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.contrastText,
+                  },
+                }}>
+                Limpiar Filtro
+              </Button>
+            )}
           </Grid>
         </Grid>
       ))}

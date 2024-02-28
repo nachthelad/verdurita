@@ -6,43 +6,29 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  Box,
 } from "@mui/material";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import styled from "styled-components";
-
-const StyledDialog = styled(Dialog)`
-  .MuiDialog-paper {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-`;
-
-const StyledDialogTitle = styled(DialogTitle)`
-  color: #001100;
-  font-size: 1.5rem;
-`;
+import { theme } from "@/theme/theme";
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
-    color: "#698550",
+    color: theme.palette.primary.main,
   },
   "& .MuiInput-underline:after": {
-    borderBottomColor: "#698550",
+    borderBottomColor: theme.palette.primary.main,
   },
   "& .MuiOutlinedInput-root": {
     "& fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
     "&:hover fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
     "&.Mui-focused fieldset": {
-      borderColor: "#698550",
+      borderColor: theme.palette.primary.main,
     },
   },
   "& input::-webkit-outer-spin-button, & input::-webkit-inner-spin-button": {
@@ -143,15 +129,33 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
 
   return (
     <div>
-      <Box>
-        <CalculateIcon
-          fontSize="large"
-          style={{ color: "#698550", cursor: "pointer" }}
-          onClick={handleClickOpen}
-        />
-      </Box>
-      <StyledDialog open={open} onClose={handleClose}>
-        <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
+      <CalculateIcon
+        fontSize="large"
+        style={{
+          color: theme.palette.primary.main,
+          cursor: "pointer",
+          marginTop: "10px",
+        }}
+        onClick={handleClickOpen}
+      />
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            backgroundColor: theme.palette.primary.contrastText,
+            borderRadius: "20px",
+            maxHeight: "90vh",
+            overflowY: "auto",
+          },
+        }}>
+        <DialogTitle
+          sx={{
+            color: "black",
+            fontSize: "1.5rem",
+          }}>
+          {tituloDialogo}
+        </DialogTitle>
         <DialogContent>
           <StyledTextField
             autoFocus
@@ -196,11 +200,13 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} style={{ color: "#698550" }}>
+          <Button
+            onClick={handleClose}
+            style={{ color: theme.palette.primary.main }}>
             Cerrar
           </Button>
         </DialogActions>
-      </StyledDialog>
+      </Dialog>
     </div>
   );
 };

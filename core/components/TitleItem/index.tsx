@@ -14,6 +14,8 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
         textAlign: "center",
         color: "#001100",
         fontSize: "1.5rem",
+        fontWeight: "500",
+        textTransform: "uppercase",
       }}>
       {titulo}
     </Typography>
