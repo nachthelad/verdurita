@@ -82,7 +82,11 @@ export default function CurrencyModal({
                     paddingX: "1.5rem",
                     paddingY: "0.3rem",
                   }}>
-                  {variant}{" "}
+                  {variant
+                    .split(" ")
+                    .slice(1)
+                    .join(" ")
+                    .replace("brasileño", " brasileño oficial")}
                 </Button>
               ))}
             </DialogContentText>
