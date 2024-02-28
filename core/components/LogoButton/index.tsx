@@ -40,7 +40,7 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
             textTransform: "lowercase",
             fontSize: "1.5rem",
             lineHeight: "1",
-            marginTop: isMobile ? "0.5rem" : "0",
+            marginTop: isMobile ? "1.5rem" : "0",
           }}>
           verdurita
         </Typography>
