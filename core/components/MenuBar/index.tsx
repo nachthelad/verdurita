@@ -45,7 +45,7 @@ export default function MenuBar({
           display: "flex",
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
-          transition: "height 0.3s ease", // Add transition for height change
+          transition: "height 0.2s ease", // Add transition for height change
         }}>
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (
@@ -102,7 +102,7 @@ export default function MenuBar({
             <Button
               sx={{
                 color: theme.palette.primary.contrastText,
-                backgroundColor: theme.palette.secondary.main,
+                backgroundColor: `${theme.palette.secondary.main} !important`,
                 borderRadius: "2rem",
                 paddingX: "1.5rem",
                 paddingY: "0.3rem",

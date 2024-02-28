@@ -46,7 +46,7 @@ export default function MenuButton({
         }}
         sx={{
           color: theme.palette.primary.contrastText,
-          backgroundColor: theme.palette.secondary.main,
+          backgroundColor: `${theme.palette.secondary.main} !important`,
           borderRadius: "2rem",
           paddingX: "1.5rem",
           paddingY: "0.3rem",
