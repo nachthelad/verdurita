@@ -7,6 +7,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import styled from "styled-components";
 import { TransitionProps } from "@mui/material/transitions";
 import { theme } from "@/theme/theme";
 
@@ -26,6 +27,11 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const CurrencyText = styled.span`
+  color: "black";
+  font-weight: bold;
+`;
+
 export default function CurrencyModal({
   open,
   onClose,
@@ -33,6 +39,7 @@ export default function CurrencyModal({
   onFilter,
 }: CurrencyModalProps) {
   const currency = currencyVariants[0].split(" ")[0];
+
   return (
     <>
       <Dialog
@@ -56,7 +63,9 @@ export default function CurrencyModal({
               sx={{
                 textAlign: "center",
               }}>
-              {`Seleccioná el ${currency} que queres filtrar`}
+              {`Seleccioná el`}
+              <CurrencyText> {currency} </CurrencyText>
+              {`que queres filtrar`}
             </Typography>
           </DialogTitle>
           <DialogContent>
