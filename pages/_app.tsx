@@ -1,7 +1,9 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { CssBaseline } from "@mui/material";
+import { ThemeProvider } from "@mui/material/styles";
 import PullToRefresh from "pulltorefreshjs";
+import { theme } from "@/theme/theme";
 
 export default function App({ Component, pageProps }: AppProps) {
   const standalone =
@@ -17,8 +19,10 @@ export default function App({ Component, pageProps }: AppProps) {
   }
   return (
     <>
-      <CssBaseline />
-      <Component {...pageProps} />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }

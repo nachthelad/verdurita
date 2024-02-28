@@ -1,5 +1,6 @@
 import React from "react";
 import MenuBar from "@/core/components/MenuBar";
+import { useMediaQuery, Theme } from "@mui/material";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -8,9 +9,17 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
+
   return (
     <>
-      <MenuBar refreshData={refreshData} onFilter={onFilter} />
+      <MenuBar
+        isMobile={isMobile}
+        refreshData={refreshData}
+        onFilter={onFilter}
+      />
       {children}
     </>
   );
