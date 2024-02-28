@@ -6,6 +6,8 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import styled from "styled-components";
 import { TransitionProps } from "@mui/material/transitions";
 import { theme } from "@/theme/theme";
 
@@ -25,6 +27,15 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
+const StyledDialog = styled(Dialog)`
+  .MuiDialog-paper {
+    background-color: ${theme.palette.primary.contrastText};
+    border-radius: 20px;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+`;
+
 export default function CurrencyModal({
   open,
   onClose,
@@ -34,20 +45,21 @@ export default function CurrencyModal({
   const currency = currencyVariants[0].split(" ")[0];
   return (
     <>
-      <Dialog
+      <StyledDialog
         open={open}
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
         aria-describedby="alert-dialog-slide-description">
         <Box>
-          <DialogTitle
-            sx={{
-              fontSize: "1.5rem",
-              display: "flex",
-              alignItems: "center",
-            }}>
-            {`Seleccioná el ${currency} que queres filtrar`}
+          <DialogTitle>
+            <Typography
+              variant="h5"
+              sx={{
+                textAlign: "center",
+              }}>
+              {`Seleccioná el ${currency} que queres filtrar`}
+            </Typography>
           </DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-slide-description">
@@ -78,7 +90,7 @@ export default function CurrencyModal({
             </DialogContentText>
           </DialogContent>
         </Box>
-      </Dialog>
+      </StyledDialog>
     </>
   );
 }

@@ -6,18 +6,28 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
-  Box,
 } from "@mui/material";
+import { TransitionProps } from "@mui/material/transitions";
+import Slide from "@mui/material/Slide";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import styled from "styled-components";
 import { theme } from "@/theme/theme";
 
+const Transition = React.forwardRef(function Transition(
+  props: TransitionProps & {
+    children: React.ReactElement<any, any>;
+  },
+  ref: React.Ref<unknown>
+) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
     background-color: ${theme.palette.primary.contrastText};
-    border-radius: 10px;
+    border-radius: 20px;
     max-height: 90vh;
     overflow-y: auto;
   }
@@ -144,14 +154,19 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
 
   return (
     <div>
-      <Box>
-        <CalculateIcon
-          fontSize="large"
-          style={{ color: theme.palette.primary.main, cursor: "pointer" }}
-          onClick={handleClickOpen}
-        />
-      </Box>
-      <StyledDialog open={open} onClose={handleClose}>
+      <CalculateIcon
+        fontSize="large"
+        style={{
+          color: theme.palette.primary.main,
+          cursor: "pointer",
+          marginTop: "10px",
+        }}
+        onClick={handleClickOpen}
+      />
+      <StyledDialog
+        open={open}
+        onClose={handleClose}
+        TransitionComponent={Transition}>
         <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
         <DialogContent>
           <StyledTextField

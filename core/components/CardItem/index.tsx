@@ -6,6 +6,8 @@ import CurrencyCalculatorButton from "../Calculator";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import Skeleton from "@mui/material/Skeleton";
+import styled from "styled-components";
+import { Box } from "@mui/material";
 
 type CardItemProps = {
   texto: string;
@@ -15,6 +17,18 @@ type CardItemProps = {
   EsEuroB?: boolean;
   loadingData: boolean;
 };
+
+const StyledCard = styled(Card)`
+  flex-grow: 1;
+  border-radius: 20px;
+`;
+
+const StyledCardContent = styled(CardContent)`
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-radius: 20px;
+`;
 
 const CardItem = ({
   texto,
@@ -40,18 +54,14 @@ const CardItem = ({
   }
 
   return (
-    <Card
+    <StyledCard
       sx={{
-        flexGrow: 1,
         boxShadow: 3,
-        marginBottom: "1%",
       }}>
-      <CardContent
-        sx={{
-          display: "flex",
-          alignItems: "center",
-        }}>
-        <div style={{ flex: 1 }}>
+      <StyledCardContent>
+        {/* Permite el largo del skeleton */}
+        <Box sx={{ flex: 1 }}>
+          {/* Permite el largo del skeleton */}
           {loadingData ? (
             <Skeleton
               variant="text"
@@ -72,7 +82,7 @@ const CardItem = ({
               ${format(precio, "0,0.00", { locale: es })}
             </Typography>
           )}
-        </div>
+        </Box>
         <CurrencyCalculatorButton
           loadingData={loadingData}
           precioMoneda={Number(precio)}
@@ -81,8 +91,8 @@ const CardItem = ({
           EsEuroO={EsEuroO}
           EsEuroB={EsEuroB}
         />
-      </CardContent>
-    </Card>
+      </StyledCardContent>
+    </StyledCard>
   );
 };
 
