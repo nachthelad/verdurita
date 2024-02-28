@@ -9,13 +9,16 @@ type MenuButtonProps = {
   buttonName: string | React.ReactNode;
   onFilter: (moneda: string | null) => void;
   refreshData: () => void;
-  setSelectedVariant: (variant: string) => void;
+  expandAppBar: () => void;
+  expanded: boolean;
 };
 
 export default function MenuButton({
   currencyVariants,
   buttonName,
   onFilter,
+  expandAppBar,
+  expanded,
 }: MenuButtonProps) {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -37,7 +40,10 @@ export default function MenuButton({
       <Button
         id="basic-button"
         aria-haspopup="true"
-        onClick={handleClickOpen}
+        onClick={() => {
+          isMobile && expandAppBar();
+          !isMobile && handleClickOpen();
+        }}
         sx={{
           color: theme.palette.primary.contrastText,
           backgroundColor: theme.palette.secondary.main,
@@ -49,7 +55,7 @@ export default function MenuButton({
         {buttonName}
       </Button>
       <CurrencyModal
-        open={open}
+        open={open && !expanded}
         onClose={handleClose}
         currencyVariants={currencyVariants}
         onFilter={onFilter}
