@@ -2,6 +2,7 @@ html {
   position: fixed;
   height: 100%;
   overflow: hidden;
+  background-color: #f0fff0;
 }
 
 body {
@@ -12,6 +13,7 @@ body {
   -webkit-overflow-scrolling: touch;
   color: rgb(var(--foreground-rgb));
   background-color: #f0fff0;
+  overscroll-behavior: none;
 }
 
 ::-webkit-scrollbar-track {
