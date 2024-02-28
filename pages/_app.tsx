@@ -16,12 +16,6 @@ export default function App({ Component, pageProps }: AppProps) {
       instructionsReleaseToRefresh: "Soltá para actualizar",
       instructionsRefreshing: "Actualizando...",
       getStyles: () => `
-        .ptr-arrow {
-          fill: ${theme.palette.primary.main};
-        }
-        .ptr-loading {
-          color: ${theme.palette.primary.main};
-        }
         .ptr-font-size {
           font-size: 1.5rem;
         }
