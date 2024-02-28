@@ -51,7 +51,7 @@ export default function MenuButton({
         endIcon={isMobile ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
         sx={{
           color: theme.palette.secondary.main,
-          fontSize: isMobile ? "25px" : "15px",
+          fontSize: isMobile ? "20px" : "15px",
         }}>
         {buttonName}
       </Button>

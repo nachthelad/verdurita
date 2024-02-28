@@ -49,28 +49,30 @@ export default function MenuBar({
           <Box
             sx={{
               display: "flex",
-              gap: isMobile ? 5 : 0,
+              gap: isMobile ? 2 : 0,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
             }}>
-            {selectedVariant && typeof selectedVariant != "object" && (
-              <Button
-                onClick={() => {
-                  setSelectedVariant(null);
-                  onFilter(null);
-                }}
-                variant="contained"
-                sx={{
-                  color: theme.palette.primary.main,
-                  fontSize: "15px",
-                  marginRight: "5px",
-                  backgroundColor: theme.palette.secondary.main,
-                  "&:hover": {
+            {!isMobile &&
+              selectedVariant &&
+              typeof selectedVariant != "object" && (
+                <Button
+                  onClick={() => {
+                    setSelectedVariant(null);
+                    onFilter(null);
+                  }}
+                  variant="contained"
+                  sx={{
+                    color: theme.palette.primary.main,
+                    fontSize: "15px",
+                    marginRight: "5px",
                     backgroundColor: theme.palette.secondary.main,
-                  },
-                }}>
-                Todas
-              </Button>
-            )}
+                    "&:hover": {
+                      backgroundColor: theme.palette.secondary.main,
+                    },
+                  }}>
+                  Todas
+                </Button>
+              )}
             <MenuButton
               buttonName={"Dólar"}
               currencyVariants={dolarVariants}

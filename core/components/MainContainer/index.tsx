@@ -5,6 +5,9 @@ import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
 import LogoButton from "@/core/components/LogoButton";
 import { useMediaQuery, Theme } from "@mui/material";
+import Button from "@mui/material/Button";
+import { theme } from "@/theme/theme";
+import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -42,7 +45,7 @@ export default function MainContainer({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            mb: isMobile ? 1 : 5,
+            mb: isMobile ? 4 : 5,
           }}>
           <Grid
             item
@@ -111,6 +114,26 @@ export default function MainContainer({
           </Grid>
         </Grid>
       ))}
+      {isMobile && (
+        <Button
+          onClick={() => {
+            onFilter();
+          }}
+          variant="text"
+          size="large"
+          startIcon={<FilterAltOffIcon />}
+          sx={{
+            color: theme.palette.primary.main,
+            fontSize: "20px",
+            marginTop: 2,
+            backgroundColor: theme.palette.secondary.main,
+            "&:hover": {
+              backgroundColor: theme.palette.secondary.main,
+            },
+          }}>
+          Limpiar Filtros
+        </Button>
+      )}
     </Box>
   );
 }
