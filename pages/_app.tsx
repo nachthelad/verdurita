@@ -15,11 +15,6 @@ export default function App({ Component, pageProps }: AppProps) {
       instructionsPullToRefresh: "Deslizá para actualizar",
       instructionsReleaseToRefresh: "Soltá para actualizar",
       instructionsRefreshing: "Actualizando...",
-      getStyles: () => `
-        .ptr-font-size {
-          font-size: 1.5rem;
-        }
-      `,
       onRefresh() {
         window.location.reload();
       },
