@@ -1,12 +1,12 @@
 import { useState } from "react";
-import Button from "@mui/material/Button";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery, Theme } from "@mui/material";
+import Button from "@mui/material/Button";
 import CurrencyModal from "@/core/components/CurrencyModal";
 
 type MenuButtonProps = {
   currencyVariants: string[];
-  buttonName: string;
+  buttonName: string | React.ReactNode;
   onFilter: (moneda: string | null) => void;
   refreshData: () => void;
   setSelectedVariant: (variant: string) => void;

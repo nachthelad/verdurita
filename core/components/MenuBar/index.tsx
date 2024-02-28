@@ -3,6 +3,7 @@ import { AppBar, Box, Toolbar, Button } from "@mui/material";
 import LogoText from "../LogoButton";
 import MenuButton from "../MenuButton";
 import { theme } from "@/theme/theme";
+import { Icon } from "@iconify-icon/react";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | null) => void;
@@ -31,7 +32,7 @@ export default function MenuBar({
   const monedasKeys = Object.keys(monedas);
   const dolarVariants = monedasKeys.filter((key) => key.includes("dólar"));
   const euroVariants = monedasKeys.filter((key) => key.includes("euro"));
-  const realVariants = monedasKeys.filter((key) => key.includes("real"));
+  // const realVariants = monedasKeys.filter((key) => key.includes("real"));
   const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
 
   return (
@@ -74,26 +75,58 @@ export default function MenuBar({
                 </Button>
               )}
             <MenuButton
-              buttonName={"Dólar"}
+              buttonName={
+                isMobile ? (
+                  <Icon
+                    icon="tabler:currency-dollar"
+                    style={{ fontSize: "35px" }}
+                  />
+                ) : (
+                  "Dólar"
+                )
+              }
               currencyVariants={dolarVariants}
               onFilter={onFilter}
               refreshData={refreshData}
               setSelectedVariant={setSelectedVariant}
             />
             <MenuButton
-              buttonName={"Euro"}
+              buttonName={
+                isMobile ? (
+                  <Icon
+                    icon="tabler:currency-euro"
+                    style={{ fontSize: "35px" }}
+                  />
+                ) : (
+                  "Euro"
+                )
+              }
               currencyVariants={euroVariants}
               onFilter={onFilter}
               refreshData={refreshData}
               setSelectedVariant={setSelectedVariant}
             />
-            <MenuButton
-              buttonName={"Real"}
-              currencyVariants={realVariants}
-              onFilter={onFilter}
-              refreshData={refreshData}
-              setSelectedVariant={setSelectedVariant}
-            />
+            <Button
+              sx={{
+                color: theme.palette.primary.contrastText,
+                backgroundColor: theme.palette.secondary.main,
+                borderRadius: "2rem",
+                paddingX: "1.5rem",
+                paddingY: "0.3rem",
+                fontSize: isMobile ? "20px" : "15px",
+              }}
+              onClick={() => {
+                onFilter("Real");
+              }}>
+              {isMobile ? (
+                <Icon
+                  icon="tabler:currency-real"
+                  style={{ fontSize: "35px" }}
+                />
+              ) : (
+                "Real"
+              )}
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
