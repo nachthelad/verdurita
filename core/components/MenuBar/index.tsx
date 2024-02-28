@@ -49,7 +49,7 @@ export default function MenuBar({
           <Box
             sx={{
               display: "flex",
-              gap: isMobile ? 2 : 0,
+              gap: isMobile ? 2 : 1,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
             }}>
             {!isMobile &&
@@ -65,9 +65,9 @@ export default function MenuBar({
                     color: theme.palette.primary.main,
                     fontSize: "15px",
                     marginRight: "5px",
-                    backgroundColor: theme.palette.secondary.main,
+                    backgroundColor: theme.palette.primary.contrastText,
                     "&:hover": {
-                      backgroundColor: theme.palette.secondary.main,
+                      backgroundColor: theme.palette.primary.contrastText,
                     },
                   }}>
                   Todas

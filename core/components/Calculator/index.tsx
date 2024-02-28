@@ -16,7 +16,7 @@ import { theme } from "@/theme/theme";
 
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
-    background-color: ${theme.palette.secondary.main};
+    background-color: ${theme.palette.primary.contrastText};
     border-radius: 10px;
     max-height: 90vh;
     overflow-y: auto;

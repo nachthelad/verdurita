@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Grid } from "@mui/material";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
@@ -14,6 +13,7 @@ type MainContainerProps = {
   loadingData: boolean;
   onFilter: () => void;
   refreshData: () => void;
+  filterApplied: boolean;
 };
 
 export default function MainContainer({
@@ -21,6 +21,7 @@ export default function MainContainer({
   loadingData,
   onFilter,
   refreshData,
+  filterApplied,
 }: MainContainerProps): React.ReactElement {
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
@@ -45,7 +46,8 @@ export default function MainContainer({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            mb: isMobile ? 4 : 5,
+            marginBottom:
+              isMobile && index === resultadosFiltrados.length - 1 ? 10 : 2,
           }}>
           <Grid
             item
@@ -112,28 +114,38 @@ export default function MainContainer({
               EsEuroB={moneda.nombre === "Euro Blue"}
             />
           </Grid>
+          <Grid
+            item
+            xs={12}
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              alignItems: "center",
+            }}>
+            {filterApplied && (
+              <Button
+                onClick={() => {
+                  onFilter();
+                }}
+                variant="text"
+                size="large"
+                startIcon={<FilterAltOffIcon />}
+                sx={{
+                  color: theme.palette.primary.main,
+                  fontSize: "20px",
+                  // marginTop: 2,
+                  backgroundColor: theme.palette.primary.contrastText,
+                  "&:hover": {
+                    backgroundColor: theme.palette.primary.contrastText,
+                  },
+                }}>
+                Limpiar Filtro
+              </Button>
+            )}
+          </Grid>
         </Grid>
       ))}
-      {isMobile && (
-        <Button
-          onClick={() => {
-            onFilter();
-          }}
-          variant="text"
-          size="large"
-          startIcon={<FilterAltOffIcon />}
-          sx={{
-            color: theme.palette.primary.main,
-            fontSize: "20px",
-            marginTop: 2,
-            backgroundColor: theme.palette.secondary.main,
-            "&:hover": {
-              backgroundColor: theme.palette.secondary.main,
-            },
-          }}>
-          Limpiar Filtros
-        </Button>
-      )}
     </Box>
   );
 }

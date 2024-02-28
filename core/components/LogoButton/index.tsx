@@ -28,7 +28,9 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
       }}>
       <Button
         onClick={handleRefresh}
-        sx={{
+        disableFocusRipple
+        disableRipple
+        style={{
           padding: "0",
         }}>
         <Typography

@@ -1,11 +1,8 @@
 import { useState } from "react";
 import Button from "@mui/material/Button";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { useTheme } from "@mui/material/styles";
 import { useMediaQuery, Theme } from "@mui/material";
+import CurrencyModal from "@/core/components/CurrencyModal";
 
 type MenuButtonProps = {
   currencyVariants: string[];
@@ -19,69 +16,44 @@ export default function MenuButton({
   currencyVariants,
   buttonName,
   onFilter,
-  setSelectedVariant,
 }: MenuButtonProps) {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
   const theme = useTheme();
+  const [open, setOpen] = useState(false);
 
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const handleClose = (variant: string) => {
-    setAnchorEl(null);
-    setSelectedVariant(variant);
-    if (!variant || typeof variant === "object") return;
-    onFilter(variant);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
     <div>
       <Button
         id="basic-button"
-        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? "true" : undefined}
-        onClick={handleClick}
-        endIcon={isMobile ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        onClick={handleClickOpen}
         sx={{
-          color: theme.palette.secondary.main,
+          color: theme.palette.primary.contrastText,
+          backgroundColor: theme.palette.secondary.main,
+          borderRadius: "2rem",
+          paddingX: "1.5rem",
+          paddingY: "0.3rem",
           fontSize: isMobile ? "20px" : "15px",
         }}>
         {buttonName}
       </Button>
-      <Menu
-        id="basic-menu"
-        anchorEl={anchorEl}
+      <CurrencyModal
         open={open}
         onClose={handleClose}
-        MenuListProps={{
-          "aria-labelledby": "basic-button",
-        }}>
-        {currencyVariants.map((variant) => (
-          <MenuItem
-            key={variant}
-            onClick={() => handleClose(variant)}
-            sx={{ textTransform: "uppercase", fontSize: "15px" }}>
-            {variant
-              .split(" ")
-              .filter(
-                (word) =>
-                  word.toLowerCase() !== "dólar" &&
-                  word.toLowerCase() !== "euro"
-              )
-              .map((word) => {
-                return word.charAt(0).toUpperCase() + word.slice(1);
-              })
-              .join(" ")}
-          </MenuItem>
-        ))}
-      </Menu>
+        currencyVariants={currencyVariants}
+        onFilter={onFilter}
+      />
     </div>
   );
 }
