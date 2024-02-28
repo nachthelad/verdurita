@@ -28,6 +28,7 @@ const StyledCardContent = styled(CardContent)`
   align-items: center;
   padding: 16px;
   border-radius: 20px;
+  flex: 10px;
 `;
 
 const CardItem = ({
@@ -59,9 +60,7 @@ const CardItem = ({
         boxShadow: 3,
       }}>
       <StyledCardContent>
-        {/* Permite el largo del skeleton */}
         <Box sx={{ flex: 1 }}>
-          {/* Permite el largo del skeleton */}
           {loadingData ? (
             <Skeleton
               variant="text"
