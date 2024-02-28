@@ -24,6 +24,7 @@
     "styled-components": "^6.1.8"
   },
   "devDependencies": {
+    "@iconify-icon/react": "^2.0.1",
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",
     "@types/react": "^18",

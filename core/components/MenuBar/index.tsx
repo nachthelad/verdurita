@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { AppBar, Box, Toolbar, Button } from "@mui/material";
+import { useState } from "react";
+import { AppBar, Box, Toolbar, Button, Typography } from "@mui/material";
 import LogoText from "../LogoButton";
 import MenuButton from "../MenuButton";
 import { theme } from "@/theme/theme";
+import { Icon } from "@iconify-icon/react";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | null) => void;
@@ -28,19 +29,23 @@ export default function MenuBar({
   refreshData,
   isMobile = false,
 }: MenuBarProps) {
+  const [expanded, setExpanded] = useState(false);
+  const [dolarExpanded, setDolarExpanded] = useState(false);
+  const [euroExpanded, setEuroExpanded] = useState(false);
   const monedasKeys = Object.keys(monedas);
   const dolarVariants = monedasKeys.filter((key) => key.includes("dólar"));
   const euroVariants = monedasKeys.filter((key) => key.includes("euro"));
-  const realVariants = monedasKeys.filter((key) => key.includes("real"));
-  const [selectedVariant, setSelectedVariant] = useState<string | null>(null);
-
   return (
     <Box>
       <AppBar
         position="fixed"
         sx={{
           ...(isMobile && { top: "auto", bottom: 0 }),
-          height: isMobile ? "80px" : "64px",
+          height: expanded ? "100%" : isMobile ? "80px" : "64px",
+          display: "flex",
+          justifyContent: isMobile && expanded ? "center" : "flex-end",
+          alignItems: isMobile ? "center" : null,
+          transition: "height 0.2s ease", // Add transition for height change
         }}>
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (
@@ -48,52 +53,135 @@ export default function MenuBar({
           )}
           <Box
             sx={{
-              display: "flex",
+              display: isMobile && expanded ? "none" : "flex",
               gap: isMobile ? 2 : 1,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
             }}>
-            {!isMobile &&
-              selectedVariant &&
-              typeof selectedVariant != "object" && (
-                <Button
-                  onClick={() => {
-                    setSelectedVariant(null);
-                    onFilter(null);
-                  }}
-                  variant="contained"
-                  sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: "15px",
-                    marginRight: "5px",
-                    backgroundColor: theme.palette.primary.contrastText,
-                    "&:hover": {
-                      backgroundColor: theme.palette.primary.contrastText,
-                    },
-                  }}>
-                  Todas
-                </Button>
-              )}
             <MenuButton
-              buttonName={"Dólar"}
+              expanded={expanded}
+              buttonName={
+                isMobile ? (
+                  <Icon
+                    icon="tabler:currency-dollar"
+                    style={{ fontSize: "35px" }}
+                  />
+                ) : (
+                  "Dólar"
+                )
+              }
               currencyVariants={dolarVariants}
               onFilter={onFilter}
               refreshData={refreshData}
-              setSelectedVariant={setSelectedVariant}
+              expandAppBar={() => {
+                setExpanded(true);
+                setDolarExpanded(true);
+                setEuroExpanded(false);
+              }}
             />
             <MenuButton
-              buttonName={"Euro"}
+              expanded={expanded}
+              buttonName={
+                isMobile ? (
+                  <Icon
+                    icon="tabler:currency-euro"
+                    style={{ fontSize: "35px" }}
+                  />
+                ) : (
+                  "Euro"
+                )
+              }
               currencyVariants={euroVariants}
               onFilter={onFilter}
               refreshData={refreshData}
-              setSelectedVariant={setSelectedVariant}
+              expandAppBar={() => {
+                setExpanded(true);
+                setDolarExpanded(false);
+                setEuroExpanded(true);
+              }}
             />
-            <MenuButton
-              buttonName={"Real"}
-              currencyVariants={realVariants}
-              onFilter={onFilter}
-              refreshData={refreshData}
-              setSelectedVariant={setSelectedVariant}
-            />
+            <Button
+              sx={{
+                color: theme.palette.primary.contrastText,
+                backgroundColor: `${theme.palette.secondary.main} !important`,
+                borderRadius: "2rem",
+                paddingX: "1.5rem",
+                paddingY: "0.3rem",
+                fontSize: isMobile ? "20px" : "15px",
+              }}
+              onClick={() => {
+                onFilter("Real");
+              }}>
+              {isMobile ? (
+                <Icon
+                  icon="tabler:currency-real"
+                  style={{ fontSize: "35px" }}
+                />
+              ) : (
+                "Real"
+              )}
+            </Button>
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              gap: 2,
+            }}>
+            {expanded && (
+              <>
+                {dolarExpanded && (
+                  <>
+                    <Typography variant="h5">
+                      Seleccioná el dólar que queres filtrar
+                    </Typography>
+                    {dolarVariants.map((variant) => (
+                      <Button
+                        key={variant}
+                        onClick={() => {
+                          onFilter(variant);
+                          setExpanded(false);
+                        }}
+                        variant="contained"
+                        sx={{
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: "2rem",
+                          paddingX: "1.5rem",
+                          paddingY: "0.3rem",
+                          fontSize: "20px",
+                        }}>
+                        {monedas[variant].replace("Dólar ", "")}
+                      </Button>
+                    ))}
+                  </>
+                )}
+                {euroExpanded && (
+                  <>
+                    <Typography variant="h5">
+                      Seleccioná el euro que queres filtrar
+                    </Typography>
+                    {euroVariants.map((variant) => (
+                      <Button
+                        key={variant}
+                        onClick={() => {
+                          onFilter(variant);
+                          setExpanded(false);
+                        }}
+                        variant="contained"
+                        sx={{
+                          backgroundColor: theme.palette.secondary.main,
+                          borderRadius: "2rem",
+                          paddingX: "1.5rem",
+                          paddingY: "0.3rem",
+                          fontSize: "20px",
+                        }}>
+                        {monedas[variant].replace("Euro ", "")}
+                      </Button>
+                    ))}
+                  </>
+                )}
+              </>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
