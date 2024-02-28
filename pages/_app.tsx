@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   if (standalone) {
     PullToRefresh.init({
+      instructionsPullToRefresh: "jejejjee",
       onRefresh() {
         window.location.reload();
       },
