@@ -7,36 +7,11 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { TransitionProps } from "@mui/material/transitions";
-import Slide from "@mui/material/Slide";
 import CalculateIcon from "@mui/icons-material/Calculate";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import styled from "styled-components";
 import { theme } from "@/theme/theme";
-
-const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
-  ref: React.Ref<unknown>
-) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const StyledDialog = styled(Dialog)`
-  .MuiDialog-paper {
-    background-color: ${theme.palette.primary.contrastText};
-    border-radius: 20px;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-`;
-
-const StyledDialogTitle = styled(DialogTitle)`
-  color: #000;
-  font-size: 1.5rem;
-`;
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -163,11 +138,24 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
         }}
         onClick={handleClickOpen}
       />
-      <StyledDialog
+      <Dialog
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}>
-        <StyledDialogTitle>{tituloDialogo}</StyledDialogTitle>
+        PaperProps={{
+          style: {
+            backgroundColor: theme.palette.primary.contrastText,
+            borderRadius: "20px",
+            maxHeight: "90vh",
+            overflowY: "auto",
+          },
+        }}>
+        <DialogTitle
+          sx={{
+            color: "black",
+            fontSize: "1.5rem",
+          }}>
+          {tituloDialogo}
+        </DialogTitle>
         <DialogContent>
           <StyledTextField
             autoFocus
@@ -218,7 +206,7 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             Cerrar
           </Button>
         </DialogActions>
-      </StyledDialog>
+      </Dialog>
     </div>
   );
 };

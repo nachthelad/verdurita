@@ -3,10 +3,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CurrencyCalculatorButton from "../Calculator";
+import Skeleton from "@mui/material/Skeleton";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-import Skeleton from "@mui/material/Skeleton";
-import styled from "styled-components";
 import { Box } from "@mui/material";
 
 type CardItemProps = {
@@ -17,19 +16,6 @@ type CardItemProps = {
   EsEuroB?: boolean;
   loadingData: boolean;
 };
-
-const StyledCard = styled(Card)`
-  flex-grow: 1;
-  border-radius: 20px;
-`;
-
-const StyledCardContent = styled(CardContent)`
-  display: flex;
-  align-items: center;
-  padding: 16px;
-  border-radius: 20px;
-  flex: 10px;
-`;
 
 const CardItem = ({
   texto,
@@ -55,11 +41,20 @@ const CardItem = ({
   }
 
   return (
-    <StyledCard
+    <Card
       sx={{
-        boxShadow: 3,
+        flexGrow: "1",
+        borderRadius: "20px",
+        boxShadow: "3",
       }}>
-      <StyledCardContent>
+      <CardContent
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          padding: "16px",
+          borderRadius: "20px",
+          flex: "10px",
+        }}>
         <Box sx={{ flex: 1 }}>
           {loadingData ? (
             <Skeleton
@@ -90,8 +85,8 @@ const CardItem = ({
           EsEuroO={EsEuroO}
           EsEuroB={EsEuroB}
         />
-      </StyledCardContent>
-    </StyledCard>
+      </CardContent>
+    </Card>
   );
 };
 

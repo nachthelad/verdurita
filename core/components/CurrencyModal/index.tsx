@@ -7,7 +7,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Slide from "@mui/material/Slide";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import styled from "styled-components";
 import { TransitionProps } from "@mui/material/transitions";
 import { theme } from "@/theme/theme";
 
@@ -27,15 +26,6 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const StyledDialog = styled(Dialog)`
-  .MuiDialog-paper {
-    background-color: ${theme.palette.primary.contrastText};
-    border-radius: 20px;
-    max-height: 90vh;
-    overflow-y: auto;
-  }
-`;
-
 export default function CurrencyModal({
   open,
   onClose,
@@ -45,7 +35,15 @@ export default function CurrencyModal({
   const currency = currencyVariants[0].split(" ")[0];
   return (
     <>
-      <StyledDialog
+      <Dialog
+        PaperProps={{
+          style: {
+            backgroundColor: theme.palette.primary.contrastText,
+            borderRadius: "20px",
+            maxHeight: "90vh",
+            overflowY: "auto",
+          },
+        }}
         open={open}
         TransitionComponent={Transition}
         keepMounted
@@ -90,7 +88,7 @@ export default function CurrencyModal({
             </DialogContentText>
           </DialogContent>
         </Box>
-      </StyledDialog>
+      </Dialog>
     </>
   );
 }
