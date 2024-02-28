@@ -49,7 +49,10 @@ export default function MenuButton({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         endIcon={isMobile ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-        sx={{ color: theme.palette.secondary.main, fontSize: "15px" }}>
+        sx={{
+          color: theme.palette.secondary.main,
+          fontSize: isMobile ? "25px" : "15px",
+        }}>
         {buttonName}
       </Button>
       <Menu

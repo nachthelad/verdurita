@@ -38,14 +38,18 @@ export default function MenuBar({
     <Box>
       <AppBar
         position="fixed"
-        sx={{ ...(isMobile && { top: "auto", bottom: 0 }) }}>
-        <Toolbar>
+        sx={{
+          ...(isMobile && { top: "auto", bottom: 0 }),
+          height: isMobile ? "80px" : "64px",
+        }}>
+        <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (
             <LogoText onFilter={onFilter} refreshData={refreshData} />
           )}
           <Box
             sx={{
               display: "flex",
+              gap: isMobile ? 5 : 0,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
             }}>
             {selectedVariant && typeof selectedVariant != "object" && (
