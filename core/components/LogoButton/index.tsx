@@ -38,7 +38,7 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
             color: isMobile ? theme.palette.primary.main : "white",
             fontFamily: kanit.style.fontFamily,
             textTransform: "lowercase",
-            fontSize: "1.5rem",
+            fontSize: isMobile ? "2.5rem" : "1.5rem",
             lineHeight: "1",
             marginTop: isMobile ? "1.5rem" : "0",
           }}>
@@ -50,7 +50,7 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
         sx={{
           color: isMobile ? theme.palette.primary.main : "white",
           whiteSpace: "nowrap",
-          fontSize: "0.6rem",
+          fontSize: isMobile ? "1rem" : "0.6rem",
           fontStyle: "italic",
           textTransform: "lowercase",
           userSelect: "none",
