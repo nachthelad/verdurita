@@ -45,7 +45,7 @@ export default function MenuBar({
           display: "flex",
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
-          transition: "height 0.2s ease", // Add transition for height change
+          transition: "height 0.2s ease",
         }}>
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (

@@ -4,6 +4,7 @@ import { format } from "numerable";
 import { es } from "numerable/locale";
 import { theme } from "@/theme/theme";
 import styled from "styled-components";
+import { Theme, useMediaQuery } from "@mui/material";
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -36,15 +37,17 @@ type CalculatorInputsProps = {
   precioMoneda: number;
   esRealBrasileño?: boolean;
   EsEuro?: boolean;
+  autoFocus: boolean;
 };
 
 const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   precioMoneda,
   esRealBrasileño = false,
   EsEuro = false,
+  autoFocus,
 }) => {
-  const [montoPesos, setMontoPesos] = useState("1");
-  const [montoDolares, setMontoDolares] = useState("1");
+  const [montoDolares, setMontoDolares] = useState("");
+  const [montoPesos, setMontoPesos] = useState("");
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
@@ -78,28 +81,19 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
     }
   };
 
-  const formatOnBlurPesos = () => {
-    const formattedValue = format(Number(montoPesos) / precioMoneda, "0,0.00", {
-      locale: es,
-    });
-    setMontoDolares(formattedValue);
-  };
-
-  const formatOnBlurDolares = () => {
-    const formattedValue = format(
-      Number(montoDolares) * precioMoneda,
-      "0,0.00",
-      { locale: es }
-    );
-    setMontoPesos(formattedValue);
-  };
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
 
   return (
     <div>
-      <Grid container direction={"row"} spacing={2}>
+      <Grid
+        container
+        direction={isMobile ? "column" : "row"}
+        spacing={isMobile ? 0 : 1}>
         <Grid item>
           <StyledTextField
-            autoFocus
+            autoFocus={autoFocus}
             margin="dense"
             label={
               esRealBrasileño
@@ -112,7 +106,6 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
-            onBlur={formatOnBlurDolares}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
@@ -127,7 +120,6 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
-            onBlur={formatOnBlurPesos}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }

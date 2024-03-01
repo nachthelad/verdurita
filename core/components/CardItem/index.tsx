@@ -41,6 +41,7 @@ const CardItem = ({
             display: "flex",
             flexDirection: "column",
             position: "relative",
+            paddingBottom: "16px !important",
           }}>
           <Icon
             icon="typcn:arrow-maximise"

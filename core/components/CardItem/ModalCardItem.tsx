@@ -35,7 +35,6 @@ const ModalCardItem = ({
         style: {
           backgroundColor: theme.palette.primary.contrastText,
           borderRadius: "20px",
-          maxHeight: "90vh",
           overflowY: "auto",
         },
       }}>
@@ -74,9 +73,10 @@ const ModalCardItem = ({
                   sx={{
                     textAlign: "center",
                   }}>
-                  {texto}
+                  {texto} {/*  Vende a: / Compra a: / Promedio: */}
                 </Typography>
                 <CalculatorInputs
+                  autoFocus={index === 0}
                   precioMoneda={Number(data[index].precio)}
                   esRealBrasileño={esRealBrasileño}
                   EsEuro={EsEuro}
