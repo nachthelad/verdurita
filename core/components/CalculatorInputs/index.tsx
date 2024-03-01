@@ -1,17 +1,9 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  TextField,
-} from "@mui/material";
-import CalculateIcon from "@mui/icons-material/Calculate";
+import { TextField, Grid } from "@mui/material";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-import styled from "styled-components";
 import { theme } from "@/theme/theme";
+import styled from "styled-components";
 
 const StyledTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -40,44 +32,19 @@ const StyledTextField = styled(TextField)({
   },
 });
 
-interface CurrencyCalculatorButtonProps {
+type CalculatorInputsProps = {
   precioMoneda: number;
-  tipoOperacion: "venta" | "compra" | "promedio";
   esRealBrasileño?: boolean;
-  EsEuroO?: boolean;
-  EsEuroB?: boolean;
-  loadingData: boolean;
-}
+  EsEuro?: boolean;
+};
 
-const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
+const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   precioMoneda,
-  tipoOperacion,
   esRealBrasileño = false,
-  EsEuroO = false,
-  EsEuroB = false,
-  loadingData,
+  EsEuro = false,
 }) => {
-  const [open, setOpen] = useState(false);
-  const [montoPesos, setMontoPesos] = useState("0");
-  const [montoDolares, setMontoDolares] = useState("0");
-
-  const tituloDialogo =
-    tipoOperacion === "venta"
-      ? "¿Cuánto querés vender?"
-      : tipoOperacion === "compra"
-      ? "¿Cuánto querés comprar?"
-      : "Cambiá al precio promedio";
-
-  const handleClickOpen = () => {
-    if (loadingData) return;
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    setMontoPesos("");
-    setMontoDolares("");
-  };
+  const [montoPesos, setMontoPesos] = useState("1");
+  const [montoDolares, setMontoDolares] = useState("1");
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
@@ -129,50 +96,19 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
 
   return (
     <div>
-      <CalculateIcon
-        fontSize="large"
-        style={{
-          color: theme.palette.primary.main,
-          cursor: "pointer",
-          marginTop: "10px",
-        }}
-        onClick={handleClickOpen}
-      />
-      <Dialog
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            backgroundColor: theme.palette.primary.contrastText,
-            borderRadius: "20px",
-            maxHeight: "90vh",
-            overflowY: "auto",
-          },
-        }}>
-        <DialogTitle
-          sx={{
-            color: "black",
-            fontSize: "1.5rem",
-          }}>
-          {tituloDialogo}
-        </DialogTitle>
-        <DialogContent>
+      <Grid container direction={"row"} spacing={2}>
+        <Grid item>
           <StyledTextField
             autoFocus
             margin="dense"
-            id="montoDolares"
             label={
               esRealBrasileño
                 ? "Monto en reales"
-                : EsEuroB
-                ? "Monto en euro blue"
-                : EsEuroO
-                ? "Monto en euro oficial"
+                : EsEuro
+                ? "Monto en euros"
                 : "Monto en dólares"
             }
-            type="tel"
             inputMode="numeric"
-            fullWidth
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
@@ -182,13 +118,12 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             }
             onFocus={(e) => e.target.select()}
           />
+        </Grid>
+        <Grid item>
           <StyledTextField
             margin="dense"
-            id="cantidad"
             label="Monto en pesos"
-            type="tel"
             inputMode="numeric"
-            fullWidth
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
@@ -198,17 +133,10 @@ const CurrencyCalculatorButton: React.FC<CurrencyCalculatorButtonProps> = ({
             }
             onFocus={(e) => e.target.select()}
           />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={handleClose}
-            style={{ color: theme.palette.primary.main }}>
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
+        </Grid>
+      </Grid>
     </div>
   );
 };
 
-export default CurrencyCalculatorButton;
+export default CalculatorInputs;

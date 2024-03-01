@@ -1,92 +1,89 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import Typography from "@mui/material/Typography";
-import CurrencyCalculatorButton from "../Calculator";
-import Skeleton from "@mui/material/Skeleton";
+import { Card, CardContent, Typography, Box } from "@mui/material";
+import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
-import { es } from "numerable/locale";
-import { Box } from "@mui/material";
+import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 
 type CardItemProps = {
-  texto: string;
-  precio?: number;
+  data: { texto: string; precio?: number }[];
   esRealBrasileño?: boolean;
-  EsEuroO?: boolean;
-  EsEuroB?: boolean;
+  EsEuro?: boolean;
   loadingData: boolean;
+  moneda: string;
 };
 
 const CardItem = ({
-  texto,
-  precio,
+  data,
   esRealBrasileño = false,
-  EsEuroO = false,
-  EsEuroB = false,
+  EsEuro = false,
   loadingData,
+  moneda,
 }: CardItemProps) => {
-  let tipoOperacion;
-  switch (texto) {
-    case "Vendé a:":
-      tipoOperacion = "venta";
-      break;
-    case "Comprá a:":
-      tipoOperacion = "compra";
-      break;
-    case "Promedio:":
-      tipoOperacion = "promedio";
-      break;
-    default:
-      tipoOperacion = "";
-  }
+  const [open, setOpen] = React.useState(false);
+
+  const handleExpandClick = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
-    <Card
-      sx={{
-        flexGrow: "1",
-        borderRadius: "20px",
-        boxShadow: "3",
-      }}>
-      <CardContent
+    <div>
+      <Card
         sx={{
-          display: "flex",
-          alignItems: "center",
-          padding: "16px",
           borderRadius: "20px",
-          flex: "10px",
+          boxShadow: "3",
         }}>
-        <Box sx={{ flex: 1 }}>
-          {loadingData ? (
-            <Skeleton
-              variant="text"
-              sx={{ fontSize: "1.5rem", height: 32, width: "30%" }}
-            />
-          ) : (
-            <Typography variant="h5" component="div">
-              {texto}
-            </Typography>
-          )}
-          {loadingData ? (
-            <Skeleton
-              variant="text"
-              sx={{ fontSize: "1.5rem", height: 32, width: "35%" }}
-            />
-          ) : (
-            <Typography variant="h5" color="text.secondary">
-              ${format(precio, "0,0.00", { locale: es })}
-            </Typography>
-          )}
-        </Box>
-        <CurrencyCalculatorButton
-          loadingData={loadingData}
-          precioMoneda={Number(precio)}
-          tipoOperacion={tipoOperacion as "venta" | "compra" | "promedio"}
-          esRealBrasileño={esRealBrasileño}
-          EsEuroO={EsEuroO}
-          EsEuroB={EsEuroB}
-        />
-      </CardContent>
-    </Card>
+        <CardContent
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            position: "relative",
+          }}>
+          <Icon
+            icon="typcn:arrow-maximise"
+            width="2rem"
+            height="2rem"
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "12px",
+              color: "#0000007e",
+              cursor: "pointer",
+            }}
+            onClick={handleExpandClick}
+          />
+          {data.map(({ texto, precio }, index) => (
+            <Box
+              key={index}
+              sx={{
+                marginBottom: "0.5rem",
+                display: "flex",
+                alignItems: "flex-start",
+                padding: "0.2rem",
+              }}>
+              <Typography variant="h5" component="div">
+                {texto}
+              </Typography>
+              <Typography variant="h5" color="text.secondary">
+                ${format(precio, "0,0.00")}
+              </Typography>
+            </Box>
+          ))}
+        </CardContent>
+      </Card>
+      <ModalCardItem
+        moneda={moneda}
+        open={open}
+        handleClose={handleClose}
+        data={data}
+        esRealBrasileño={esRealBrasileño}
+        EsEuro={EsEuro}
+        loadingData={loadingData}
+      />
+    </div>
   );
 };
 
