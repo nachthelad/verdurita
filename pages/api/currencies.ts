@@ -9,12 +9,12 @@ const ordenMonedas = [
   "Dólar Blue",
   "Dólar Oficial",
   "Dólar Tarjeta",
-  "Euro Blue",
-  "Euro Oficial",
   "Dólar Bolsa",
   "Dólar Cripto",
   "Dólar Contado con liquidación",
-  "Dólar Mayorista",
+  // "Dólar Mayorista",
+  "Euro Blue",
+  "Euro Oficial",
   "Real Brasileño",
 ];
 

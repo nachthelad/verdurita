@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
 import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
@@ -68,9 +68,15 @@ const CardItem = ({
               <Typography variant="h5" component="div">
                 {texto}
               </Typography>
-              <Typography variant="h5" color="text.secondary">
-                ${format(precio, "0,0.00")}
-              </Typography>
+              {loadingData ? (
+                <Skeleton
+                  sx={{ fontSize: "1.5rem", height: 32, width: "30%" }}
+                />
+              ) : (
+                <Typography variant="h5" color="text.secondary">
+                  ${format(precio, "0,0.00")}
+                </Typography>
+              )}
             </Box>
           ))}
         </CardContent>
