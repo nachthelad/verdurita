@@ -3,6 +3,7 @@ import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
 import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { Theme, useMediaQuery } from "@mui/material";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -28,6 +29,13 @@ const CardItem = ({
   const handleClose = () => {
     setOpen(false);
   };
+
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
+  const isTablet = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
 
   return (
     <div>
@@ -60,12 +68,16 @@ const CardItem = ({
             <Box
               key={index}
               sx={{
+                marginTop: isTablet && index === 0 ? "1.5rem" : 0,
                 marginBottom: "0.5rem",
                 display: "flex",
-                alignItems: "flex-start",
+                justifyContent: "center",
                 padding: "0.2rem",
               }}>
-              <Typography variant="h5" component="div">
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ whiteSpace: "nowrap" }}>
                 {texto}
               </Typography>
               {loadingData ? (

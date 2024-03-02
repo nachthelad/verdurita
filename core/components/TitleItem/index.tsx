@@ -11,13 +11,15 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
       variant="h1"
       component="div"
       sx={{
-        textAlign: "center",
+        // textAlign: "center",
+        display: "flex",
+        justifyContent: "center",
         color: "#001100",
         fontSize: "1.5rem",
         fontWeight: "500",
         textTransform: "uppercase",
       }}>
-      {titulo}
+      {titulo === "Dólar Contado con liquidación" ? "Dólar CCL" : titulo}
     </Typography>
   );
 };

@@ -23,13 +23,6 @@ export default function MainContainer({
   refreshData,
   filterApplied,
 }: MainContainerProps): React.ReactElement {
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
-  );
-  const isTablet = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("xl")
-  );
-
   return (
     <Box
       sx={{
@@ -43,31 +36,25 @@ export default function MainContainer({
         spacing={2}
         sx={{
           maxWidth: 1440,
+          width: "100%",
           display: "flex",
           justifyContent: "center",
-          alignItems: "center",
           margin: "auto",
           marginTop: 4,
+          gap: 1,
         }}>
         {resultadosFiltrados.map((moneda: Moneda, index: number) => (
           <Grid
             key={`${moneda?.nombre}-${index}`}
             item
-            xs={12}
+            xs={10}
             sm={6}
             md={4}
-            lg={4}
-            sx={{
-              marginBottom:
-                isMobile && index === resultadosFiltrados.length - 1 ? 10 : 2,
-              marginRight: isMobile ? "20px" : "0px" && isTablet ? "30px" : "0",
-              marginLeft: isMobile ? "-10px" : "0px" && isTablet ? "30px" : "0",
-            }}>
+            lg={3}>
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={12} sx={{ whiteSpace: "nowrap" }}>
                 <TitleItem titulo={moneda.nombre} />
               </Grid>
-
               <Grid item xs={12}>
                 <CardItem
                   moneda={moneda.nombre}
