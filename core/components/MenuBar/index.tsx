@@ -4,6 +4,7 @@ import LogoText from "../LogoButton";
 import MenuButton from "../MenuButton";
 import { theme } from "@/theme/theme";
 import { Icon } from "@iconify-icon/react";
+import CloseIcon from "@mui/icons-material/Close";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | null) => void;
@@ -132,6 +133,19 @@ export default function MenuBar({
               <>
                 {dolarExpanded && (
                   <>
+                    <CloseIcon
+                      onClick={() => {
+                        setExpanded(false);
+                      }}
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "12px",
+                        // color: "#0000007e",
+                        cursor: "pointer",
+                      }}
+                    />
+
                     <Typography variant="h5">
                       Seleccioná el dólar que queres filtrar
                     </Typography>
@@ -157,6 +171,18 @@ export default function MenuBar({
                 )}
                 {euroExpanded && (
                   <>
+                    <CloseIcon
+                      onClick={() => {
+                        setExpanded(false);
+                      }}
+                      sx={{
+                        position: "absolute",
+                        top: "10px",
+                        right: "12px",
+                        // color: "#0000007e",
+                        cursor: "pointer",
+                      }}
+                    />
                     <Typography variant="h5">
                       Seleccioná el euro que queres filtrar
                     </Typography>
