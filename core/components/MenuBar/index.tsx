@@ -141,7 +141,6 @@ export default function MenuBar({
                         position: "absolute",
                         top: "10px",
                         right: "12px",
-                        // color: "#0000007e",
                         cursor: "pointer",
                       }}
                     />
