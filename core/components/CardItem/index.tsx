@@ -4,6 +4,7 @@ import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { Theme, useMediaQuery } from "@mui/material";
+import { theme } from "@/theme/theme";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -56,8 +57,8 @@ const CardItem = ({
             height="2rem"
             style={{
               position: "absolute",
-              top: "10px",
-              right: "12px",
+              top: "5px",
+              right: "5px",
               color: "#0000007e",
               cursor: "pointer",
             }}
@@ -67,24 +68,46 @@ const CardItem = ({
             <Box
               key={index}
               sx={{
-                marginTop: isMobile && index === 0 ? "1.5rem" : 0,
-                marginBottom: "0.5rem",
+                marginTop: index === 0 ? "1rem" : 0,
+                marginBottom: index === 2 ? "1rem" : 0,
                 display: "flex",
                 justifyContent: "center",
-                padding: "0.2rem",
+                alignItems: "center",
+                flexDirection: isMobile ? "column" : "row",
               }}>
               <Typography
                 variant="h5"
                 component="div"
-                sx={{ whiteSpace: "nowrap" }}>
+                sx={{
+                  whiteSpace: "nowrap",
+                  display: "flex",
+                  justifyContent: isMobile ? "center" : "flex-start",
+                  fontSize: isMobile ? "2rem" : "1.5rem",
+                  color: theme.palette.primary.main,
+                  textTransform: "uppercase",
+                  width: "145px",
+                }}>
                 {texto}
               </Typography>
               {loadingData ? (
                 <Skeleton
-                  sx={{ fontSize: "1.5rem", height: 32, width: "30%" }}
+                  sx={{
+                    height: isMobile ? "43px" : "32px",
+                    width: isMobile ? "45%" : "30%",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
                 />
               ) : (
-                <Typography variant="h5" color="text.secondary">
+                <Typography
+                  variant="h5"
+                  color="text.secondary"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100px",
+                    fontSize: isMobile ? "2rem" : "1.5rem",
+                  }}>
                   ${format(precio, "0,0.00")}
                 </Typography>
               )}

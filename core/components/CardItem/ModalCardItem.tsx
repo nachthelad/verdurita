@@ -33,7 +33,6 @@ const ModalCardItem = ({
       maxWidth="sm"
       PaperProps={{
         style: {
-          backgroundColor: theme.palette.primary.contrastText,
           borderRadius: "20px",
           overflowY: "auto",
         },
@@ -66,14 +65,28 @@ const ModalCardItem = ({
           <Box sx={{ margin: "auto" }}>
             <TitleItem titulo={moneda} />
             {data.map(({ texto }, index) => (
-              <Box key={index}>
+              <Box
+                key={index}
+                sx={{
+                  border: `1px solid ${theme.palette.primary.light} `,
+                  padding: "10px",
+                  borderRadius: "10px",
+                  margin: "10px",
+                  paddingTop: "5px",
+                  backgroundColor: theme.palette.primary.contrastText,
+                }}>
+                {/*  Vende a: / Compra a: / Promedio: */}
                 <Typography
                   variant="h5"
                   component="div"
                   sx={{
                     textAlign: "center",
+                    lineHeight: "1.5",
+                    fontSize: "1.2rem",
+                    color: theme.palette.primary.dark,
+                    textTransform: "uppercase",
                   }}>
-                  {texto} {/*  Vende a: / Compra a: / Promedio: */}
+                  {texto}
                 </Typography>
                 <CalculatorInputs
                   autoFocus={index === 0}
