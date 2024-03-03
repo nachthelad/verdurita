@@ -62,7 +62,6 @@ const CardItem = ({
               color: "#0000007e",
               cursor: "pointer",
             }}
-            onClick={handleExpandClick}
           />
           {data.map(({ texto, precio }, index) => (
             <Box
