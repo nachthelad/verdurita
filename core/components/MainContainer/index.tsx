@@ -60,8 +60,6 @@ export default function MainContainer({
             }}>
             <Grid item xs={12}>
               <TitleItem titulo={moneda.nombre} />
-            </Grid>
-            <Grid item xs={12}>
               <CardItem
                 moneda={moneda.nombre}
                 loadingData={loadingData}
