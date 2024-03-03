@@ -31,9 +31,6 @@ const CardItem = ({
   };
 
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("sm")
-  );
-  const isTablet = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
 
@@ -50,7 +47,9 @@ const CardItem = ({
             flexDirection: "column",
             position: "relative",
             paddingBottom: "16px !important",
-          }}>
+            cursor: "pointer",
+          }}
+          onClick={handleExpandClick}>
           <Icon
             icon="typcn:arrow-maximise"
             width="2rem"
@@ -68,7 +67,7 @@ const CardItem = ({
             <Box
               key={index}
               sx={{
-                marginTop: isTablet && index === 0 ? "1.5rem" : 0,
+                marginTop: isMobile && index === 0 ? "1.5rem" : 0,
                 marginBottom: "0.5rem",
                 display: "flex",
                 justifyContent: "center",

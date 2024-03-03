@@ -3,7 +3,6 @@ import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
 import LogoButton from "@/core/components/LogoButton";
-import { useMediaQuery, Theme } from "@mui/material";
 import Button from "@mui/material/Button";
 import { theme } from "@/theme/theme";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
