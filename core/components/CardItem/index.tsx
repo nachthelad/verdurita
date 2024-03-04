@@ -5,6 +5,7 @@ import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { Theme, useMediaQuery } from "@mui/material";
 import { theme } from "@/theme/theme";
+import { inter } from "@/fonts/fonts";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -85,6 +86,7 @@ const CardItem = ({
                   color: theme.palette.primary.main,
                   textTransform: "uppercase",
                   width: "145px",
+                  fontFamily: inter.style.fontFamily,
                 }}>
                 {texto}
               </Typography>
@@ -106,6 +108,7 @@ const CardItem = ({
                     justifyContent: "center",
                     width: "100px",
                     fontSize: isMobile ? "2rem" : "1.5rem",
+                    fontFamily: inter.style.fontFamily,
                   }}>
                   ${format(precio, "0,0.00")}
                 </Typography>

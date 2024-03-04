@@ -36,6 +36,7 @@ export default function MenuBar({
   const monedasKeys = Object.keys(monedas);
   const dolarVariants = monedasKeys.filter((key) => key.includes("dólar"));
   const euroVariants = monedasKeys.filter((key) => key.includes("euro"));
+
   return (
     <Box>
       <AppBar

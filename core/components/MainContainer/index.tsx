@@ -58,7 +58,7 @@ export default function MainContainer({
               marginBottom:
                 isMobile && index === resultadosFiltrados.length - 1 ? 12 : 0,
             }}>
-            <Grid item xs={12}>
+            <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>
               <TitleItem titulo={moneda.nombre} />
               <CardItem
                 moneda={moneda.nombre}
@@ -86,6 +86,10 @@ export default function MainContainer({
                     fontSize: "20px",
                     display: "flex",
                     margin: "auto",
+                    backgroundColor: theme.palette.primary.contrastText,
+                    "&:hover": {
+                      backgroundColor: theme.palette.primary.contrastText,
+                    },
                   }}>
                   Limpiar Filtro
                 </Button>
