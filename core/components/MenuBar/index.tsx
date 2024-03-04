@@ -15,13 +15,13 @@ type MenuBarProps = {
 const monedas: { [key: string]: string } = {
   "dólar blue": "Dólar Blue",
   "dólar oficial": "Dólar Oficial",
-  "euro blue": "Euro Blue",
-  "euro oficial": "Euro Oficial",
   "dólar tarjeta": "tarjeta",
   "dólar bolsa": "bolsa",
   "dólar cripto": "cripto",
   "dólar contado con liqui": "contado con liqui",
   "dólar mayorista": "mayorista",
+  "euro blue": "Euro Blue",
+  "euro oficial": "Euro Oficial",
   "real brasileño": "real",
 };
 
@@ -46,7 +46,7 @@ export default function MenuBar({
           display: "flex",
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
-          transition: "height 0.2s ease", // Add transition for height change
+          transition: "height 0.2s ease",
         }}>
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (
@@ -144,6 +144,7 @@ export default function MenuBar({
                         cursor: "pointer",
                       }}
                     />
+
                     <Typography variant="h5">
                       Seleccioná el dólar que queres filtrar
                     </Typography>
