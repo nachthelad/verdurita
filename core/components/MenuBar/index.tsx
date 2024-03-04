@@ -144,7 +144,6 @@ export default function MenuBar({
                         cursor: "pointer",
                       }}
                     />
-
                     <Typography variant="h5">
                       Seleccioná el dólar que queres filtrar
                     </Typography>
