@@ -86,10 +86,6 @@ export default function MainContainer({
                     fontSize: "20px",
                     display: "flex",
                     margin: "auto",
-                    backgroundColor: theme.palette.primary.contrastText,
-                    "&:hover": {
-                      backgroundColor: theme.palette.primary.contrastText,
-                    },
                   }}>
                   Limpiar Filtro
                 </Button>
