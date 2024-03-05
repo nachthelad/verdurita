@@ -47,7 +47,6 @@ export default function CurrencyModal({
           style: {
             backgroundColor: theme.palette.primary.contrastText,
             borderRadius: "20px",
-            maxHeight: "90vh",
             overflowY: "auto",
           },
         }}

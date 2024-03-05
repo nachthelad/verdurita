@@ -8,13 +8,13 @@ const API_EURO_URL = "https://api.bluelytics.com.ar/v2/latest";
 const ordenMonedas = [
   "Dólar Blue",
   "Dólar Oficial",
-  "Euro Blue",
-  "Euro Oficial",
   "Dólar Tarjeta",
   "Dólar Bolsa",
   "Dólar Cripto",
   "Dólar Contado con liquidación",
   "Dólar Mayorista",
+  "Euro Blue",
+  "Euro Oficial",
   "Real Brasileño",
 ];
 
