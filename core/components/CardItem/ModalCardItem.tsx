@@ -4,6 +4,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { useTheme } from "@mui/material";
 import TitleItem from "../TitleItem";
 import CalculatorInputs from "../CalculatorInputs";
+import ToggleButtons from "./ToggleButtons";
 
 type ModalCardItemProps = {
   open: boolean;
@@ -24,7 +25,13 @@ const ModalCardItem = ({
   moneda,
 }: ModalCardItemProps) => {
   const theme = useTheme();
+  const [selectedValue, setSelectedValue] = React.useState<string | null>(
+    "Promedio:"
+  );
 
+  const handleToggleChange = (value: string | null) => {
+    setSelectedValue(value);
+  };
   return (
     <Dialog
       open={open}
@@ -64,10 +71,12 @@ const ModalCardItem = ({
           />
           <Box sx={{ margin: "auto" }}>
             <TitleItem titulo={moneda} />
+            <ToggleButtons onChange={handleToggleChange} />
             {data.map(({ texto }, index) => (
               <Box
                 key={index}
                 sx={{
+                  display: selectedValue === texto ? "block" : "none",
                   border: `1px solid ${theme.palette.primary.light} `,
                   padding: "10px",
                   borderRadius: "10px",

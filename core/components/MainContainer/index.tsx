@@ -64,9 +64,9 @@ export default function MainContainer({
                 moneda={moneda.nombre}
                 loadingData={loadingData}
                 data={[
-                  { texto: "Vendé a:\u00A0", precio: moneda.compra },
-                  { texto: "Comprá a:\u00A0", precio: moneda.venta },
-                  { texto: "Promedio:\u00A0", precio: moneda.promedio },
+                  { texto: "Vendé a:", precio: moneda.compra },
+                  { texto: "Comprá a:", precio: moneda.venta },
+                  { texto: "Promedio:", precio: moneda.promedio },
                 ]}
                 esRealBrasileño={moneda.nombre === "Real Brasileño"}
                 EsEuro={moneda.nombre.split(" ")[0] === "Euro"}

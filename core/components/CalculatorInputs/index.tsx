@@ -83,7 +83,10 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
       <Grid
         container
         direction={isMobile ? "column" : "row"}
-        spacing={isMobile ? 0 : 1}>
+        spacing={isMobile ? 0 : 1}
+        sx={{
+          alignContent: "center",
+        }}>
         <Grid item>
           <StyledTextField
             autoFocus={autoFocus}
@@ -99,9 +102,9 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
-            onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            }
+            // onKeyDown={(e) =>
+            //   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            // }
             onFocus={(e) => e.target.select()}
           />
         </Grid>
@@ -113,9 +116,9 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
-            onKeyDown={(e) =>
-              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            }
+            // onKeyDown={(e) =>
+            //   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            // }
             onFocus={(e) => e.target.select()}
           />
         </Grid>
