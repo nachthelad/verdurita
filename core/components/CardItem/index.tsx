@@ -3,7 +3,6 @@ import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
 import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { Theme, useMediaQuery } from "@mui/material";
 import { theme } from "@/theme/theme";
 import { inter } from "@/fonts/fonts";
 
@@ -31,10 +30,6 @@ const CardItem = ({
   const handleClose = () => {
     setOpen(false);
   };
-
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
-  );
 
   return (
     <div>
@@ -68,47 +63,53 @@ const CardItem = ({
             <Box
               key={index}
               sx={{
-                marginTop: index === 0 ? "1rem" : 0,
-                marginBottom: index === 2 ? "1rem" : 0,
                 display: "flex",
+                flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
-                flexDirection: isMobile ? "column" : "row",
+                borderBottom: "1px solid #0000001f",
+                borderBottomWidth: index === 2 ? "0" : "1px",
+                width: "90%",
+                margin: "auto",
+                marginTop: index === 0 ? "1rem" : 0,
+                marginBottom: index === 2 ? "1rem" : 0,
               }}>
               <Typography
-                variant="h5"
-                component="div"
                 sx={{
                   whiteSpace: "nowrap",
                   display: "flex",
-                  justifyContent: isMobile ? "center" : "flex-start",
-                  fontSize: isMobile ? "2rem" : "1.5rem",
+                  justifyContent: "flex-start",
+                  fontSize: "1.5rem",
+                  fontWeight: "600",
                   color: theme.palette.primary.main,
                   textTransform: "uppercase",
-                  width: "145px",
+                  width: "150px",
                   fontFamily: inter.style.fontFamily,
+                  marginBottom: index === 2 ? "0" : "0.2rem",
+                  marginTop: index === 1 ? "0.2rem" : 0,
                 }}>
                 {texto}
               </Typography>
               {loadingData ? (
                 <Skeleton
                   sx={{
-                    height: isMobile ? "43px" : "32px",
-                    width: isMobile ? "45%" : "30%",
+                    height: "35px",
+                    width: "36%",
                     display: "flex",
                     justifyContent: "center",
                   }}
                 />
               ) : (
                 <Typography
-                  variant="h5"
                   color="text.secondary"
                   sx={{
                     display: "flex",
-                    justifyContent: "center",
-                    width: "100px",
-                    fontSize: isMobile ? "2rem" : "1.5rem",
+                    justifyContent: "flex-end",
+                    width: "110px",
+                    fontSize: "1.5rem",
                     fontFamily: inter.style.fontFamily,
+                    marginBottom: index === 2 ? "0" : "0.2rem",
+                    marginTop: index === 1 ? "0.2rem" : 0,
                   }}>
                   ${format(precio, "0,0.00")}
                 </Typography>

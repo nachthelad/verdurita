@@ -56,7 +56,7 @@ export default function MainContainer({
             container
             sx={{
               marginBottom:
-                isMobile && index === resultadosFiltrados.length - 1 ? 12 : 0,
+                isMobile && index === resultadosFiltrados.length - 1 ? 12 : 4,
             }}>
             <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>
               <TitleItem titulo={moneda.nombre} />
@@ -64,9 +64,9 @@ export default function MainContainer({
                 moneda={moneda.nombre}
                 loadingData={loadingData}
                 data={[
-                  { texto: "Vendé a:\u00A0", precio: moneda.compra },
-                  { texto: "Comprá a:\u00A0", precio: moneda.venta },
-                  { texto: "Promedio:\u00A0", precio: moneda.promedio },
+                  { texto: "Vendé a:", precio: moneda.compra },
+                  { texto: "Comprá a:", precio: moneda.venta },
+                  { texto: "Promedio:", precio: moneda.promedio },
                 ]}
                 esRealBrasileño={moneda.nombre === "Real Brasileño"}
                 EsEuro={moneda.nombre.split(" ")[0] === "Euro"}
