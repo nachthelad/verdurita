@@ -2,29 +2,7 @@ import React, { useState } from "react";
 import { TextField, Grid } from "@mui/material";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-// import { theme } from "@/theme/theme";
-// import styled from "styled-components";
 import { Theme, useMediaQuery } from "@mui/material";
-
-// const StyledTextField = styled(TextField)({
-//   "& label.Mui-focused": {
-//     color: theme.palette.primary.main,
-//   },
-//   "& .MuiInput-underline:after": {
-//     borderBottomColor: theme.palette.primary.main,
-//   },
-//   "& .MuiOutlinedInput-root": {
-//     "& fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//     "&:hover fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//     "&.Mui-focused fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//   },
-// });
 
 type CalculatorInputsProps = {
   precioMoneda: number;
@@ -37,7 +15,6 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   precioMoneda,
   esRealBrasileño = false,
   EsEuro = false,
-  autoFocus,
 }) => {
   const [montoDolares, setMontoDolares] = useState("");
   const [montoPesos, setMontoPesos] = useState("");
@@ -89,7 +66,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
         }}>
         <Grid item>
           <TextField
-            autoFocus={autoFocus}
+            autoFocus
             margin="dense"
             label={
               esRealBrasileño
@@ -99,6 +76,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 : "Monto en dólares"
             }
             inputMode="numeric"
+            type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
@@ -113,6 +91,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             margin="dense"
             label="Monto en pesos"
             inputMode="numeric"
+            type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
