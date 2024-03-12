@@ -56,7 +56,7 @@ const ModalCardItem = ({
         style: {
           borderRadius: "20px",
           overflowY: "auto",
-          transform: isKeypadOpen ? "translateY(-35%)" : "none", // Move up the dialog when the keypad is open
+          transform: isKeypadOpen ? "translateY(-20%)" : "none", // Move up the dialog when the keypad is open
         },
       }}>
       <Card
