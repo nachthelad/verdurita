@@ -2,29 +2,7 @@ import React, { useState } from "react";
 import { TextField, Grid } from "@mui/material";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-// import { theme } from "@/theme/theme";
-// import styled from "styled-components";
 import { Theme, useMediaQuery } from "@mui/material";
-
-// const StyledTextField = styled(TextField)({
-//   "& label.Mui-focused": {
-//     color: theme.palette.primary.main,
-//   },
-//   "& .MuiInput-underline:after": {
-//     borderBottomColor: theme.palette.primary.main,
-//   },
-//   "& .MuiOutlinedInput-root": {
-//     "& fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//     "&:hover fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//     "&.Mui-focused fieldset": {
-//       borderColor: theme.palette.primary.main,
-//     },
-//   },
-// });
 
 type CalculatorInputsProps = {
   precioMoneda: number;
@@ -38,8 +16,8 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   esRealBrasileño = false,
   EsEuro = false,
 }) => {
-  const [montoDolares, setMontoDolares] = useState("");
-  const [montoPesos, setMontoPesos] = useState("");
+  const [montoDolares, setMontoDolares] = useState<number | string>("");
+  const [montoPesos, setMontoPesos] = useState<number | string>("");
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
@@ -52,7 +30,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             locale: es,
           })
         : "";
-      setMontoPesos(valor || "");
+      setMontoPesos(valor);
       setMontoDolares(montoEnDolares);
     }
   };
@@ -68,7 +46,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             locale: es,
           })
         : "";
-      setMontoDolares(valor || "");
+      setMontoDolares(valor);
       setMontoPesos(montoEnPesos);
     }
   };
@@ -99,7 +77,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             }
             inputMode="numeric"
             variant="outlined"
-            value={montoDolares || ""}
+            value={montoDolares}
             onChange={handleDollarAmountChange}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
@@ -113,7 +91,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             label="Monto en pesos"
             inputMode="numeric"
             variant="outlined"
-            value={montoPesos || ""}
+            value={montoPesos}
             onChange={handleAmountChange}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
