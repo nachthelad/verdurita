@@ -42,7 +42,7 @@ const ModalCardItem = ({
       PaperProps={{
         style: {
           borderRadius: "20px",
-          overflowY: "scroll",
+          overflowY: "auto",
         },
       }}>
       <Card
