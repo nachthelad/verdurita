@@ -2,32 +2,29 @@ import React, { useState } from "react";
 import { TextField, Grid } from "@mui/material";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-import { theme } from "@/theme/theme";
-import styled from "styled-components";
+// import { theme } from "@/theme/theme";
+// import styled from "styled-components";
 import { Theme, useMediaQuery } from "@mui/material";
 
-const StyledTextField = styled(TextField)({
-  "& label.Mui-focused": {
-    color: theme.palette.primary.main,
-  },
-  "& .MuiInput-underline:after": {
-    borderBottomColor: theme.palette.primary.main,
-  },
-  "& .MuiOutlinedInput-root": {
-    "& fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
-    "&:hover fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
-    "&.Mui-focused fieldset": {
-      borderColor: theme.palette.primary.main,
-    },
-    "&.MuiTextField-root": {
-      type: "number",
-    },
-  },
-});
+// const StyledTextField = styled(TextField)({
+//   "& label.Mui-focused": {
+//     color: theme.palette.primary.main,
+//   },
+//   "& .MuiInput-underline:after": {
+//     borderBottomColor: theme.palette.primary.main,
+//   },
+//   "& .MuiOutlinedInput-root": {
+//     "& fieldset": {
+//       borderColor: theme.palette.primary.main,
+//     },
+//     "&:hover fieldset": {
+//       borderColor: theme.palette.primary.main,
+//     },
+//     "&.Mui-focused fieldset": {
+//       borderColor: theme.palette.primary.main,
+//     },
+//   },
+// });
 
 type CalculatorInputsProps = {
   precioMoneda: number;
@@ -91,7 +88,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           alignContent: "center",
         }}>
         <Grid item>
-          <StyledTextField
+          <TextField
             autoFocus={autoFocus}
             margin="dense"
             label={
@@ -112,7 +109,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           />
         </Grid>
         <Grid item>
-          <StyledTextField
+          <TextField
             margin="dense"
             label="Monto en pesos"
             inputMode="numeric"
