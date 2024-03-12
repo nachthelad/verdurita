@@ -37,7 +37,6 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   precioMoneda,
   esRealBrasileño = false,
   EsEuro = false,
-  autoFocus,
 }) => {
   const [montoDolares, setMontoDolares] = useState("");
   const [montoPesos, setMontoPesos] = useState("");
@@ -89,7 +88,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
         }}>
         <Grid item>
           <TextField
-            autoFocus={autoFocus}
+            autoFocus
             margin="dense"
             label={
               esRealBrasileño

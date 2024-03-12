@@ -32,6 +32,7 @@ const ModalCardItem = ({
   const handleToggleChange = (value: string | null) => {
     setSelectedValue(value);
   };
+
   return (
     <Dialog
       open={open}
@@ -98,7 +99,7 @@ const ModalCardItem = ({
                   {texto}
                 </Typography>
                 <CalculatorInputs
-                  autoFocus={index === 0}
+                  autoFocus
                   precioMoneda={Number(data[index].precio)}
                   esRealBrasileño={esRealBrasileño}
                   EsEuro={EsEuro}
