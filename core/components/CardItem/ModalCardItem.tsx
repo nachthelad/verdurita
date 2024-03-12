@@ -28,6 +28,19 @@ const ModalCardItem = ({
   const [selectedValue, setSelectedValue] = React.useState<string | null>(
     "Promedio:"
   );
+  const [isKeypadOpen, setIsKeypadOpen] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsKeypadOpen(window.innerHeight < window.outerHeight);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleToggleChange = (value: string | null) => {
     setSelectedValue(value);
@@ -43,6 +56,7 @@ const ModalCardItem = ({
         style: {
           borderRadius: "20px",
           overflowY: "auto",
+          transform: isKeypadOpen ? "translateY(-50%)" : "none",
         },
       }}>
       <Card
