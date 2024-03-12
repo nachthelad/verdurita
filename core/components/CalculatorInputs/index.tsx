@@ -75,7 +75,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 ? "Monto en euros"
                 : "Monto en dólares"
             }
-            inputMode="tel"
+            inputMode="numeric"
             variant="outlined"
             value={montoDolares}
             onChange={handleDollarAmountChange}
