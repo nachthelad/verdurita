@@ -86,6 +86,7 @@ const CardItem = ({
                   width: "150px",
                   fontFamily: inter.style.fontFamily,
                   marginBottom: index === 2 ? "0" : "0.2rem",
+                  marginTop: index === 1 ? "0.2rem" : 0,
                 }}>
                 {texto}
               </Typography>
@@ -108,6 +109,7 @@ const CardItem = ({
                     fontSize: "1.5rem",
                     fontFamily: inter.style.fontFamily,
                     marginBottom: index === 2 ? "0" : "0.2rem",
+                    marginTop: index === 1 ? "0.2rem" : 0,
                   }}>
                   ${format(precio, "0,0.00")}
                 </Typography>

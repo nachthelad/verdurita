@@ -23,6 +23,9 @@ const StyledTextField = styled(TextField)({
     "&.Mui-focused fieldset": {
       borderColor: theme.palette.primary.main,
     },
+    "&.MuiTextField-root": {
+      type: "number",
+    },
   },
 });
 
@@ -102,9 +105,9 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
-            // onKeyDown={(e) =>
-            //   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            // }
+            onKeyDown={(e) =>
+              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            }
             onFocus={(e) => e.target.select()}
           />
         </Grid>
@@ -116,9 +119,9 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
-            // onKeyDown={(e) =>
-            //   ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
-            // }
+            onKeyDown={(e) =>
+              ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
+            }
             onFocus={(e) => e.target.select()}
           />
         </Grid>
