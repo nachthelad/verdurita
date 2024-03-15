@@ -40,7 +40,7 @@ export default function MainContainer({
       <Grid
         container
         sx={{
-          maxWidth: 1840,
+          maxWidth: 2160,
           width: "100%",
           display: "flex",
           justifyContent: "center",

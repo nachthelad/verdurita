@@ -74,7 +74,7 @@ const CardItem = ({
                 alignItems: "center",
                 borderBottom: "1px solid #0000001f",
                 borderBottomWidth: index === 2 ? "0" : "1px",
-                width: isMobile ? "95%" : "85%",
+                width: isMobile ? "95%" : "90%",
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
                 marginBottom: index === 2 ? "1rem" : 0,
