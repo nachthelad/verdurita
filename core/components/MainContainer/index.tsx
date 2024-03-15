@@ -7,6 +7,8 @@ import Button from "@mui/material/Button";
 import { theme } from "@/theme/theme";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import { Theme, useMediaQuery } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { inter } from "@/fonts/fonts";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -26,6 +28,7 @@ export default function MainContainer({
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
+
   return (
     <Box
       sx={{
@@ -37,22 +40,58 @@ export default function MainContainer({
       <Grid
         container
         sx={{
-          maxWidth: 1440,
+          maxWidth: 2160,
           width: "100%",
           display: "flex",
           justifyContent: "center",
           margin: "auto",
-          gap: 1,
+          gap: 2,
           marginTop: isMobile ? 3 : 5,
         }}>
+        {isMobile ? null : (
+          <Grid
+            item
+            sm={10}
+            md={10}
+            lg={10}
+            xl={10}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginBottom: "16px",
+            }}>
+            <Typography
+              variant="h1"
+              gutterBottom
+              sx={{
+                fontFamily: inter.style.fontFamily,
+                color: theme.palette.primary.main,
+                fontWeight: 600,
+                fontSize: "2.2rem",
+              }}>
+              💵 Cotizaciones del dólar, euro y real
+            </Typography>
+            <Typography
+              variant="subtitle2"
+              sx={{
+                fontFamily: inter.style.fontFamily,
+                color: theme.palette.primary.main,
+                fontWeight: 500,
+              }}>
+              Datos en el momento de las monedas más cotizadas del país
+            </Typography>
+          </Grid>
+        )}
         {resultadosFiltrados.map((moneda: Moneda, index: number) => (
           <Grid
             key={`${moneda?.nombre}-${index}`}
             item
             xs={10}
             sm={6}
-            md={4}
+            md={5}
             lg={3}
+            xl={2}
             container
             sx={{
               marginBottom:
