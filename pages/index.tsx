@@ -56,7 +56,7 @@ export default function Home() {
         sx={{
           marginTop: "sm: 56px, md: 64px",
           backgroundColor: theme.palette.primary.contrastText,
-          minHeight: "calc(100vh - 60px)",
+          minHeight: "100vh",
         }}>
         <MainContainer
           filterApplied={filterApplied}
