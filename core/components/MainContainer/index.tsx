@@ -69,7 +69,6 @@ export default function MainContainer({
                 color: theme.palette.primary.main,
                 fontWeight: 600,
                 fontSize: "2.2rem",
-                // textTransform: "uppercase",
               }}>
               💵 Cotizaciones del dólar, euro y real
             </Typography>
@@ -80,7 +79,7 @@ export default function MainContainer({
                 color: theme.palette.primary.main,
                 fontWeight: 500,
               }}>
-              Datos en el momento de las monedas mas cotizadas del país
+              Datos en el momento de las monedas más cotizadas del país
             </Typography>
           </Grid>
         )}
