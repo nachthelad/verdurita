@@ -69,9 +69,9 @@ export default function MainContainer({
                 color: theme.palette.primary.main,
                 fontWeight: 600,
                 fontSize: "2.2rem",
-                textTransform: "uppercase",
+                // textTransform: "uppercase",
               }}>
-              Cotizaciones en el momento
+              💵 Cotizaciones del dólar, euro y real
             </Typography>
             <Typography
               variant="subtitle2"
@@ -80,8 +80,7 @@ export default function MainContainer({
                 color: theme.palette.primary.main,
                 fontWeight: 500,
               }}>
-              Actualizaciones en el momento de las monedas mas cotizadas del
-              país
+              Datos en el momento de las monedas mas cotizadas del país
             </Typography>
           </Grid>
         )}
