@@ -100,7 +100,7 @@ const CardItem = ({
                   sx={{
                     height: "35px",
                     width: "120px",
-                    marginLeft: isMobile ? "10px" : "30px",
+                    marginLeft: "10px",
                     display: "flex",
                     justifyContent: "center",
                   }}
