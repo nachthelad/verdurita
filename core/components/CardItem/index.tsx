@@ -5,6 +5,7 @@ import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { theme } from "@/theme/theme";
 import { inter } from "@/fonts/fonts";
+import { useMediaQuery, Theme } from "@mui/material";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -30,6 +31,10 @@ const CardItem = ({
   const handleClose = () => {
     setOpen(false);
   };
+
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("sm")
+  );
 
   return (
     <div>
@@ -69,7 +74,7 @@ const CardItem = ({
                 alignItems: "center",
                 borderBottom: "1px solid #0000001f",
                 borderBottomWidth: index === 2 ? "0" : "1px",
-                width: "90%",
+                width: isMobile ? "100%" : "85%",
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
                 marginBottom: index === 2 ? "1rem" : 0,
@@ -94,7 +99,8 @@ const CardItem = ({
                 <Skeleton
                   sx={{
                     height: "35px",
-                    width: "36%",
+                    width: "120px",
+                    marginLeft: isMobile ? "30px" : "30px",
                     display: "flex",
                     justifyContent: "center",
                   }}
@@ -105,7 +111,7 @@ const CardItem = ({
                   sx={{
                     display: "flex",
                     justifyContent: "flex-end",
-                    width: "110px",
+                    width: "150px",
                     fontSize: "1.5rem",
                     fontFamily: inter.style.fontFamily,
                     marginBottom: index === 2 ? "0" : "0.2rem",
