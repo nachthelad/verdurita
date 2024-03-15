@@ -28,9 +28,6 @@ export default function MainContainer({
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
-  const isXlScreen = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.up("xl")
-  );
 
   return (
     <Box
