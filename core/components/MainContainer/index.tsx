@@ -51,7 +51,7 @@ export default function MainContainer({
             item
             xs={10}
             sm={6}
-            md={4}
+            md={5}
             lg={3}
             container
             sx={{

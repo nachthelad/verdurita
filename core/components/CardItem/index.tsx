@@ -74,7 +74,7 @@ const CardItem = ({
                 alignItems: "center",
                 borderBottom: "1px solid #0000001f",
                 borderBottomWidth: index === 2 ? "0" : "1px",
-                width: isMobile ? "100%" : "85%",
+                width: isMobile ? "95%" : "85%",
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
                 marginBottom: index === 2 ? "1rem" : 0,
@@ -99,8 +99,8 @@ const CardItem = ({
                 <Skeleton
                   sx={{
                     height: "35px",
-                    width: "120px",
-                    marginLeft: isMobile ? "30px" : "30px",
+                    width: "100px",
+                    // marginLeft: isMobile ? "30px" : "30px",
                     display: "flex",
                     justifyContent: "center",
                   }}
