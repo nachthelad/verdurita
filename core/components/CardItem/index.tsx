@@ -99,7 +99,8 @@ const CardItem = ({
                 <Skeleton
                   sx={{
                     height: "35px",
-                    width: "36%",
+                    width: "120px",
+                    marginLeft: isMobile ? "30px" : "30px",
                     display: "flex",
                     justifyContent: "center",
                   }}
