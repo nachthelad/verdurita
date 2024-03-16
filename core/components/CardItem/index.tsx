@@ -4,7 +4,6 @@ import ModalCardItem from "./ModalCardItem";
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { theme } from "@/theme/theme";
-import { inter } from "@/fonts/fonts";
 import { useMediaQuery, Theme } from "@mui/material";
 
 type CardItemProps = {
@@ -25,7 +24,7 @@ const CardItem = ({
   const [open, setOpen] = React.useState(false);
 
   const handleExpandClick = () => {
-    setOpen(true);
+    setOpen((prevOpen) => !prevOpen);
   };
 
   const handleClose = () => {
@@ -72,8 +71,7 @@ const CardItem = ({
                 flexDirection: "row",
                 justifyContent: "center",
                 alignItems: "center",
-                borderBottom: "1px solid #0000001f",
-                borderBottomWidth: index === 2 ? "0" : "1px",
+                borderBottom: index === 2 ? "none" : "1px solid #0000001f",
                 width: isMobile ? "95%" : "90%",
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
@@ -89,9 +87,8 @@ const CardItem = ({
                   color: theme.palette.primary.main,
                   textTransform: "uppercase",
                   width: "150px",
-                  fontFamily: inter.style.fontFamily,
-                  marginBottom: index === 2 ? "0" : "0.2rem",
                   marginTop: index === 1 ? "0.2rem" : 0,
+                  marginBottom: index === 2 ? "0" : "0.2rem",
                 }}>
                 {texto}
               </Typography>
@@ -113,7 +110,6 @@ const CardItem = ({
                     justifyContent: "flex-end",
                     width: "150px",
                     fontSize: "1.5rem",
-                    fontFamily: inter.style.fontFamily,
                     marginBottom: index === 2 ? "0" : "0.2rem",
                     marginTop: index === 1 ? "0.2rem" : 0,
                   }}>

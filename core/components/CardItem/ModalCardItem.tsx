@@ -73,39 +73,39 @@ const ModalCardItem = ({
           <Box sx={{ margin: "auto" }}>
             <TitleItem titulo={moneda} />
             <ToggleButtons onChange={handleToggleChange} />
-            {data.map(({ texto }, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: selectedValue === texto ? "block" : "none",
-                  border: `1px solid ${theme.palette.primary.light} `,
-                  padding: "10px",
-                  borderRadius: "10px",
-                  margin: "10px",
-                  paddingTop: "5px",
-                  backgroundColor: theme.palette.primary.contrastText,
-                }}>
-                {/*  Vende a: / Compra a: / Promedio: */}
-                <Typography
-                  variant="h5"
-                  component="div"
-                  sx={{
-                    textAlign: "center",
-                    lineHeight: "1.5",
-                    fontSize: "1.2rem",
-                    color: theme.palette.primary.dark,
-                    textTransform: "uppercase",
-                  }}>
-                  {texto}
-                </Typography>
-                <CalculatorInputs
-                  autoFocus
-                  precioMoneda={Number(data[index].precio)}
-                  esRealBrasileño={esRealBrasileño}
-                  EsEuro={EsEuro}
-                />
-              </Box>
-            ))}
+            {data.map(
+              ({ texto }, index) =>
+                selectedValue === texto && (
+                  <Box
+                    key={index}
+                    sx={{
+                      border: `1px solid ${theme.palette.primary.light} `,
+                      padding: "10px",
+                      borderRadius: "10px",
+                      margin: "10px",
+                      paddingTop: "5px",
+                      backgroundColor: theme.palette.primary.contrastText,
+                    }}>
+                    {/*  Vende a: / Compra a: / Promedio: */}
+                    <Typography
+                      sx={{
+                        textAlign: "center",
+                        lineHeight: "1.5",
+                        fontSize: "1.2rem",
+                        color: theme.palette.primary.dark,
+                        textTransform: "uppercase",
+                      }}>
+                      {texto}
+                    </Typography>
+                    <CalculatorInputs
+                      autoFocus
+                      precioMoneda={Number(data[index].precio)}
+                      esRealBrasileño={esRealBrasileño}
+                      EsEuro={EsEuro}
+                    />
+                  </Box>
+                )
+            )}
           </Box>
         </CardContent>
       </Card>
