@@ -12,8 +12,10 @@ export default function ToggleButtons({ onChange }: ToggleButtonsProps) {
     _event: React.MouseEvent<HTMLElement>,
     newValue: string | null
   ) => {
-    setValue(newValue);
-    onChange(newValue);
+    if (newValue !== null && newValue !== value) {
+      setValue(newValue);
+      onChange(newValue);
+    }
   };
 
   return (
@@ -23,13 +25,13 @@ export default function ToggleButtons({ onChange }: ToggleButtonsProps) {
       exclusive
       onChange={handleValue}>
       <ToggleButton value="Vendé a:" aria-label="vende">
-        <Typography sx={{ fontSize: "0.9rem" }}>Vendé</Typography>
+        <Typography variant="body2">Vendé</Typography>
       </ToggleButton>
       <ToggleButton value="Comprá a:" aria-label="compra">
-        <Typography sx={{ fontSize: "0.9rem" }}>Comprá</Typography>
+        <Typography variant="body2">Comprá</Typography>
       </ToggleButton>
       <ToggleButton value="Promedio:" aria-label="promedio">
-        <Typography sx={{ fontSize: "0.9rem" }}>Promedio</Typography>
+        <Typography variant="body2">Promedio</Typography>
       </ToggleButton>
     </ToggleButtonGroup>
   );

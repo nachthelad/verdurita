@@ -13,15 +13,12 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
   );
   return (
     <Typography
-      variant="h1"
-      component="div"
       sx={{
         textAlign: "center",
         color: theme.palette.primary.main,
         fontSize: isMobile ? "2rem" : "1.5rem",
         fontWeight: "600",
         textTransform: "uppercase",
-        marginBottom: "0.5rem",
       }}>
       {titulo === "Dólar Contado con liquidación"
         ? "Dólar CCL"

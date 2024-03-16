@@ -95,7 +95,7 @@ export default function MainContainer({
             container
             sx={{
               marginBottom:
-                isMobile && index === resultadosFiltrados.length - 1 ? 12 : 4,
+                isMobile && index === resultadosFiltrados.length - 1 ? 12 : 0,
             }}>
             <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>
               <TitleItem titulo={moneda.nombre} />
