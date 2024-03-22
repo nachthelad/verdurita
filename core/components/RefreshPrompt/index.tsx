@@ -51,6 +51,7 @@ const RefreshPrompt = ({ refreshData }: RefreshPromptProps) => {
           <DialogActions>
             <Button onClick={() => setOpen(false)}>Cerrar</Button>
             <Button
+              variant="contained"
               onClick={() => {
                 refreshData();
                 setOpen(false);
