@@ -1,14 +1,19 @@
-import { Box, Grid } from "@mui/material";
 import CardItem from "@/core/components/CardItem";
 import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
 import LogoButton from "@/core/components/LogoButton";
-import Button from "@mui/material/Button";
 import { theme } from "@/theme/theme";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
-import { Theme, useMediaQuery } from "@mui/material";
-import Typography from "@mui/material/Typography";
+import {
+  Theme,
+  useMediaQuery,
+  Box,
+  Grid,
+  Button,
+  Typography,
+} from "@mui/material";
 import { inter } from "@/fonts/fonts";
+import RefreshPrompt from "../RefreshPrompt";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -28,7 +33,6 @@ export default function MainContainer({
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("md")
   );
-
   return (
     <Box
       sx={{
@@ -36,6 +40,7 @@ export default function MainContainer({
         flexDirection: "column",
         justifyContent: "center",
       }}>
+      <RefreshPrompt refreshData={refreshData} />
       <LogoButton onFilter={onFilter} refreshData={refreshData} />
       <Grid
         container
