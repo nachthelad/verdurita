@@ -5,6 +5,7 @@ import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { theme } from "@/theme/theme";
 import { useMediaQuery, Theme } from "@mui/material";
+import LastUpdate from "./LastUpdate";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -75,7 +76,7 @@ const CardItem = ({
                 width: isMobile ? "95%" : "90%",
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
-                marginBottom: index === 2 ? "1rem" : 0,
+                // marginBottom: index === 2 ? "1rem" : 0,
               }}>
               <Typography
                 sx={{
@@ -118,6 +119,7 @@ const CardItem = ({
               )}
             </Box>
           ))}
+          <LastUpdate loadingData={loadingData} />
         </CardContent>
       </Card>
       <ModalCardItem
