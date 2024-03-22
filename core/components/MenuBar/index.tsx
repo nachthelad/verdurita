@@ -5,6 +5,7 @@ import MenuButton from "../MenuButton";
 import { theme } from "@/theme/theme";
 import { Icon } from "@iconify-icon/react";
 import CloseIcon from "@mui/icons-material/Close";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | null) => void;
@@ -56,9 +57,20 @@ export default function MenuBar({
           <Box
             sx={{
               display: isMobile && expanded ? "none" : "flex",
-              gap: isMobile ? 2 : 1,
+              gap: isMobile ? 1 : 1,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
             }}>
+            <Button
+              sx={{
+                color: theme.palette.primary.contrastText,
+                backgroundColor: `${theme.palette.secondary.main} !important`,
+                borderRadius: "2rem",
+                paddingX: "0.3rem",
+                paddingY: "0.3rem",
+                fontSize: isMobile ? "20px" : "15px",
+              }}>
+              <RefreshIcon onClick={refreshData} />
+            </Button>
             <MenuButton
               expanded={expanded}
               buttonName={
