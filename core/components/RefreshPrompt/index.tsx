@@ -52,6 +52,7 @@ const RefreshPrompt = ({ refreshData }: RefreshPromptProps) => {
             <Button onClick={() => setOpen(false)}>Cerrar</Button>
             <Button
               variant="contained"
+              sx={{ borderRadius: "20px" }}
               onClick={() => {
                 refreshData();
                 setOpen(false);
