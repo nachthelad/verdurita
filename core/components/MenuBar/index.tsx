@@ -5,7 +5,6 @@ import MenuButton from "../MenuButton";
 import { theme } from "@/theme/theme";
 import { Icon } from "@iconify-icon/react";
 import CloseIcon from "@mui/icons-material/Close";
-import RefreshIcon from "@mui/icons-material/Refresh";
 
 type MenuBarProps = {
   onFilter: (moneda?: string | null) => void;
@@ -69,7 +68,10 @@ export default function MenuBar({
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
               }}>
-              <RefreshIcon onClick={refreshData} />
+              <Icon 
+              icon="tabler:refresh" 
+              style={{ fontSize: isMobile ? "30px" : "25px" }} 
+              onClick={refreshData}/>
             </Button>
             <MenuButton
               expanded={expanded}
