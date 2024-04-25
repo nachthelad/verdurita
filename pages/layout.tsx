@@ -1,6 +1,7 @@
 import React from "react";
 import MenuBar from "@/core/components/MenuBar";
 import { useMediaQuery, Theme } from "@mui/material";
+import { Analytics } from "@vercel/analytics/react";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -21,6 +22,7 @@ const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
         onFilter={onFilter}
       />
       {children}
+      <Analytics />
     </>
   );
 };
