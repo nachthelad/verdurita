@@ -37,6 +37,11 @@ const CustomHead: React.FC<CustomHeadProps> = ({
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/icon-512x512.png" />
     <meta name="theme-color" content={theme.palette.primary.main} />
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1027418154196814"
+      crossOrigin="anonymous"
+    ></script>
   </Head>
 );
 
