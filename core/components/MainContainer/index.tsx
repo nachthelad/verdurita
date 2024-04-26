@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { inter } from "@/fonts/fonts";
 import RefreshPrompt from "../RefreshPrompt";
+import Footer from "./../Footer/index";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -39,7 +40,8 @@ export default function MainContainer({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-      }}>
+      }}
+    >
       <RefreshPrompt refreshData={refreshData} />
       <LogoButton onFilter={onFilter} refreshData={refreshData} />
       <Grid
@@ -51,8 +53,9 @@ export default function MainContainer({
           justifyContent: "center",
           margin: "auto",
           gap: 2,
-          marginTop: isMobile ? 3 : 5,
-        }}>
+          marginTop: isMobile ? 3 : 6,
+        }}
+      >
         {isMobile ? null : (
           <Grid
             item
@@ -65,7 +68,8 @@ export default function MainContainer({
               flexDirection: "column",
               alignItems: "center",
               marginBottom: "16px",
-            }}>
+            }}
+          >
             <Typography
               variant="h1"
               gutterBottom
@@ -74,7 +78,8 @@ export default function MainContainer({
                 color: theme.palette.primary.main,
                 fontWeight: 600,
                 fontSize: "2.2rem",
-              }}>
+              }}
+            >
               💵 Cotizaciones del dólar, euro y real
             </Typography>
             <Typography
@@ -83,7 +88,8 @@ export default function MainContainer({
                 fontFamily: inter.style.fontFamily,
                 color: theme.palette.primary.main,
                 fontWeight: 500,
-              }}>
+              }}
+            >
               Datos en el momento de las monedas más cotizadas del país
             </Typography>
           </Grid>
@@ -100,8 +106,9 @@ export default function MainContainer({
             container
             sx={{
               marginBottom:
-                isMobile && index === resultadosFiltrados.length - 1 ? 12 : 0,
-            }}>
+                isMobile && index === resultadosFiltrados.length - 1 ? 2 : 0,
+            }}
+          >
             <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>
               <TitleItem titulo={moneda.nombre} />
               <CardItem
@@ -131,7 +138,8 @@ export default function MainContainer({
                     display: "flex",
                     margin: "auto",
                     marginTop: "0.5rem",
-                  }}>
+                  }}
+                >
                   Limpiar Filtro
                 </Button>
               )}
@@ -139,6 +147,7 @@ export default function MainContainer({
           </Grid>
         ))}
       </Grid>
+      <Footer />
     </Box>
   );
 }

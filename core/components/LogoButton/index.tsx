@@ -25,14 +25,16 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
         flexDirection: "column",
         alignItems: isMobile ? "center" : "flex-start",
         flexGrow: 1,
-      }}>
+      }}
+    >
       <Button
         onClick={handleRefresh}
         disableFocusRipple
         disableRipple
         style={{
           padding: "0",
-        }}>
+        }}
+      >
         <Typography
           variant="h6"
           noWrap
@@ -43,7 +45,8 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
             fontSize: isMobile ? "2.5rem" : "1.5rem",
             lineHeight: "1",
             marginTop: isMobile ? "1.5rem" : "0",
-          }}>
+          }}
+        >
           verdurita
         </Typography>
       </Button>
@@ -54,10 +57,10 @@ const LogoButton = ({ refreshData, onFilter }: LogoButtonProps) => {
           whiteSpace: "nowrap",
           fontSize: isMobile ? "1rem" : "0.6rem",
           fontStyle: "italic",
-          textTransform: "lowercase",
           userSelect: "none",
-        }}>
-        by nachthelad
+        }}
+      >
+        Cotizaciones al momento
       </Typography>
     </Box>
   );
