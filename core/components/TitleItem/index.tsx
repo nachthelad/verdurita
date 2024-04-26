@@ -19,7 +19,8 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
         fontSize: isMobile ? "2rem" : "1.5rem",
         fontWeight: "600",
         textTransform: "uppercase",
-      }}>
+      }}
+    >
       {titulo === "Dólar Contado con liquidación"
         ? "Dólar CCL"
         : titulo && titulo === "Dólar Bolsa"

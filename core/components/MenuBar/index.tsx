@@ -48,7 +48,8 @@ export default function MenuBar({
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
           transition: "height 0.2s ease",
-        }}>
+        }}
+      >
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
           {isMobile ? null : (
             <LogoText onFilter={onFilter} refreshData={refreshData} />
@@ -58,7 +59,8 @@ export default function MenuBar({
               display: isMobile && expanded ? "none" : "flex",
               gap: isMobile ? 1 : 1,
               ...(isMobile && { justifyContent: "center", width: "100%" }),
-            }}>
+            }}
+          >
             <Button
               sx={{
                 color: theme.palette.primary.contrastText,
@@ -67,11 +69,13 @@ export default function MenuBar({
                 paddingX: "0.3rem",
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
-              }}>
-              <Icon 
-              icon="tabler:refresh" 
-              style={{ fontSize: isMobile ? "30px" : "25px" }} 
-              onClick={refreshData}/>
+              }}
+            >
+              <Icon
+                icon="tabler:refresh"
+                style={{ fontSize: isMobile ? "30px" : "25px" }}
+                onClick={refreshData}
+              />
             </Button>
             <MenuButton
               expanded={expanded}
@@ -126,7 +130,8 @@ export default function MenuBar({
               }}
               onClick={() => {
                 onFilter("Real");
-              }}>
+              }}
+            >
               {isMobile ? (
                 <Icon
                   icon="tabler:currency-real"
@@ -143,7 +148,8 @@ export default function MenuBar({
               flexDirection: "column",
               justifyContent: "center",
               gap: 2,
-            }}>
+            }}
+          >
             {expanded && (
               <>
                 {dolarExpanded && (
@@ -177,8 +183,11 @@ export default function MenuBar({
                           paddingX: "1.5rem",
                           paddingY: "0.3rem",
                           fontSize: "20px",
-                        }}>
-                        {monedas[variant].replace("Dólar ", "")}
+                        }}
+                      >
+                        {monedas[variant]
+                          .replace("Dólar ", "")
+                          .replace(/bolsa/gi, "mep / bolsa")}
                       </Button>
                     ))}
                   </>
@@ -213,7 +222,8 @@ export default function MenuBar({
                           paddingX: "1.5rem",
                           paddingY: "0.3rem",
                           fontSize: "20px",
-                        }}>
+                        }}
+                      >
                         {monedas[variant].replace("Euro ", "")}
                       </Button>
                     ))}
