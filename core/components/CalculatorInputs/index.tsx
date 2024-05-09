@@ -77,7 +77,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 : "Monto en dólares"
             }
             inputMode="numeric"
-            type={isMobile ? "tel" : "number"}
+            type={isMobile ? "number" : "text"}
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
@@ -92,7 +92,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             margin="dense"
             label="Monto en pesos"
             inputMode="numeric"
-            type={isMobile ? "tel" : "number"}
+            type={isMobile ? "number" : "text"}
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
