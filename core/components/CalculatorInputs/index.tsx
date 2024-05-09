@@ -76,7 +76,8 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 ? "Monto en euros"
                 : "Monto en dólares"
             }
-            inputMode="numeric"
+            // inputMode="numeric"
+            inputProps={{ inputMode: "numeric" }}
             type={isMobile ? "number" : "text"}
             variant="outlined"
             value={montoDolares || ""}
@@ -91,7 +92,8 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           <TextField
             margin="dense"
             label="Monto en pesos"
-            inputMode="numeric"
+            // inputMode="numeric"
+            inputProps={{ inputMode: "numeric" }}
             type={isMobile ? "number" : "text"}
             variant="outlined"
             value={montoPesos || ""}
