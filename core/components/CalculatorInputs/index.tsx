@@ -63,7 +63,8 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
         spacing={isMobile ? 0 : 1}
         sx={{
           alignContent: "center",
-        }}>
+        }}
+      >
         <Grid item>
           <TextField
             autoFocus
@@ -76,7 +77,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 : "Monto en dólares"
             }
             inputMode="numeric"
-            type={isMobile ? "tel" : "text"}
+            type={isMobile ? "tel" : "number"}
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
@@ -91,7 +92,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             margin="dense"
             label="Monto en pesos"
             inputMode="numeric"
-            type={isMobile ? "tel" : "text"}
+            type={isMobile ? "tel" : "number"}
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
