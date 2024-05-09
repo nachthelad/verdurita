@@ -21,32 +21,34 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
-    const esNumero = /^[0-9]*$/.test(valor);
+    const valorNormalizado = valor.replace(".", ",");
+    const esNumero = /^[0-9]*[.]?[0-9]{0,2}$/.test(valorNormalizado);
 
     if (esNumero) {
-      const nuevoMontoPesos = valor || "";
+      const nuevoMontoPesos = valorNormalizado || "";
       const montoEnDolares = nuevoMontoPesos
         ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
             locale: es,
           })
         : "";
-      setMontoPesos(valor || "");
+      setMontoPesos(valorNormalizado || "");
       setMontoDolares(montoEnDolares);
     }
   };
 
   const handleDollarAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
-    const esNumero = /^[0-9]*$/.test(valor);
+    const valorNormalizado = valor.replace(",", ".");
+    const esNumero = /^[0-9]*[.]?[0-9]{0,2}$/.test(valorNormalizado);
 
     if (esNumero) {
-      const nuevoMontoDolares = valor || "";
+      const nuevoMontoDolares = valorNormalizado || "";
       const montoEnPesos = nuevoMontoDolares
         ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
             locale: es,
           })
         : "";
-      setMontoDolares(valor || "");
+      setMontoDolares(valorNormalizado || "");
       setMontoPesos(montoEnPesos);
     }
   };
@@ -78,7 +80,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             }
             // inputMode="numeric"
             inputProps={{ inputMode: "numeric" }}
-            type={isMobile ? "number" : "text"}
+            type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoDolares || ""}
             onChange={handleDollarAmountChange}
@@ -94,7 +96,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             label="Monto en pesos"
             // inputMode="numeric"
             inputProps={{ inputMode: "numeric" }}
-            type={isMobile ? "number" : "text"}
+            type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoPesos || ""}
             onChange={handleAmountChange}
