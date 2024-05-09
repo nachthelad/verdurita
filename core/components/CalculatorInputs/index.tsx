@@ -21,7 +21,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
-    const valorNormalizado = valor.replace(".", ",");
+    const valorNormalizado = valor.replace(",", ".");
     const esNumero = /^[0-9]*[.]?[0-9]{0,2}$/.test(valorNormalizado);
 
     if (esNumero) {
@@ -78,8 +78,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
                 ? "Monto en euros"
                 : "Monto en dólares"
             }
-            // inputMode="numeric"
-            inputProps={{ inputMode: "numeric" }}
+            inputMode="numeric"
             type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoDolares || ""}
@@ -94,8 +93,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           <TextField
             margin="dense"
             label="Monto en pesos"
-            // inputMode="numeric"
-            inputProps={{ inputMode: "numeric" }}
+            inputMode="numeric"
             type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoPesos || ""}
