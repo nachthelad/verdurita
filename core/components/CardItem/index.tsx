@@ -42,7 +42,8 @@ const CardItem = ({
         sx={{
           borderRadius: "20px",
           boxShadow: "3",
-        }}>
+        }}
+      >
         <CardContent
           sx={{
             display: "flex",
@@ -51,9 +52,10 @@ const CardItem = ({
             paddingBottom: "16px !important",
             cursor: "pointer",
           }}
-          onClick={handleExpandClick}>
+          onClick={handleExpandClick}
+        >
           <Icon
-            icon="typcn:arrow-maximise"
+            icon="material-symbols:expand-content"
             width="2rem"
             height="2rem"
             style={{
@@ -77,7 +79,8 @@ const CardItem = ({
                 margin: "auto",
                 marginTop: index === 0 ? "1rem" : 0,
                 // marginBottom: index === 2 ? "1rem" : 0,
-              }}>
+              }}
+            >
               <Typography
                 sx={{
                   whiteSpace: "nowrap",
@@ -90,7 +93,8 @@ const CardItem = ({
                   width: "150px",
                   marginTop: index === 1 ? "0.2rem" : 0,
                   marginBottom: index === 2 ? "0" : "0.2rem",
-                }}>
+                }}
+              >
                 {texto}
               </Typography>
               {loadingData ? (
@@ -113,7 +117,8 @@ const CardItem = ({
                     fontSize: "1.5rem",
                     marginBottom: index === 2 ? "0" : "0.2rem",
                     marginTop: index === 1 ? "0.2rem" : 0,
-                  }}>
+                  }}
+                >
                   ${format(precio, "0,0.00")}
                 </Typography>
               )}
