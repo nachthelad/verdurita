@@ -44,27 +44,30 @@ const ModalCardItem = ({
           borderRadius: "20px",
           overflowY: "auto",
         },
-      }}>
+      }}
+    >
       <Card
         sx={{
           boxShadow: "3",
           position: "relative",
-        }}>
+        }}
+      >
         <CardContent
           sx={{
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
             position: "relative",
-          }}>
+          }}
+        >
           <Icon
-            icon="typcn:arrow-minimise"
+            icon="material-symbols:collapse-content"
             width="2rem"
             height="2rem"
             style={{
               position: "absolute",
-              top: "10px",
-              right: "12px",
+              top: "5px",
+              right: "5px",
               color: "#0000007e",
               cursor: "pointer",
             }}
@@ -85,7 +88,8 @@ const ModalCardItem = ({
                       margin: "10px",
                       paddingTop: "5px",
                       backgroundColor: theme.palette.primary.contrastText,
-                    }}>
+                    }}
+                  >
                     {/*  Vende a: / Compra a: / Promedio: */}
                     <Typography
                       sx={{
@@ -94,7 +98,8 @@ const ModalCardItem = ({
                         fontSize: "1.2rem",
                         color: theme.palette.primary.dark,
                         textTransform: "uppercase",
-                      }}>
+                      }}
+                    >
                       {texto}
                     </Typography>
                     <CalculatorInputs
