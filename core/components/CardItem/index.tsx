@@ -63,7 +63,6 @@ const CardItem = ({
               top: "5px",
               right: "5px",
               color: "#0000007e",
-              cursor: "pointer",
             }}
           />
           {data.map(({ texto, precio }, index) => (

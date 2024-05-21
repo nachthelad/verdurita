@@ -66,8 +66,8 @@ const ModalCardItem = ({
             height="2rem"
             style={{
               position: "absolute",
-              top: "10px",
-              right: "12px",
+              top: "5px",
+              right: "5px",
               color: "#0000007e",
               cursor: "pointer",
             }}
