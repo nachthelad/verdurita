@@ -25,7 +25,8 @@ const LastUpdate = ({ loadingData }: LastUpdateProps) => {
           justifyContent: "center",
           fontSize: "0.8rem",
           marginTop: "0.5rem",
-        }}>
+        }}
+      >
         Última actualización:{" "}
         {loadingData ? (
           <Skeleton
@@ -35,7 +36,7 @@ const LastUpdate = ({ loadingData }: LastUpdateProps) => {
             }}
           />
         ) : (
-          lastUpdate + " - " + time + "hs"
+          lastUpdate + " - " + time
         )}
       </Typography>
     </div>
