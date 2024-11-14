@@ -57,7 +57,8 @@ export default function Home() {
           marginTop: "sm: 56px, md: 64px",
           backgroundColor: theme.palette.primary.contrastText,
           minHeight: "100vh",
-        }}>
+        }}
+      >
         <MainContainer
           filterApplied={filterApplied}
           loadingData={loadingData}

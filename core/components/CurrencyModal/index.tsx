@@ -54,14 +54,16 @@ export default function CurrencyModal({
         TransitionComponent={Transition}
         keepMounted
         onClose={onClose}
-        aria-describedby="alert-dialog-slide-description">
+        aria-describedby="alert-dialog-slide-description"
+      >
         <Box>
           <DialogTitle>
             <Typography
               variant="h5"
               sx={{
                 textAlign: "center",
-              }}>
+              }}
+            >
               {`Seleccioná el`}
               <CurrencyText> {currency} </CurrencyText>
               {`que queres filtrar`}
@@ -89,8 +91,11 @@ export default function CurrencyModal({
                     borderRadius: "2rem",
                     paddingX: "1.5rem",
                     paddingY: "0.3rem",
-                  }}>
-                  {variant.split(" ").slice(1).join(" ")}
+                  }}
+                >
+                  {variant.split(" ").slice(1).join(" ") === "bolsa"
+                    ? "MEP / Bolsa"
+                    : variant.split(" ").slice(1).join(" ")}
                 </Button>
               ))}
             </DialogContentText>
