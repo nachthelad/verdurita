@@ -69,6 +69,8 @@ export default function MenuBar({
                 paddingX: "0.3rem",
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
+                minHeight: "44px",
+                minWidth: "44px",
               }}
             >
               <Icon
@@ -127,6 +129,8 @@ export default function MenuBar({
                 paddingX: "1.5rem",
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
+                minHeight: "44px",
+                minWidth: isMobile ? "44px" : "auto",
               }}
               onClick={() => {
                 onFilter("Real");

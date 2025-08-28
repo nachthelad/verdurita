@@ -51,6 +51,8 @@ export default function MenuButton({
           paddingX: "1.5rem",
           paddingY: "0.3rem",
           fontSize: isMobile ? "20px" : "15px",
+          minHeight: "44px",
+          minWidth: isMobile ? "44px" : "auto",
         }}>
         {buttonName}
       </Button>

@@ -48,7 +48,7 @@ export default function Home() {
         component="main"
         className={`${inter.className}`}
         sx={{
-          marginTop: "sm: 56px, md: 64px",
+          marginTop: { xs: "56px", sm: "56px", md: "64px" },
           backgroundColor: theme.palette.primary.contrastText,
           minHeight: "100vh",
         }}

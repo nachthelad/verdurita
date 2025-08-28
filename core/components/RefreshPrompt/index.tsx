@@ -6,15 +6,19 @@ import {
   DialogContent,
   Typography,
   Dialog,
+  CircularProgress,
+  Box,
 } from "@mui/material";
 import { theme } from "@/theme/theme";
 
 type RefreshPromptProps = {
   refreshData: () => void;
+  isLoading?: boolean;
 };
 
-const RefreshPrompt = ({ refreshData }: RefreshPromptProps) => {
+const RefreshPrompt = ({ refreshData, isLoading = false }: RefreshPromptProps) => {
   const [open, setOpen] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -49,15 +53,37 @@ const RefreshPrompt = ({ refreshData }: RefreshPromptProps) => {
             ¿Desea actualizarlos ahora?
           </Typography>
           <DialogActions>
-            <Button onClick={() => setOpen(false)}>Cerrar</Button>
+            <Button 
+              onClick={() => setOpen(false)}
+              sx={{ minHeight: "44px", minWidth: "80px" }}
+            >
+              Cerrar
+            </Button>
             <Button
               variant="contained"
-              sx={{ borderRadius: "20px" }}
-              onClick={() => {
-                refreshData();
-                setOpen(false);
+              disabled={refreshing || isLoading}
+              sx={{ 
+                borderRadius: "20px",
+                minHeight: "44px",
+                minWidth: "120px"
+              }}
+              onClick={async () => {
+                setRefreshing(true);
+                try {
+                  await refreshData();
+                } finally {
+                  setRefreshing(false);
+                  setOpen(false);
+                }
               }}>
-              Actualizar
+              {refreshing || isLoading ? (
+                <Box display="flex" alignItems="center" gap={1}>
+                  <CircularProgress size={20} color="inherit" />
+                  <Typography variant="body2">Actualizando...</Typography>
+                </Box>
+              ) : (
+                "Actualizar"
+              )}
             </Button>
           </DialogActions>
         </DialogContent>

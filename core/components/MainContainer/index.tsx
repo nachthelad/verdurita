@@ -42,7 +42,7 @@ export default function MainContainer({
         justifyContent: "center",
       }}
     >
-      <RefreshPrompt refreshData={refreshData} />
+      <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
       <LogoButton onFilter={onFilter} refreshData={refreshData} />
       <Grid
         container

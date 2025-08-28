@@ -69,15 +69,20 @@
 ## 🎨 UI/UX Enhancements
 
 ### Mobile Experience
-- [ ] **Improve pull-to-refresh UX**
-  - Add visual feedback during refresh
-  - Implement proper loading states
-- [ ] **Enhance card interactions**
-  - Add haptic feedback on mobile
-  - Improve touch targets (minimum 44px)
-- [ ] **Better responsive design**
-  - Fix marginTop responsive values in `pages/index.tsx:57`
-  - Implement proper breakpoints
+- [x] **Improve pull-to-refresh UX** ✅ COMPLETED
+  - [x] Added visual feedback with CircularProgress during refresh
+  - [x] Implemented proper loading states in RefreshPrompt component
+  - [x] Enhanced refresh button with "Actualizando..." feedback
+- [x] **Enhance card interactions** ✅ COMPLETED
+  - [x] Added haptic feedback utility (`utils/haptics.ts`)
+  - [x] Implemented medium haptic feedback for card expansion
+  - [x] Added light haptic feedback for modal close
+  - [x] Improved touch targets to minimum 44px across all buttons
+- [x] **Better responsive design** ✅ COMPLETED
+  - [x] Fixed marginTop responsive values in `pages/index.tsx` (proper MUI syntax)
+  - [x] Implemented proper breakpoints in theme with standard values
+  - [x] Enhanced theme with spacing system and button overrides
+  - [x] Added global button styles for touch targets and text casing
 
 ### Visual Design
 - [ ] **Consistent spacing system**

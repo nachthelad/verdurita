@@ -12,6 +12,7 @@ import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { theme } from "@/theme/theme";
 import { useMediaQuery, Theme } from "@mui/material";
 import LastUpdate from "./LastUpdate";
+import { hapticFeedback } from "@/utils/haptics";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -31,10 +32,12 @@ const CardItem = memo(({
   const [open, setOpen] = useState(false);
 
   const handleExpandClick = useCallback(() => {
+    hapticFeedback.medium();
     setOpen((prevOpen) => !prevOpen);
   }, []);
 
   const handleClose = useCallback(() => {
+    hapticFeedback.light();
     setOpen(false);
   }, []);
 
