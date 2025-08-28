@@ -5,7 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 type LayoutProps = {
   children: React.ReactNode;
-  onFilter: () => void;
+  onFilter: (moneda?: string | null) => void;
   refreshData: () => void;
 };
 

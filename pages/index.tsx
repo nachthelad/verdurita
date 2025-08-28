@@ -33,7 +33,7 @@ export default function Home() {
     cargarDatos();
   }, []);
 
-  const handleFilter = (filtro?: string) => {
+  const handleFilter = (filtro?: string | null) => {
     if (!filtro) {
       setFilterApplied(false);
       setResultadosFiltrados(monedas);
