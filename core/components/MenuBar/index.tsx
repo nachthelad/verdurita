@@ -15,14 +15,14 @@ type MenuBarProps = {
 const monedas: { [key: string]: string } = {
   "dólar blue": "Dólar Blue",
   "dólar oficial": "Dólar Oficial",
-  "dólar tarjeta": "tarjeta",
-  "dólar bolsa": "bolsa",
-  "dólar cripto": "cripto",
-  "dólar contado con liqui": "contado con liqui",
-  "dólar mayorista": "mayorista",
+  "dólar tarjeta": "Tarjeta",
+  "dólar bolsa": "Bolsa",
+  "dólar cripto": "Cripto",
+  "dólar contado con liqui": "Contado con liqui",
+  "dólar mayorista": "Mayorista",
   "euro blue": "Euro Blue",
   "euro oficial": "Euro Oficial",
-  "real brasileño": "real",
+  "real brasileño": "Real",
 };
 
 export default function MenuBar({
@@ -42,12 +42,19 @@ export default function MenuBar({
       <AppBar
         position="fixed"
         sx={{
-          ...(isMobile && { top: "auto", bottom: 0 }),
+          ...(isMobile && { 
+            top: "auto", 
+            bottom: 0,
+            borderTop: `1px solid ${theme.palette.primary.main}20`,
+            backdropFilter: "blur(10px)",
+          }),
           height: expanded ? "100%" : isMobile ? "80px" : "64px",
           display: "flex",
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
-          transition: "height 0.2s ease",
+          transition: "height 0.2s ease, backdrop-filter 0.2s ease",
+          backgroundColor: isMobile ? `${theme.palette.primary.main}dd` : theme.palette.primary.main,
+          boxShadow: isMobile ? `0 -2px 8px rgba(0,0,0,0.1)` : undefined,
         }}
       >
         <Toolbar sx={{ height: isMobile ? "100%" : "100%" }}>
@@ -62,21 +69,24 @@ export default function MenuBar({
             }}
           >
             <Button
+              onClick={refreshData}
               sx={{
                 color: theme.palette.primary.contrastText,
-                backgroundColor: `${theme.palette.secondary.main} !important`,
+                backgroundColor: isMobile ? "transparent" : `${theme.palette.secondary.main} !important`,
                 borderRadius: "2rem",
                 paddingX: "0.3rem",
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
                 minHeight: "44px",
                 minWidth: "44px",
+                "&:hover": {
+                  backgroundColor: isMobile ? `${theme.palette.primary.main}15` : `${theme.palette.secondary.dark} !important`,
+                },
               }}
             >
               <Icon
                 icon="tabler:refresh"
                 style={{ fontSize: isMobile ? "30px" : "25px" }}
-                onClick={refreshData}
               />
             </Button>
             <MenuButton
@@ -124,13 +134,16 @@ export default function MenuBar({
             <Button
               sx={{
                 color: theme.palette.primary.contrastText,
-                backgroundColor: `${theme.palette.secondary.main} !important`,
+                backgroundColor: isMobile ? "transparent" : `${theme.palette.secondary.main} !important`,
                 borderRadius: "2rem",
                 paddingX: "1.5rem",
                 paddingY: "0.3rem",
                 fontSize: isMobile ? "20px" : "15px",
                 minHeight: "44px",
                 minWidth: isMobile ? "44px" : "auto",
+                "&:hover": {
+                  backgroundColor: isMobile ? `${theme.palette.primary.main}15` : `${theme.palette.secondary.dark} !important`,
+                },
               }}
               onClick={() => {
                 onFilter("Real");
@@ -191,7 +204,7 @@ export default function MenuBar({
                       >
                         {monedas[variant]
                           .replace("Dólar ", "")
-                          .replace(/bolsa/gi, "mep / bolsa")}
+                          .replace(/bolsa/gi, "MEP / Bolsa")}
                       </Button>
                     ))}
                   </>

@@ -1,6 +1,5 @@
 import React from "react";
-import MenuBar from "@/core/components/MenuBar";
-import { useMediaQuery, Theme } from "@mui/material";
+import NavigationBar from "@/core/components/NavigationBar";
 import { Analytics } from "@vercel/analytics/react";
 
 type LayoutProps = {
@@ -10,14 +9,10 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
-  const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
-  );
 
   return (
     <>
-      <MenuBar
-        isMobile={isMobile}
+      <NavigationBar
         refreshData={refreshData}
         onFilter={onFilter}
       />

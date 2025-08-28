@@ -15,6 +15,7 @@ import {
 import { inter } from "@/fonts/fonts";
 import RefreshPrompt from "../RefreshPrompt";
 import Footer from "./../Footer/index";
+import SearchBar from "../SearchBar";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -44,6 +45,9 @@ export default function MainContainer({
     >
       <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
       <LogoButton onFilter={onFilter} refreshData={refreshData} />
+      <SearchBar 
+        onSearch={onFilter}
+      />
       <Grid
         container
         sx={{
@@ -134,10 +138,15 @@ export default function MainContainer({
                   startIcon={<FilterAltOffIcon />}
                   sx={{
                     color: theme.palette.primary.main,
-                    fontSize: "20px",
+                    fontSize: isMobile ? "18px" : "20px",
                     display: "flex",
                     margin: "auto",
                     marginTop: "0.5rem",
+                    minHeight: "44px",
+                    padding: "8px 16px",
+                    "&:hover": {
+                      backgroundColor: `${theme.palette.primary.main}15`,
+                    },
                   }}
                 >
                   Limpiar Filtro

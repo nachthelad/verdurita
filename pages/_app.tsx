@@ -4,6 +4,7 @@ import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import PullToRefresh from "pulltorefreshjs";
 import { theme } from "@/theme/theme";
+import ErrorBoundary from "@/core/components/ErrorBoundary";
 
 export default function App({ Component, pageProps }: AppProps) {
   const standalone =
@@ -25,7 +26,9 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Component {...pageProps} />
+        <ErrorBoundary>
+          <Component {...pageProps} />
+        </ErrorBoundary>
       </ThemeProvider>
     </>
   );

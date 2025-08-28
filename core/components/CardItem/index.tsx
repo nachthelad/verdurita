@@ -1,6 +1,6 @@
 import * as React from "react";
 const { memo, useState, useCallback } = React;
-import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import dynamic from "next/dynamic";
 
 const ModalCardItem = dynamic(() => import("./ModalCardItem"), {
@@ -13,6 +13,7 @@ import { theme } from "@/theme/theme";
 import { useMediaQuery, Theme } from "@mui/material";
 import LastUpdate from "./LastUpdate";
 import { hapticFeedback } from "@/utils/haptics";
+import LoadingShimmer from "../LoadingShimmer";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -106,14 +107,9 @@ const CardItem = memo(({
                 {texto}
               </Typography>
               {loadingData ? (
-                <Skeleton
-                  sx={{
-                    height: "35px",
-                    width: "120px",
-                    marginLeft: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                  }}
+                <LoadingShimmer
+                  width="120px"
+                  height="35px"
                 />
               ) : (
                 <Typography

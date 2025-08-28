@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid, IconButton, Box } from "@mui/material";
+import SwapVertIcon from "@mui/icons-material/SwapVert";
 import { format } from "numerable";
 import { es } from "numerable/locale";
 import { Theme, useMediaQuery } from "@mui/material";
+import { hapticFeedback } from "@/utils/haptics";
 
 type CalculatorInputsProps = {
   precioMoneda: number;
@@ -18,6 +20,13 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
 }) => {
   const [montoDolares, setMontoDolares] = useState("");
   const [montoPesos, setMontoPesos] = useState("");
+
+  const handleSwap = () => {
+    hapticFeedback.medium();
+    const temp = montoDolares;
+    setMontoDolares(montoPesos);
+    setMontoPesos(temp);
+  };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
@@ -58,16 +67,17 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   );
 
   return (
-    <div>
+    <Box>
       <Grid
         container
         direction={isMobile ? "column" : "row"}
         spacing={isMobile ? 0 : 1}
         sx={{
           alignContent: "center",
+          position: "relative",
         }}
       >
-        <Grid item>
+        <Grid item xs={12} sm={5}>
           <TextField
             autoFocus
             margin="dense"
@@ -89,7 +99,32 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             onFocus={(e) => e.target.select()}
           />
         </Grid>
-        <Grid item>
+        
+        {/* Swap Button */}
+        <Grid item xs={12} sm={2} sx={{ 
+          display: 'flex', 
+          alignItems: 'center', 
+          justifyContent: 'center',
+          minHeight: isMobile ? '20px' : '56px',
+        }}>
+          <IconButton
+            onClick={handleSwap}
+            sx={{
+              minHeight: '44px',
+              minWidth: '44px',
+              backgroundColor: 'primary.light',
+              color: 'primary.contrastText',
+              '&:hover': {
+                backgroundColor: 'primary.main',
+              },
+              transform: isMobile ? 'rotate(90deg)' : 'none',
+            }}
+          >
+            <SwapVertIcon />
+          </IconButton>
+        </Grid>
+        
+        <Grid item xs={12} sm={5}>
           <TextField
             margin="dense"
             label="Monto en pesos"
@@ -105,7 +140,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 

@@ -1,6 +1,6 @@
 import CustomHead from "@/core/components/CustomHead";
 import MainContainer from "@/core/components/MainContainer";
-import Layout from "./layout";
+import Layout from "@/core/components/Layout";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
 import { inter } from "@/fonts/fonts";
