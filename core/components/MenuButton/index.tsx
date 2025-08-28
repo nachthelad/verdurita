@@ -46,11 +46,16 @@ export default function MenuButton({
         }}
         sx={{
           color: theme.palette.primary.contrastText,
-          backgroundColor: `${theme.palette.secondary.main} !important`,
+          backgroundColor: isMobile ? "transparent" : `${theme.palette.secondary.main} !important`,
           borderRadius: "2rem",
           paddingX: "1.5rem",
           paddingY: "0.3rem",
           fontSize: isMobile ? "20px" : "15px",
+          minHeight: "44px",
+          minWidth: isMobile ? "44px" : "auto",
+          "&:hover": {
+            backgroundColor: isMobile ? `${theme.palette.primary.main}15` : `${theme.palette.secondary.dark} !important`,
+          },
         }}>
         {buttonName}
       </Button>

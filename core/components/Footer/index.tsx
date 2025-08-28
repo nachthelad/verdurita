@@ -14,7 +14,8 @@ const Footer: React.FC = () => {
         sx={{
           mt: isMobile ? 1 : 5,
           textAlign: "center",
-          mb: isMobile ? 12 : 0,
+          mb: isMobile ? 15 : 0,
+          pb: isMobile ? 2 : 0,
         }}
       >
         <Typography variant="body2" color="black" sx={{ whiteSpace: "nowrap" }}>

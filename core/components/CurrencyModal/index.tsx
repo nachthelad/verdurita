@@ -93,9 +93,11 @@ export default function CurrencyModal({
                     paddingY: "0.3rem",
                   }}
                 >
-                  {variant.split(" ").slice(1).join(" ") === "bolsa"
-                    ? "MEP / Bolsa"
-                    : variant.split(" ").slice(1).join(" ")}
+                  {(() => {
+                    const variantText = variant.split(" ").slice(1).join(" ");
+                    if (variantText === "bolsa") return "MEP / Bolsa";
+                    return variantText.charAt(0).toUpperCase() + variantText.slice(1);
+                  })()}
                 </Button>
               ))}
             </DialogContentText>

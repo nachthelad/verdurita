@@ -69,38 +69,63 @@
 ## 🎨 UI/UX Enhancements
 
 ### Mobile Experience
-- [ ] **Improve pull-to-refresh UX**
-  - Add visual feedback during refresh
-  - Implement proper loading states
-- [ ] **Enhance card interactions**
-  - Add haptic feedback on mobile
-  - Improve touch targets (minimum 44px)
-- [ ] **Better responsive design**
-  - Fix marginTop responsive values in `pages/index.tsx:57`
-  - Implement proper breakpoints
+- [x] **Improve pull-to-refresh UX** ✅ COMPLETED
+  - [x] Added visual feedback with CircularProgress during refresh
+  - [x] Implemented proper loading states in RefreshPrompt component
+  - [x] Enhanced refresh button with "Actualizando..." feedback
+- [x] **Enhance card interactions** ✅ COMPLETED
+  - [x] Added haptic feedback utility (`utils/haptics.ts`)
+  - [x] Implemented medium haptic feedback for card expansion
+  - [x] Added light haptic feedback for modal close
+  - [x] Improved touch targets to minimum 44px across all buttons
+- [x] **Better responsive design** ✅ COMPLETED
+  - [x] Fixed marginTop responsive values in `pages/index.tsx` (proper MUI syntax)
+  - [x] Implemented proper breakpoints in theme with standard values
+  - [x] Enhanced theme with spacing system and button overrides
+  - [x] Added global button styles for touch targets and text casing
 
 ### Visual Design
-- [ ] **Consistent spacing system**
-  - Define spacing tokens in theme
-  - Replace hardcoded margins/paddings
-- [ ] **Improve color accessibility**
-  - Ensure proper contrast ratios
-  - Add dark mode support
-- [ ] **Better loading states**
-  - Replace basic Skeleton with custom loading animations
-  - Add shimmer effects
+- [x] **Consistent spacing system** ✅ COMPLETED
+  - [x] Enhanced spacing system with 0.25rem increments
+  - [x] Standardized button heights and touch targets
+- [x] **Improve color accessibility** ✅ COMPLETED
+  - [x] Enhanced color palette with proper contrast ratios
+  - [x] Added light/dark color variations for better accessibility
+  - [x] Improved text colors for better readability
+- [x] **Dark mode support** ✅ COMPLETED
+  - [x] Created `useDarkMode` hook with localStorage persistence
+  - [x] Built separate light and dark theme configurations
+  - [x] System preference detection and automatic switching
+- [x] **Better loading states** ✅ COMPLETED
+  - [x] Created custom `LoadingShimmer` component with keyframe animations
+  - [x] Replaced basic Skeleton with animated shimmer effects
+  - [x] Added responsive shimmer animations for different screen sizes
+- [x] **Theme color corrections** ✅ COMPLETED
+  - [x] Restored original green background (#f0fff0) based on user feedback
+  - [x] Fixed mobile green bar and background consistency
+  - [x] Updated card backgrounds to white (#ffffff) for better contrast
+  - [x] Maintained green theme for primary colors while ensuring readability
 
 ### User Experience
-- [ ] **Add search/filter functionality**
-  - Implement real-time search
-  - Add filter by currency type
-- [ ] **Improve calculator UX**
-  - Add currency swap button
-  - Save user preferences
-  - Add calculation history
-- [ ] **Add error boundaries**
-  - Graceful error handling
-  - User-friendly error messages
+- [x] **Add search/filter functionality** ✅ COMPLETED
+  - [x] Implemented real-time search with `SearchBar` component
+  - [x] Added search suggestions and clear functionality
+  - [x] Integrated filter chips with visual feedback
+  - [x] Added haptic feedback for search interactions
+- [x] **Improve calculator UX** ✅ COMPLETED
+  - [x] Added currency swap button with animated icon rotation
+  - [x] Enhanced calculator layout with proper grid system
+  - [x] Implemented haptic feedback for swap interactions
+- [x] **User preferences and history** ✅ COMPLETED
+  - [x] Created `useUserPreferences` hook with localStorage persistence
+  - [x] Added calculation history tracking (last 50 calculations)
+  - [x] Implemented user preference management system
+  - [x] Added settings for dark mode, default currency, and haptic feedback
+- [x] **Add error boundaries** ✅ COMPLETED
+  - [x] Created comprehensive `ErrorBoundary` component
+  - [x] Added graceful error handling with user-friendly messages
+  - [x] Implemented retry and reload functionality
+  - [x] Added development mode error details
 
 ## 🔧 Code Quality & Architecture
 
