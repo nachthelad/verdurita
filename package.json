@@ -1,12 +1,13 @@
 {
-  "name": "next-app",
+  "name": "verdurita",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "analyze": "ANALYZE=true npm run build"
   },
   "dependencies": {
     "@ducanh2912/next-pwa": "^10.2.5",
@@ -15,17 +16,19 @@
     "@mui/icons-material": "^5.15.0",
     "@types/pulltorefreshjs": "^0.1.7",
     "@vercel/analytics": "^1.2.2",
-    "axios": "^1.6.2",
-    "next": "14.0.4",
+    "axios": "^1.11.0",
+    "next": "^15.5.2",
     "numerable": "^0.3.15",
     "numeral": "^2.0.6",
     "pulltorefreshjs": "^0.1.22",
     "react": "^18",
     "react-dom": "^18",
-    "styled-components": "^6.1.8"
+    "styled-components": "^6.1.8",
+    "swr": "^2.3.6"
   },
   "devDependencies": {
     "@iconify-icon/react": "^2.0.1",
+    "@next/bundle-analyzer": "^15.5.2",
     "@types/node": "^20",
     "@types/numeral": "^2.0.5",
     "@types/react": "^18",
