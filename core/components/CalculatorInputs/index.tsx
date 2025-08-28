@@ -20,12 +20,14 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
 }) => {
   const [montoDolares, setMontoDolares] = useState("");
   const [montoPesos, setMontoPesos] = useState("");
+  const [isSwapped, setIsSwapped] = useState(false);
 
   const handleSwap = () => {
     hapticFeedback.medium();
     const temp = montoDolares;
     setMontoDolares(montoPesos);
     setMontoPesos(temp);
+    setIsSwapped(!isSwapped);
   };
 
   const handleAmountChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,6 +68,17 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
     theme.breakpoints.down("md")
   );
 
+  // Dynamic labels based on currency type and swap state
+  const getCurrencyLabel = () => {
+    if (esRealBrasileño) return { currency: "reales", peso: "pesos" };
+    if (EsEuro) return { currency: "euros", peso: "pesos" };
+    return { currency: "dólares", peso: "pesos" };
+  };
+
+  const labels = getCurrencyLabel();
+  const firstInputLabel = isSwapped ? `Monto en ${labels.peso}` : `Monto en ${labels.currency}`;
+  const secondInputLabel = isSwapped ? `Monto en ${labels.currency}` : `Monto en ${labels.peso}`;
+
   return (
     <Box>
       <Grid
@@ -81,13 +94,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
           <TextField
             autoFocus
             margin="dense"
-            label={
-              esRealBrasileño
-                ? "Monto en reales"
-                : EsEuro
-                ? "Monto en euros"
-                : "Monto en dólares"
-            }
+            label={firstInputLabel}
             inputMode="numeric"
             type={isMobile ? "tel" : "text"}
             variant="outlined"
@@ -99,35 +106,40 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             onFocus={(e) => e.target.select()}
           />
         </Grid>
-        
+
         {/* Swap Button */}
-        <Grid item xs={12} sm={2} sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'center',
-          minHeight: isMobile ? '20px' : '56px',
-        }}>
+        <Grid
+          item
+          xs={12}
+          sm={2}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: isMobile ? "20px" : "56px",
+          }}
+        >
           <IconButton
             onClick={handleSwap}
             sx={{
-              minHeight: '44px',
-              minWidth: '44px',
-              backgroundColor: 'primary.light',
-              color: 'primary.contrastText',
-              '&:hover': {
-                backgroundColor: 'primary.main',
+              minHeight: "44px",
+              minWidth: "44px",
+              backgroundColor: "primary.light",
+              color: "primary.contrastText",
+              "&:hover": {
+                backgroundColor: "primary.main",
               },
-              transform: isMobile ? 'rotate(90deg)' : 'none',
+              transform: "rotate(90deg)",
             }}
           >
             <SwapVertIcon />
           </IconButton>
         </Grid>
-        
+
         <Grid item xs={12} sm={5}>
           <TextField
             margin="dense"
-            label="Monto en pesos"
+            label={secondInputLabel}
             inputMode="numeric"
             type={isMobile ? "tel" : "text"}
             variant="outlined"
