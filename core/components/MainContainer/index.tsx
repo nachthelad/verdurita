@@ -94,7 +94,7 @@ export default function MainContainer({
             </Typography>
           </Grid>
         )}
-        {resultadosFiltrados.map((moneda: Moneda, index: number) => (
+        {(resultadosFiltrados || []).map((moneda: Moneda, index: number) => (
           <Grid
             key={`${moneda?.nombre}-${index}`}
             item
@@ -106,7 +106,7 @@ export default function MainContainer({
             container
             sx={{
               marginBottom:
-                isMobile && index === resultadosFiltrados.length - 1 ? 2 : 0,
+                isMobile && index === (resultadosFiltrados || []).length - 1 ? 2 : 0,
             }}
           >
             <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>

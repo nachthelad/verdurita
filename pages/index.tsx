@@ -1,54 +1,48 @@
 import CustomHead from "@/core/components/CustomHead";
 import MainContainer from "@/core/components/MainContainer";
 import Layout from "./layout";
-import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
 import { inter } from "@/fonts/fonts";
 import { Box } from "@mui/material";
 import { defaultResults } from "@/constants/defaultResults";
 import { theme } from "@/theme/theme";
+import { useCurrencies } from "@/hooks/useCurrencies";
 
 export default function Home() {
-  const [monedas, setMonedas] = useState<Moneda[]>(defaultResults);
-  const [resultadosFiltrados, setResultadosFiltrados] =
-    useState<Moneda[]>(defaultResults);
-  const [loadingData, setLoadingData] = useState(true);
+  const { currencies, isLoading, refresh } = useCurrencies();
+  const [resultadosFiltrados, setResultadosFiltrados] = useState<Moneda[]>(defaultResults);
   const [filterApplied, setFilterApplied] = useState(false);
 
-  const cargarDatos = async () => {
-    try {
-      setLoadingData(true);
-      const response = await axios.get("/api/currencies");
-      setMonedas(response.data);
-      setResultadosFiltrados(response.data);
-      setLoadingData(false);
-    } catch (error) {
-      console.error("Hubo un error al cargar los datos", error);
-      setLoadingData(false);
-    }
-  };
-
+  // Update filtered results when currencies data changes
+  const monedas = useMemo(() => currencies || defaultResults, [currencies]);
+  
   useEffect(() => {
-    cargarDatos();
-  }, []);
+    if (!filterApplied && Array.isArray(monedas)) {
+      setResultadosFiltrados(monedas);
+    }
+  }, [monedas, filterApplied]);
 
-  const handleFilter = (filtro?: string | null) => {
+  const handleFilter = useCallback((filtro?: string | null) => {
     if (!filtro) {
       setFilterApplied(false);
-      setResultadosFiltrados(monedas);
-      cargarDatos();
+      if (Array.isArray(monedas)) {
+        setResultadosFiltrados(monedas);
+      }
+      refresh();
     } else {
       setFilterApplied(true);
-      const monedasFiltradas = monedas.filter((moneda: { nombre: string }) =>
-        moneda.nombre.toLowerCase().includes(filtro.toLowerCase())
-      );
-      setResultadosFiltrados(monedasFiltradas);
+      if (Array.isArray(monedas)) {
+        const monedasFiltradas = monedas.filter((moneda: { nombre: string }) =>
+          moneda.nombre.toLowerCase().includes(filtro.toLowerCase())
+        );
+        setResultadosFiltrados(monedasFiltradas);
+      }
     }
-  };
+  }, [monedas, refresh]);
 
   return (
-    <Layout onFilter={handleFilter} refreshData={cargarDatos}>
+    <Layout onFilter={handleFilter} refreshData={refresh}>
       <CustomHead />
       <Box
         component="main"
@@ -61,10 +55,10 @@ export default function Home() {
       >
         <MainContainer
           filterApplied={filterApplied}
-          loadingData={loadingData}
+          loadingData={isLoading}
           resultadosFiltrados={resultadosFiltrados}
           onFilter={handleFilter}
-          refreshData={cargarDatos}
+          refreshData={refresh}
         />
       </Box>
     </Layout>

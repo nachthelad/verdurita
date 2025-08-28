@@ -1,6 +1,12 @@
 import * as React from "react";
+const { memo, useState, useCallback } = React;
 import { Card, CardContent, Typography, Box, Skeleton } from "@mui/material";
-import ModalCardItem from "./ModalCardItem";
+import dynamic from "next/dynamic";
+
+const ModalCardItem = dynamic(() => import("./ModalCardItem"), {
+  ssr: false,
+  loading: () => null
+});
 import { format } from "numerable";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { theme } from "@/theme/theme";
@@ -15,22 +21,22 @@ type CardItemProps = {
   moneda: string;
 };
 
-const CardItem = ({
+const CardItem = memo(({
   data,
   esRealBrasileño = false,
   EsEuro = false,
   loadingData,
   moneda,
 }: CardItemProps) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
-  const handleExpandClick = () => {
+  const handleExpandClick = useCallback(() => {
     setOpen((prevOpen) => !prevOpen);
-  };
+  }, []);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setOpen(false);
-  };
+  }, []);
 
   const isMobile = useMediaQuery((theme: Theme) =>
     theme.breakpoints.down("sm")
@@ -137,6 +143,8 @@ const CardItem = ({
       />
     </div>
   );
-};
+});
+
+CardItem.displayName = 'CardItem';
 
 export default CardItem;
