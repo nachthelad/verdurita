@@ -42,8 +42,8 @@ export default function MenuBar({
       <AppBar
         position="fixed"
         sx={{
-          ...(isMobile && { 
-            top: "auto", 
+          ...(isMobile && {
+            top: "auto",
             bottom: 0,
             borderTop: `1px solid ${theme.palette.primary.main}20`,
             backdropFilter: "blur(10px)",
@@ -53,7 +53,9 @@ export default function MenuBar({
           justifyContent: isMobile && expanded ? "center" : "flex-end",
           alignItems: isMobile ? "center" : null,
           transition: "height 0.2s ease, backdrop-filter 0.2s ease",
-          backgroundColor: isMobile ? `${theme.palette.primary.main}dd` : theme.palette.primary.main,
+          backgroundColor: isMobile
+            ? `${theme.palette.primary.main}dd`
+            : theme.palette.primary.main,
           boxShadow: isMobile ? `0 -2px 8px rgba(0,0,0,0.1)` : undefined,
         }}
       >
@@ -72,7 +74,9 @@ export default function MenuBar({
               onClick={refreshData}
               sx={{
                 color: theme.palette.primary.contrastText,
-                backgroundColor: isMobile ? "transparent" : `${theme.palette.secondary.main} !important`,
+                backgroundColor: isMobile
+                  ? "transparent"
+                  : `${theme.palette.secondary.main} !important`,
                 borderRadius: "2rem",
                 paddingX: "0.3rem",
                 paddingY: "0.3rem",
@@ -80,7 +84,9 @@ export default function MenuBar({
                 minHeight: "44px",
                 minWidth: "44px",
                 "&:hover": {
-                  backgroundColor: isMobile ? `${theme.palette.primary.main}15` : `${theme.palette.secondary.dark} !important`,
+                  backgroundColor: isMobile
+                    ? `${theme.palette.primary.main}15`
+                    : `${theme.palette.secondary.dark} !important`,
                 },
               }}
             >
@@ -134,7 +140,9 @@ export default function MenuBar({
             <Button
               sx={{
                 color: theme.palette.primary.contrastText,
-                backgroundColor: isMobile ? "transparent" : `${theme.palette.secondary.main} !important`,
+                backgroundColor: isMobile
+                  ? "transparent"
+                  : `${theme.palette.secondary.main} !important`,
                 borderRadius: "2rem",
                 paddingX: "1.5rem",
                 paddingY: "0.3rem",
@@ -142,7 +150,9 @@ export default function MenuBar({
                 minHeight: "44px",
                 minWidth: isMobile ? "44px" : "auto",
                 "&:hover": {
-                  backgroundColor: isMobile ? `${theme.palette.primary.main}15` : `${theme.palette.secondary.dark} !important`,
+                  backgroundColor: isMobile
+                    ? `${theme.palette.primary.main}15`
+                    : `${theme.palette.secondary.dark} !important`,
                 },
               }}
               onClick={() => {

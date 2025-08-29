@@ -57,8 +57,8 @@ const baseTheme: ThemeOptions = {
     MuiButton: {
       styleOverrides: {
         root: {
-          minHeight: '44px', // Ensure all buttons meet touch target guidelines
-          textTransform: 'none', // Preserve case for better readability
+          minHeight: "44px", // Ensure all buttons meet touch target guidelines
+          textTransform: "none", // Preserve case for better readability
         },
       },
     },
@@ -69,7 +69,7 @@ const baseTheme: ThemeOptions = {
 export const lightTheme = createTheme({
   ...baseTheme,
   palette: {
-    mode: 'light',
+    mode: "light",
     ...baseTheme.palette,
   },
 });
@@ -78,7 +78,7 @@ export const lightTheme = createTheme({
 export const darkTheme = createTheme({
   ...baseTheme,
   palette: {
-    mode: 'dark',
+    mode: "dark",
     primary: {
       main: "#8fb070",
       light: "#b3c596",

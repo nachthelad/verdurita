@@ -102,8 +102,12 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
   };
 
   const labels = getCurrencyLabel();
-  const firstInputLabel = isSwapped ? `Monto en ${labels.peso}` : `Monto en ${labels.currency}`;
-  const secondInputLabel = isSwapped ? `Monto en ${labels.currency}` : `Monto en ${labels.peso}`;
+  const firstInputLabel = isSwapped
+    ? `Monto en ${labels.peso}`
+    : `Monto en ${labels.currency}`;
+  const secondInputLabel = isSwapped
+    ? `Monto en ${labels.currency}`
+    : `Monto en ${labels.peso}`;
 
   return (
     <Box>

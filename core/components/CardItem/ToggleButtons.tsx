@@ -23,7 +23,8 @@ export default function ToggleButtons({ onChange }: ToggleButtonsProps) {
       sx={{ display: "flex", justifyContent: "center", alignContent: "center" }}
       value={value}
       exclusive
-      onChange={handleValue}>
+      onChange={handleValue}
+    >
       <ToggleButton value="Vendé a:" aria-label="vende">
         <Typography variant="body2">Vendé</Typography>
       </ToggleButton>

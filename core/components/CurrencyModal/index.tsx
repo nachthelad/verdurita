@@ -96,7 +96,9 @@ export default function CurrencyModal({
                   {(() => {
                     const variantText = variant.split(" ").slice(1).join(" ");
                     if (variantText === "bolsa") return "MEP / Bolsa";
-                    return variantText.charAt(0).toUpperCase() + variantText.slice(1);
+                    return (
+                      variantText.charAt(0).toUpperCase() + variantText.slice(1)
+                    );
                   })()}
                 </Button>
               ))}
