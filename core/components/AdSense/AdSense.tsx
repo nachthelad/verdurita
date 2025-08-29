@@ -1,5 +1,6 @@
 import Script from "next/script";
 import React from "react";
+import { ADSENSE_CONFIG } from "@/constants";
 
 type AdsenseTypes = {
   pId: string;
@@ -9,7 +10,7 @@ const AdSense = ({ pId }: AdsenseTypes) => {
   return (
     <Script
       async
-      src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-${pId}`}
+      src={`${ADSENSE_CONFIG.SCRIPT_URL}?client=ca-pub-${pId}`}
       crossOrigin="anonymous"
       strategy="afterInteractive"
     />

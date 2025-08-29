@@ -74,7 +74,7 @@ const LoadingShimmer: React.FC<LoadingShimmerProps> = ({
     );
   }
 
-  return <ShimmerBox width={width} height={height} />;
+  return <ShimmerBox width={width} height={height} data-testid="loading-shimmer" />;
 };
 
 export default LoadingShimmer;

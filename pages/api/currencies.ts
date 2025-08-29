@@ -2,9 +2,9 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import axios from "axios";
 import { rateLimit } from "@/utils/rateLimit";
 
-const API_DOLAR_URL = "https://dolarapi.com/v1/dolares";
-const API_REAL_URL = "https://dolarapi.com/v1/cotizaciones/brl";
-const API_EURO_URL = "https://api.bluelytics.com.ar/v2/latest";
+import { API_URLS } from "@/constants";
+
+const { DOLAR: API_DOLAR_URL, REAL: API_REAL_URL, EURO: API_EURO_URL } = API_URLS;
 
 const ordenMonedas = [
   "Dólar Blue",
