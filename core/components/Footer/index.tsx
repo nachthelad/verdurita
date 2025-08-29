@@ -15,8 +15,8 @@ const Footer: React.FC = () => {
         sx={{
           mt: isMobile ? 1 : 5,
           textAlign: "center",
-          mb: isMobile ? 15 : 0,
-          pb: isMobile ? 2 : 0,
+          mb: 0,
+          pb: 0,
         }}
       >
         <Typography variant="body2" color="black" sx={{ whiteSpace: "nowrap" }}>
@@ -34,11 +34,7 @@ const Footer: React.FC = () => {
           </Link>
         </Typography>
         <Box>
-          <a
-            href={EXTERNAL_LINKS.CAFECITO}
-            rel="noopener"
-            target="_blank"
-          >
+          <a href={EXTERNAL_LINKS.CAFECITO} rel="noopener" target="_blank">
             <img
               srcSet={`${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}.png 1x, ${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}_2x.png 2x, ${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}_3.75x.png 3.75x`}
               src={`${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}.png`}

@@ -24,8 +24,8 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
       {titulo === "Dólar Contado con liquidación"
         ? "Dólar CCL"
         : titulo && titulo === "Dólar Bolsa"
-        ? "Dólar MEP / Bolsa"
-        : titulo}
+          ? "Dólar MEP / Bolsa"
+          : titulo}
     </Typography>
   );
 };

@@ -1,11 +1,8 @@
 import { createMocks } from 'node-mocks-http';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import handler from '../currencies';
-import axios from 'axios';
-
 // Mock axios
 jest.mock('axios');
-const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 // Mock rate limit utility
 jest.mock('@/utils/rateLimit', () => ({
@@ -31,7 +28,7 @@ describe('/api/currencies', () => {
   });
 
   it('should handle GET requests', async () => {
-    const { req, res } = createMocks<NextApiRequest, NextApiResponse>({
+    const { req } = createMocks<NextApiRequest, NextApiResponse>({
       method: 'GET',
     });
 

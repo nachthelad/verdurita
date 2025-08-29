@@ -9,13 +9,9 @@ type LayoutProps = {
 };
 
 const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
-
   return (
     <>
-      <NavigationBar
-        refreshData={refreshData}
-        onFilter={onFilter}
-      />
+      <NavigationBar refreshData={refreshData} onFilter={onFilter} />
       {children}
       <Analytics />
     </>

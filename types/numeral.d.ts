@@ -1,5 +1,4 @@
-declare module 'numeral' {
-    const numeral: any;
-    export default numeral;
-  }
-  
+declare module "numeral" {
+  const numeral: any;
+  export default numeral;
+}

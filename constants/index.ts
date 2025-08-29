@@ -1,7 +1,7 @@
 // API URLs
 export const API_URLS = {
   DOLAR: "https://dolarapi.com/v1/dolares",
-  REAL: "https://dolarapi.com/v1/cotizaciones/brl", 
+  REAL: "https://dolarapi.com/v1/cotizaciones/brl",
   EURO: "https://api.bluelytics.com.ar/v2/latest",
 } as const;
 
@@ -28,7 +28,7 @@ export const EXTERNAL_LINKS = {
 // Currency Mappings
 export const CURRENCY_MAPPINGS = {
   "dólar blue": "Dólar Blue",
-  "dólar oficial": "Dólar Oficial", 
+  "dólar oficial": "Dólar Oficial",
   "dólar tarjeta": "Tarjeta",
   "dólar bolsa": "Bolsa",
   "dólar cripto": "Cripto",

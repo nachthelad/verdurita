@@ -4,7 +4,11 @@ import { rateLimit } from "@/utils/rateLimit";
 
 import { API_URLS } from "@/constants";
 
-const { DOLAR: API_DOLAR_URL, REAL: API_REAL_URL, EURO: API_EURO_URL } = API_URLS;
+const {
+  DOLAR: API_DOLAR_URL,
+  REAL: API_REAL_URL,
+  EURO: API_EURO_URL,
+} = API_URLS;
 
 const ordenMonedas = [
   "Dólar Blue",
@@ -24,9 +28,9 @@ export default async function handler(
   res: NextApiResponse
 ) {
   // Only allow GET requests
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', ['GET']);
-    return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== "GET") {
+    res.setHeader("Allow", ["GET"]);
+    return res.status(405).json({ error: "Method not allowed" });
   }
 
   // Apply rate limiting
@@ -43,21 +47,36 @@ export default async function handler(
 
     // Procesamiento de datos con validación
     const datosDolar = responseDolar.data
-      .filter((d: any) => d && typeof d === 'object' && d.nombre && typeof d.compra === 'number' && typeof d.venta === 'number')
+      .filter(
+        (d: any) =>
+          d &&
+          typeof d === "object" &&
+          d.nombre &&
+          typeof d.compra === "number" &&
+          typeof d.venta === "number"
+      )
       .map((d: any) => ({
-        moneda: 'USD',
-        nombre: `Dólar ${String(d.nombre).replace(/[<>\"'&]/g, '')}`,
-        casa: String(d.casa || '').replace(/[<>\"'&]/g, ''),
+        moneda: "USD",
+        nombre: `Dólar ${String(d.nombre).replace(/[<>\"'&]/g, "")}`,
+        casa: String(d.casa || "").replace(/[<>\"'&]/g, ""),
         compra: Number(d.compra) || 0,
         venta: Number(d.venta) || 0,
         promedio: (Number(d.compra) + Number(d.venta)) / 2 || 0,
       }));
-    const datosReal = (Array.isArray(responseReal.data) ? responseReal.data : [responseReal.data])
-      .filter((d: any) => d && typeof d === 'object' && typeof d.compra === 'number' && typeof d.venta === 'number')
+    const datosReal = (
+      Array.isArray(responseReal.data) ? responseReal.data : [responseReal.data]
+    )
+      .filter(
+        (d: any) =>
+          d &&
+          typeof d === "object" &&
+          typeof d.compra === "number" &&
+          typeof d.venta === "number"
+      )
       .map((d: any) => ({
-        moneda: 'BRL',
-        nombre: 'Real Brasileño',
-        casa: String(d.casa || '').replace(/[<>\"'&]/g, ''),
+        moneda: "BRL",
+        nombre: "Real Brasileño",
+        casa: String(d.casa || "").replace(/[<>\"'&]/g, ""),
         compra: Number(d.compra) || 0,
         venta: Number(d.venta) || 0,
         promedio: (Number(d.compra) + Number(d.venta)) / 2 || 0,
@@ -66,14 +85,17 @@ export default async function handler(
     // Validate Euro data before processing
     const euroData = responseEuro.data;
     if (!euroData?.oficial_euro || !euroData?.blue_euro) {
-      throw new Error('Invalid Euro data received');
+      throw new Error("Invalid Euro data received");
     }
 
     const datosEuroOficial = {
       moneda: "EUR",
       compra: Number(euroData.oficial_euro.value_buy) || 0,
       venta: Number(euroData.oficial_euro.value_sell) || 0,
-      promedio: ((Number(euroData.oficial_euro.value_buy) || 0) + (Number(euroData.oficial_euro.value_sell) || 0)) / 2,
+      promedio:
+        ((Number(euroData.oficial_euro.value_buy) || 0) +
+          (Number(euroData.oficial_euro.value_sell) || 0)) /
+        2,
       casa: "Euro",
       nombre: "Euro Oficial",
     };
@@ -81,7 +103,10 @@ export default async function handler(
       moneda: "EUR",
       compra: Number(euroData.blue_euro.value_buy) || 0,
       venta: Number(euroData.blue_euro.value_sell) || 0,
-      promedio: ((Number(euroData.blue_euro.value_buy) || 0) + (Number(euroData.blue_euro.value_sell) || 0)) / 2,
+      promedio:
+        ((Number(euroData.blue_euro.value_buy) || 0) +
+          (Number(euroData.blue_euro.value_sell) || 0)) /
+        2,
       casa: "Euro",
       nombre: "Euro Blue",
     };
@@ -92,7 +117,12 @@ export default async function handler(
       datosEuroOficial,
       datosEuroBlue,
     ]
-      .filter(moneda => moneda && typeof moneda.compra === 'number' && typeof moneda.venta === 'number')
+      .filter(
+        (moneda) =>
+          moneda &&
+          typeof moneda.compra === "number" &&
+          typeof moneda.venta === "number"
+      )
       .map((moneda) => ({
         ...moneda,
         promedio: Number(((moneda.compra + moneda.venta) / 2).toFixed(2)),
@@ -100,8 +130,8 @@ export default async function handler(
         venta: Number(moneda.venta.toFixed(2)),
       }))
       .sort((a, b) => {
-        let indexA = ordenMonedas.indexOf(a.nombre);
-        let indexB = ordenMonedas.indexOf(b.nombre);
+        const indexA = ordenMonedas.indexOf(a.nombre);
+        const indexB = ordenMonedas.indexOf(b.nombre);
         return (
           (indexA === -1 ? ordenMonedas.length : indexA) -
           (indexB === -1 ? ordenMonedas.length : indexB)
@@ -109,7 +139,10 @@ export default async function handler(
       });
 
     // Set cache headers
-    res.setHeader('Cache-Control', 'public, s-maxage=60, stale-while-revalidate=300');
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=60, stale-while-revalidate=300"
+    );
     res.status(200).json(datosProcesados);
   } catch (error) {
     console.error("Hubo un error al cargar los datos", error);

@@ -45,10 +45,8 @@ export default function MainContainer({
       }}
     >
       <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
-      <LogoButton onFilter={onFilter} refreshData={refreshData} />
-      <SearchBar 
-        onSearch={onFilter}
-      />
+      {isMobile && <LogoButton onFilter={onFilter} refreshData={refreshData} />}
+      <SearchBar onSearch={onFilter} />
       <Grid
         container
         sx={{
@@ -111,7 +109,9 @@ export default function MainContainer({
             container
             sx={{
               marginBottom:
-                isMobile && index === (resultadosFiltrados || []).length - 1 ? 2 : 0,
+                isMobile && index === (resultadosFiltrados || []).length - 1
+                  ? 2
+                  : 0,
             }}
           >
             <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>

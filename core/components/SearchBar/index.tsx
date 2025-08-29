@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback } from "react";
 import {
   TextField,
   InputAdornment,
@@ -6,10 +6,10 @@ import {
   Box,
   useMediaQuery,
   Theme,
-} from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import ClearIcon from '@mui/icons-material/Clear';
-import { hapticFeedback } from '@/utils/haptics';
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import ClearIcon from "@mui/icons-material/Clear";
+import { hapticFeedback } from "@/utils/haptics";
 
 interface SearchBarProps {
   onSearch: (query: string) => void;
@@ -20,36 +20,43 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSearch,
   placeholder = "Buscar moneda...",
 }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down('md'));
+  const [searchQuery, setSearchQuery] = useState("");
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
 
-  const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    setSearchQuery(query);
-    onSearch(query);
-    
-    // Light haptic feedback for typing
-    if (query && query.length === 1) {
-      hapticFeedback.light();
-    }
-  }, [onSearch]);
+  const handleSearchChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const query = event.target.value;
+      setSearchQuery(query);
+      onSearch(query);
+
+      // Light haptic feedback for typing
+      if (query && query.length === 1) {
+        hapticFeedback.light();
+      }
+    },
+    [onSearch]
+  );
 
   const handleClear = useCallback(() => {
-    setSearchQuery('');
-    onSearch('');
+    setSearchQuery("");
+    onSearch("");
     hapticFeedback.light();
   }, [onSearch]);
 
   return (
-    <Box sx={{ 
-      display: 'flex', 
-      flexDirection: 'column', 
-      gap: 1, 
-      width: '100%',
-      maxWidth: isMobile ? '100%' : '400px',
-      margin: 'auto',
-      padding: isMobile ? 2 : 1,
-    }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 1,
+        width: "100%",
+        maxWidth: isMobile ? "100%" : "400px",
+        margin: "auto",
+        padding: isMobile ? 2 : 1,
+      }}
+    >
       <TextField
         fullWidth
         variant="outlined"
@@ -58,18 +65,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={handleSearchChange}
         size={isMobile ? "medium" : "small"}
         sx={{
-          '& .MuiOutlinedInput-root': {
-            borderRadius: '24px',
-            backgroundColor: 'background.paper',
-            '&:hover': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'primary.main',
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "24px",
+            backgroundColor: "background.paper",
+            "&:hover": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "primary.main",
               },
             },
-            '&.Mui-focused': {
-              '& .MuiOutlinedInput-notchedOutline': {
-                borderColor: 'primary.main',
-                borderWidth: '2px',
+            "&.Mui-focused": {
+              "& .MuiOutlinedInput-notchedOutline": {
+                borderColor: "primary.main",
+                borderWidth: "2px",
               },
             },
           },
@@ -85,9 +92,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
               <IconButton
                 size="small"
                 onClick={handleClear}
-                sx={{ 
-                  minHeight: '44px',
-                  minWidth: '44px',
+                sx={{
+                  minHeight: "44px",
+                  minWidth: "44px",
                 }}
               >
                 <ClearIcon />
