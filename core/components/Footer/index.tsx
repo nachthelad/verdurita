@@ -2,6 +2,7 @@
 import React from "react";
 import { Box, Typography, Link, Theme, useMediaQuery } from "@mui/material";
 import { theme } from "@/theme/theme";
+import { EXTERNAL_LINKS } from "@/constants";
 
 const Footer: React.FC = () => {
   const isMobile = useMediaQuery((theme: Theme) =>
@@ -21,7 +22,7 @@ const Footer: React.FC = () => {
         <Typography variant="body2" color="black" sx={{ whiteSpace: "nowrap" }}>
           Creado por{" "}
           <Link
-            href="https://github.com/nachthelad"
+            href={EXTERNAL_LINKS.GITHUB}
             target="_blank"
             rel="noopener noreferrer"
             sx={{
@@ -34,13 +35,13 @@ const Footer: React.FC = () => {
         </Typography>
         <Box>
           <a
-            href="https://cafecito.app/nachthelad"
+            href={EXTERNAL_LINKS.CAFECITO}
             rel="noopener"
             target="_blank"
           >
             <img
-              srcSet="https://cdn.cafecito.app/imgs/buttons/button_1.png 1x, https://cdn.cafecito.app/imgs/buttons/button_1_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_1_3.75x.png 3.75x"
-              src="https://cdn.cafecito.app/imgs/buttons/button_1.png"
+              srcSet={`${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}.png 1x, ${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}_2x.png 2x, ${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}_3.75x.png 3.75x`}
+              src={`${EXTERNAL_LINKS.CAFECITO_BUTTON_BASE}.png`}
               alt="Invitame un café en cafecito.app"
             />
           </a>

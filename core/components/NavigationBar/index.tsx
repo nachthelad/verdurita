@@ -14,24 +14,14 @@ import { Icon } from "@iconify-icon/react";
 import LogoText from "../LogoButton";
 import CurrencyModal from "../CurrencyModal";
 import { theme } from "@/theme/theme";
+import { CURRENCY_MAPPINGS } from "@/constants";
 
 type NavigationBarProps = {
   onFilter: (moneda?: string | null) => void;
   refreshData: () => void;
 };
 
-const monedas: { [key: string]: string } = {
-  "dólar blue": "Dólar Blue",
-  "dólar oficial": "Dólar Oficial",
-  "dólar tarjeta": "Tarjeta",
-  "dólar bolsa": "Bolsa",
-  "dólar cripto": "Cripto",
-  "dólar contado con liqui": "Contado con liqui",
-  "dólar mayorista": "Mayorista",
-  "euro blue": "Euro Blue",
-  "euro oficial": "Euro Oficial",
-  "real brasileño": "Real",
-};
+const monedas = CURRENCY_MAPPINGS;
 
 export default function NavigationBar({
   onFilter,

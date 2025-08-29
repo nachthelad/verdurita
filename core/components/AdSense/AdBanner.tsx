@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { ADSENSE_CONFIG } from "@/constants";
 
 type AdBannerTypes = {
   dataAdSlot: string;
@@ -17,7 +18,7 @@ const AdBanner = ({
         {}
       );
     } catch (error: any) {
-      console.log(error.message);
+      // AdSense initialization failed, continue silently
     }
   }, []);
 
@@ -25,7 +26,7 @@ const AdBanner = ({
     <ins
       className="adsbygoogle"
       style={{ display: "block" }}
-      data-ad-client="ca-pub-1027418154196814"
+      data-ad-client={ADSENSE_CONFIG.CLIENT_ID}
       data-ad-slot={dataAdSlot}
       data-ad-format={dataAdFormat}
       data-full-width-responsive={dataFullWidthResponsive.toString()}

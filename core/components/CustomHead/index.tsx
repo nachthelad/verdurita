@@ -1,6 +1,7 @@
 import { theme } from "@/theme/theme";
 import Head from "next/head";
 import Script from "next/script";
+import { ADSENSE_CONFIG, SITE_CONFIG } from "@/constants";
 
 type CustomHeadProps = {
   title?: string;
@@ -15,7 +16,7 @@ const CustomHead: React.FC<CustomHeadProps> = ({
   description = "Cotizaciones en tiempo real",
   keywords = "currency, exchange, rates, Argentina, USD, Real, inflacion, finanzas, economia, verdurita, tipo de cambio",
   imageUrl = "@/public/logo.png",
-  url = "https://verdurita.com.ar/",
+  url = SITE_CONFIG.URL,
 }) => (
   <>
     <Head>
@@ -42,7 +43,7 @@ const CustomHead: React.FC<CustomHeadProps> = ({
     </Head>
     <Script
       async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1027418154196814"
+      src={`${ADSENSE_CONFIG.SCRIPT_URL}?client=${ADSENSE_CONFIG.CLIENT_ID}`}
       crossOrigin="anonymous"
     ></Script>
   </>
