@@ -22,7 +22,7 @@ type NavigationBarProps = {
 
 const monedas: { [key: string]: string } = {
   "dólar blue": "Dólar Blue",
-  "dólar oficial": "Dólar Oficial", 
+  "dólar oficial": "Dólar Oficial",
   "dólar tarjeta": "Tarjeta",
   "dólar bolsa": "Bolsa",
   "dólar cripto": "Cripto",
@@ -33,8 +33,13 @@ const monedas: { [key: string]: string } = {
   "real brasileño": "Real",
 };
 
-export default function NavigationBar({ onFilter, refreshData }: NavigationBarProps) {
-  const isMobile = useMediaQuery((theme: Theme) => theme.breakpoints.down("md"));
+export default function NavigationBar({
+  onFilter,
+  refreshData,
+}: NavigationBarProps) {
+  const isMobile = useMediaQuery((theme: Theme) =>
+    theme.breakpoints.down("md")
+  );
   const [value, setValue] = useState(0);
   const [dolarModalOpen, setDolarModalOpen] = useState(false);
   const [euroModalOpen, setEuroModalOpen] = useState(false);
@@ -75,10 +80,11 @@ export default function NavigationBar({ onFilter, refreshData }: NavigationBarPr
             left: 0,
             right: 0,
             height: "80px",
-            backgroundColor: `${theme.palette.primary.main}dd`,
+            backgroundColor: theme.palette.primary.main,
             backdropFilter: "blur(8px)",
             borderTop: `1px solid ${theme.palette.primary.main}40`,
             boxShadow: "0 -2px 16px rgba(0,0,0,0.15)",
+            zIndex: 1300,
             "& .MuiBottomNavigationAction-root": {
               color: theme.palette.primary.contrastText,
               "&.Mui-selected": {
@@ -92,19 +98,28 @@ export default function NavigationBar({ onFilter, refreshData }: NavigationBarPr
             onClick={handleRefresh}
           />
           <BottomNavigationAction
-            icon={<Icon icon="tabler:currency-dollar" style={{ fontSize: "28px" }} />}
+            icon={
+              <Icon
+                icon="tabler:currency-dollar"
+                style={{ fontSize: "28px" }}
+              />
+            }
             onClick={handleDolarClick}
           />
           <BottomNavigationAction
-            icon={<Icon icon="tabler:currency-euro" style={{ fontSize: "28px" }} />}
+            icon={
+              <Icon icon="tabler:currency-euro" style={{ fontSize: "28px" }} />
+            }
             onClick={handleEuroClick}
           />
           <BottomNavigationAction
-            icon={<Icon icon="tabler:currency-real" style={{ fontSize: "28px" }} />}
+            icon={
+              <Icon icon="tabler:currency-real" style={{ fontSize: "28px" }} />
+            }
             onClick={handleRealClick}
           />
         </BottomNavigation>
-        
+
         <CurrencyModal
           open={dolarModalOpen}
           onClose={() => setDolarModalOpen(false)}
@@ -143,7 +158,7 @@ export default function NavigationBar({ onFilter, refreshData }: NavigationBarPr
             },
           }}
         >
-          <Tab 
+          <Tab
             icon={<Icon icon="tabler:refresh" style={{ fontSize: "20px" }} />}
             onClick={handleRefresh}
           />
@@ -151,7 +166,7 @@ export default function NavigationBar({ onFilter, refreshData }: NavigationBarPr
           <Tab label="Euro" onClick={handleEuroClick} />
           <Tab label="Real" onClick={handleRealClick} />
         </Tabs>
-        
+
         <CurrencyModal
           open={dolarModalOpen}
           onClose={() => setDolarModalOpen(false)}

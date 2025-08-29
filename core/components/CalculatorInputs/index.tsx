@@ -36,14 +36,27 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
     const esNumero = /^[0-9]*[.]?[0-9]{0,2}$/.test(valorNormalizado);
 
     if (esNumero) {
-      const nuevoMontoPesos = valorNormalizado || "";
-      const montoEnDolares = nuevoMontoPesos
-        ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
-            locale: es,
-          })
-        : "";
-      setMontoPesos(valorNormalizado || "");
-      setMontoDolares(montoEnDolares);
+      if (isSwapped) {
+        // When swapped: first input is pesos, calculate dollars for second input
+        const nuevoMontoPesos = valorNormalizado || "";
+        const montoEnDolares = nuevoMontoPesos
+          ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
+              locale: es,
+            })
+          : "";
+        setMontoDolares(valorNormalizado || "");
+        setMontoPesos(montoEnDolares);
+      } else {
+        // Normal state: second input is pesos, calculate dollars for first input
+        const nuevoMontoPesos = valorNormalizado || "";
+        const montoEnDolares = nuevoMontoPesos
+          ? format(Number(nuevoMontoPesos) / precioMoneda, "0,0.00", {
+              locale: es,
+            })
+          : "";
+        setMontoPesos(valorNormalizado || "");
+        setMontoDolares(montoEnDolares);
+      }
     }
   };
 
@@ -53,14 +66,27 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
     const esNumero = /^[0-9]*[.]?[0-9]{0,2}$/.test(valorNormalizado);
 
     if (esNumero) {
-      const nuevoMontoDolares = valorNormalizado || "";
-      const montoEnPesos = nuevoMontoDolares
-        ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
-            locale: es,
-          })
-        : "";
-      setMontoDolares(valorNormalizado || "");
-      setMontoPesos(montoEnPesos);
+      if (isSwapped) {
+        // When swapped: second input is dollars, calculate pesos for first input
+        const nuevoMontoDolares = valorNormalizado || "";
+        const montoEnPesos = nuevoMontoDolares
+          ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
+              locale: es,
+            })
+          : "";
+        setMontoPesos(valorNormalizado || "");
+        setMontoDolares(montoEnPesos);
+      } else {
+        // Normal state: first input is dollars, calculate pesos for second input
+        const nuevoMontoDolares = valorNormalizado || "";
+        const montoEnPesos = nuevoMontoDolares
+          ? format(Number(nuevoMontoDolares) * precioMoneda, "0,0.00", {
+              locale: es,
+            })
+          : "";
+        setMontoDolares(valorNormalizado || "");
+        setMontoPesos(montoEnPesos);
+      }
     }
   };
 
@@ -99,7 +125,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoDolares || ""}
-            onChange={handleDollarAmountChange}
+            onChange={isSwapped ? handleAmountChange : handleDollarAmountChange}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }
@@ -144,7 +170,7 @@ const CalculatorInputs: React.FC<CalculatorInputsProps> = ({
             type={isMobile ? "tel" : "text"}
             variant="outlined"
             value={montoPesos || ""}
-            onChange={handleAmountChange}
+            onChange={isSwapped ? handleDollarAmountChange : handleAmountChange}
             onKeyDown={(e) =>
               ["e", "E", "+", "-"].includes(e.key) && e.preventDefault()
             }

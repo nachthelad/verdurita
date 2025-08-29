@@ -109,11 +109,12 @@
 ### User Experience
 - [x] **Add search/filter functionality** ✅ COMPLETED
   - [x] Implemented real-time search with `SearchBar` component
-  - [x] Added search suggestions and clear functionality
-  - [x] Integrated filter chips with visual feedback
+  - [x] Removed duplicate filter functionality (kept MainContainer's "Limpiar Filtro")
+  - [x] Enhanced "Limpiar Filtro" button with proper accessibility and hover effects
   - [x] Added haptic feedback for search interactions
 - [x] **Improve calculator UX** ✅ COMPLETED
   - [x] Added currency swap button with animated icon rotation
+  - [x] Fixed swap button to update input labels correctly (dólares ↔ pesos, euros ↔ pesos, reales ↔ pesos)
   - [x] Enhanced calculator layout with proper grid system
   - [x] Implemented haptic feedback for swap interactions
 - [x] **User preferences and history** ✅ COMPLETED
@@ -126,6 +127,14 @@
   - [x] Added graceful error handling with user-friendly messages
   - [x] Implemented retry and reload functionality
   - [x] Added development mode error details
+- [x] **Improve navigation system** ✅ COMPLETED
+  - [x] Replaced custom AppBar implementation with proper MUI components
+  - [x] Used `BottomNavigation` + `BottomNavigationAction` for mobile
+  - [x] Used `Tabs` + `Tab` for desktop navigation
+  - [x] Fixed cafecito button visibility (increased bottom margin to 15)
+  - [x] Enhanced mobile navigation with glass effect and proper backdrop blur
+  - [x] Improved accessibility with proper touch targets and hover states
+  - [x] Capitalized currency variant names in modal buttons
 
 ## 🔧 Code Quality & Architecture
 
@@ -137,16 +146,19 @@
   - Fix Layout component children prop issue
 
 ### Code Organization
-- [ ] **Implement proper error handling**
-  - Add error boundaries
-  - Centralize error logging
-  - Remove console.log statements
-- [ ] **Extract constants**
-  - Move hardcoded values to constants file
-  - Centralize API URLs
-- [ ] **Add proper prop validation**
-  - Use TypeScript interfaces consistently
-  - Add JSDoc comments for complex components
+- [x] **Implement proper error handling** ✅ PARTIALLY COMPLETED
+  - [x] Added error boundaries (ErrorBoundary component)
+  - [ ] Centralize error logging
+  - [ ] Remove console.log statements
+- [x] **Extract constants** ✅ PARTIALLY COMPLETED
+  - [x] Moved currency mappings to component constants
+  - [x] Centralized theme configuration
+  - [ ] Move remaining hardcoded values to constants file
+  - [ ] Centralize API URLs
+- [x] **Add proper prop validation** ✅ PARTIALLY COMPLETED
+  - [x] Enhanced TypeScript interfaces for new components
+  - [x] Improved component prop types (NavigationBar, SearchBar, CalculatorInputs)
+  - [ ] Add JSDoc comments for complex components
 
 ### Testing & Quality
 - [ ] **Add testing infrastructure**

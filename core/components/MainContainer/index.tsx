@@ -41,6 +41,7 @@ export default function MainContainer({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        paddingBottom: isMobile ? "100px" : 0,
       }}
     >
       <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
