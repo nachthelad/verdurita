@@ -1,4 +1,3 @@
-import React from "react";
 import Typography from "@mui/material/Typography";
 import { theme } from "@/theme/theme";
 import { Theme, useMediaQuery } from "@mui/material";
