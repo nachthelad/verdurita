@@ -3,10 +3,7 @@ import MainContainer from "@/core/components/MainContainer";
 import Layout from "@/core/components/Layout";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
-import { inter } from "@/fonts/fonts";
-import { Box } from "@mui/material";
 import { defaultResults } from "@/constants/defaultResults";
-import { theme } from "@/theme/theme";
 import { useCurrencies } from "@/hooks/useCurrencies";
 
 export default function Home() {
@@ -37,34 +34,25 @@ export default function Home() {
         if (Array.isArray(monedas)) {
           const monedasFiltradas = monedas.filter(
             (moneda: { nombre: string }) =>
-              moneda.nombre.toLowerCase().includes(filtro.toLowerCase())
+              moneda.nombre.toLowerCase().includes(filtro.toLowerCase()),
           );
           setResultadosFiltrados(monedasFiltradas);
         }
       }
     },
-    [monedas, refresh]
+    [monedas, refresh],
   );
 
   return (
     <Layout onFilter={handleFilter} refreshData={refresh}>
       <CustomHead />
-      <Box
-        component="main"
-        className={`${inter.className}`}
-        sx={{
-          marginTop: { xs: "56px", sm: "56px", md: "64px" },
-          backgroundColor: theme.palette.primary.contrastText,
-        }}
-      >
-        <MainContainer
-          filterApplied={filterApplied}
-          loadingData={isLoading}
-          resultadosFiltrados={resultadosFiltrados}
-          onFilter={handleFilter}
-          refreshData={refresh}
-        />
-      </Box>
+      <MainContainer
+        filterApplied={filterApplied}
+        loadingData={isLoading}
+        resultadosFiltrados={resultadosFiltrados}
+        onFilter={handleFilter}
+        refreshData={refresh}
+      />
     </Layout>
   );
 }

@@ -1,19 +1,10 @@
 import * as React from "react";
-const { memo, useState, useCallback } = React;
+const { memo, useCallback } = React;
 import { Card, CardContent, Typography, Box } from "@mui/material";
-import dynamic from "next/dynamic";
-
-const ModalCardItem = dynamic(() => import("./ModalCardItem"), {
-  ssr: false,
-  loading: () => null,
-});
 import { format } from "numerable";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
-import { theme } from "@/theme/theme";
-import { useMediaQuery, Theme } from "@mui/material";
-import LastUpdate from "./LastUpdate";
 import { hapticFeedback } from "@/utils/haptics";
 import LoadingShimmer from "../LoadingShimmer";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
@@ -21,126 +12,97 @@ type CardItemProps = {
   EsEuro?: boolean;
   loadingData: boolean;
   moneda: string;
+  onClick: (moneda: string) => void;
 };
 
 const CardItem = memo(
-  ({
-    data,
-    esRealBrasileño = false,
-    EsEuro = false,
-    loadingData,
-    moneda,
-  }: CardItemProps) => {
-    const [open, setOpen] = useState(false);
-
-    const handleExpandClick = useCallback(() => {
+  ({ data, loadingData, moneda, onClick }: CardItemProps) => {
+    const handleClick = useCallback(() => {
       hapticFeedback.medium();
-      setOpen((prevOpen) => !prevOpen);
-    }, []);
+      onClick(moneda);
+    }, [moneda, onClick]);
 
-    const handleClose = useCallback(() => {
-      hapticFeedback.light();
-      setOpen(false);
-    }, []);
-
-    const isMobile = useMediaQuery((theme: Theme) =>
-      theme.breakpoints.down("sm")
-    );
+    // Extract key values for cleaner display
+    const venta = data.find((d) => d.texto.includes("Venta"))?.precio;
+    const compra = data.find((d) => d.texto.includes("Compra"))?.precio;
 
     return (
-      <div>
-        <Card
-          sx={{
-            borderRadius: "20px",
-            boxShadow: "3",
-          }}
-        >
-          <CardContent
+      <Card
+        onClick={handleClick}
+        sx={{
+          borderRadius: "16px",
+          width: "100%",
+          cursor: "pointer",
+          transition: "all 0.2s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-4px)",
+            boxShadow: "0px 8px 24px rgba(0,0,0,0.1)",
+          },
+        }}
+      >
+        <CardContent sx={{ p: 3, "&:last-child": { pb: 3 } }}>
+          <Box
             sx={{
               display: "flex",
-              flexDirection: "column",
-              position: "relative",
-              paddingBottom: "16px !important",
-              cursor: "pointer",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              mb: 2,
             }}
-            onClick={handleExpandClick}
           >
-            <Icon
-              icon="material-symbols:expand-content"
-              width="2rem"
-              height="2rem"
-              style={{
-                position: "absolute",
-                top: "5px",
-                right: "5px",
-                color: "#0000007e",
-              }}
+            <Typography
+              variant="h6"
+              sx={{ fontWeight: 600, color: "text.primary" }}
+            >
+              {moneda}
+            </Typography>
+            <ArrowForwardIosIcon
+              sx={{ fontSize: 16, color: "text.secondary", mt: 0.5 }}
             />
-            {data.map(({ texto, precio }, index) => (
-              <Box
-                key={index}
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  borderBottom: index === 2 ? "none" : "1px solid #0000001f",
-                  width: isMobile ? "95%" : "90%",
-                  margin: "auto",
-                  marginTop: index === 0 ? "1rem" : 0,
-                  // marginBottom: index === 2 ? "1rem" : 0,
-                }}
-              >
+          </Box>
+
+          {loadingData ? (
+            <LoadingShimmer width="100%" height="60px" />
+          ) : (
+            <Box>
+              {/* Main Price (Venta usually matters most) */}
+              <Box sx={{ display: "flex", alignItems: "baseline", mb: 1 }}>
                 <Typography
-                  sx={{
-                    whiteSpace: "nowrap",
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    fontSize: "1.5rem",
-                    fontWeight: "600",
-                    color: theme.palette.primary.main,
-                    textTransform: "uppercase",
-                    width: "150px",
-                    marginTop: index === 1 ? "0.2rem" : 0,
-                    marginBottom: index === 2 ? "0" : "0.2rem",
-                  }}
+                  variant="h3"
+                  sx={{ color: "primary.main", fontWeight: 700, mr: 1 }}
                 >
-                  {texto}
+                  ${format(venta || 0, "0,0.00")}
                 </Typography>
-                {loadingData ? (
-                  <LoadingShimmer width="120px" height="35px" />
-                ) : (
-                  <Typography
-                    color="text.secondary"
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-end",
-                      width: "150px",
-                      fontSize: "1.5rem",
-                      marginBottom: index === 2 ? "0" : "0.2rem",
-                      marginTop: index === 1 ? "0.2rem" : 0,
-                    }}
-                  >
-                    ${format(precio, "0,0.00")}
-                  </Typography>
+              </Box>
+
+              {/* Sub Grid for Compra/Venta labels */}
+              <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+                {compra && (
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Typography variant="caption" color="text.secondary">
+                      Compra
+                    </Typography>
+                    <Typography variant="body2" fontWeight={600}>
+                      ${format(compra, "0,0.00")}
+                    </Typography>
+                  </Box>
+                )}
+                {venta && (
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Typography variant="caption" color="text.secondary">
+                      Venta
+                    </Typography>
+                    <Typography variant="body2" fontWeight={600}>
+                      ${format(venta, "0,0.00")}
+                    </Typography>
+                  </Box>
                 )}
               </Box>
-            ))}
-            <LastUpdate loadingData={loadingData} />
-          </CardContent>
-        </Card>
-        <ModalCardItem
-          moneda={moneda}
-          open={open}
-          handleClose={handleClose}
-          data={data}
-          esRealBrasileño={esRealBrasileño}
-          EsEuro={EsEuro}
-          loadingData={loadingData}
-        />
-      </div>
+            </Box>
+          )}
+        </CardContent>
+      </Card>
     );
-  }
+  },
 );
 
 CardItem.displayName = "CardItem";
