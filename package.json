@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
@@ -31,7 +31,7 @@
     "react": "^18",
     "react-dom": "^18",
     "styled-components": "^6.1.8",
-    "swr": "^2.3.6"
+    "swr": "^2.3.7"
   },
   "devDependencies": {
     "@iconify-icon/react": "^2.0.1",
@@ -63,13 +63,18 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
+      "prettier --write"
     ],
     "*.{json,md,css,scss,yaml,yml}": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "ignorePattern": [
+      ".next",
+      "node_modules",
+      "public/workbox-*.js",
+      "public/sw*.js"
     ]
   }
 }

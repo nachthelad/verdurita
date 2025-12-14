@@ -1,5 +1,5 @@
 import React from "react";
-import NavigationBar from "@/core/components/NavigationBar";
+// NavigationBar removed as per new UI ease-of-use requirements
 import { Analytics } from "@vercel/analytics/react";
 
 type LayoutProps = {
@@ -8,10 +8,9 @@ type LayoutProps = {
   refreshData: () => void;
 };
 
-const Layout = ({ children, onFilter, refreshData }: LayoutProps) => {
+const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <NavigationBar refreshData={refreshData} onFilter={onFilter} />
       {children}
       <Analytics />
     </>

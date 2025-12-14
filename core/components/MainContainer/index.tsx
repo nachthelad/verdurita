@@ -1,9 +1,9 @@
 import CardItem from "@/core/components/CardItem";
-import TitleItem from "@/core/components/TitleItem";
 import { Moneda } from "@/types/moneda";
-import LogoButton from "@/core/components/LogoButton";
 import { theme } from "@/theme/theme";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {
   Theme,
   useMediaQuery,
@@ -11,11 +11,17 @@ import {
   Grid,
   Button,
   Typography,
+  Tabs,
+  Tab,
+  Container,
+  Paper,
+  IconButton,
 } from "@mui/material";
-import { inter } from "@/fonts/fonts";
 import RefreshPrompt from "../RefreshPrompt";
 import Footer from "./../Footer/index";
-import SearchBar from "../SearchBar";
+import { useState } from "react";
+import InternationalCalculator from "../InternationalCalculator";
+import { useThemeMode } from "@/contexts/ThemeContext";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -33,130 +39,234 @@ export default function MainContainer({
   filterApplied,
 }: MainContainerProps): React.ReactElement {
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
+    theme.breakpoints.down("md"),
   );
+  const { mode, toggleTheme } = useThemeMode();
+  const [tabValue, setTabValue] = useState(0);
+  const [calculatorSource, setCalculatorSource] = useState("Dolar Blue");
+  const [calculatorTarget, setCalculatorTarget] = useState("Peso Argentino");
+
+  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
+  };
+
+  const handleCardClick = (moneda: string) => {
+    setCalculatorSource(moneda);
+    setCalculatorTarget("Peso Argentino");
+    setTabValue(1); // Switch to Calculator Tab
+  };
+
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        paddingBottom: isMobile ? "100px" : 0,
+        backgroundColor: "background.default",
+        minHeight: "100vh",
+        paddingBottom: isMobile ? "2rem" : 0,
       }}
     >
-      <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
-      {isMobile && <LogoButton onFilter={onFilter} refreshData={refreshData} />}
-      <SearchBar onSearch={onFilter} />
-      <Grid
-        container
+      {/* Header Section */}
+      <Paper
+        elevation={0}
         sx={{
-          maxWidth: 2160,
-          width: "100%",
-          display: "flex",
-          justifyContent: "center",
-          margin: "auto",
-          gap: 2,
-          marginTop: isMobile ? 3 : 6,
+          py: 2,
+          px: 0,
+          backgroundColor: "background.paper",
+          borderBottom: "1px solid",
+          borderColor: "divider",
+          marginBottom: 3,
         }}
       >
-        {isMobile ? null : (
-          <Grid
-            item
-            sm={10}
-            md={10}
-            lg={10}
-            xl={10}
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginBottom: "16px",
-            }}
-          >
-            <Typography
-              variant="h1"
-              gutterBottom
+        <Container maxWidth="xl">
+          <Grid container alignItems="center" spacing={2}>
+            {/* Title with Theme Toggle (mobile inline) */}
+            <Grid
+              item
+              xs={12}
+              md={4}
               sx={{
-                fontFamily: inter.style.fontFamily,
-                color: theme.palette.primary.main,
-                fontWeight: 600,
-                fontSize: "2.2rem",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: { xs: "space-between", md: "flex-start" },
               }}
             >
-              💵 Cotizaciones del dólar, euro y real
-            </Typography>
-            <Typography
-              variant="subtitle2"
-              sx={{
-                fontFamily: inter.style.fontFamily,
-                color: theme.palette.primary.main,
-                fontWeight: 500,
-              }}
-            >
-              Datos en el momento de las monedas más cotizadas del país
-            </Typography>
-          </Grid>
-        )}
-        {(resultadosFiltrados || []).map((moneda: Moneda, index: number) => (
-          <Grid
-            key={`${moneda?.nombre}-${index}`}
-            item
-            xs={10}
-            sm={6}
-            md={5}
-            lg={3}
-            xl={2}
-            container
-            sx={{
-              marginBottom:
-                isMobile && index === (resultadosFiltrados || []).length - 1
-                  ? 2
-                  : 0,
-            }}
-          >
-            <Grid item xs={12} sx={{ marginTop: isMobile ? "1rem" : 0 }}>
-              <TitleItem titulo={moneda.nombre} />
-              <CardItem
-                moneda={moneda.nombre}
-                loadingData={loadingData}
-                data={[
-                  { texto: "Vendé a:", precio: moneda.compra },
-                  { texto: "Comprá a:", precio: moneda.venta },
-                  { texto: "Promedio:", precio: moneda.promedio },
-                ]}
-                esRealBrasileño={moneda.nombre === "Real Brasileño"}
-                EsEuro={moneda.nombre.split(" ")[0] === "Euro"}
-              />
+              <Typography
+                variant="h1"
+                sx={{
+                  color: "primary.main",
+                  fontSize: { xs: "1.5rem", md: "1.75rem" },
+                }}
+              >
+                verdurita.
+              </Typography>
+              {/* Theme toggle - visible only on mobile */}
+              <IconButton
+                onClick={toggleTheme}
+                color="inherit"
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                  borderRadius: "50%",
+                  backgroundColor: "background.default",
+                  "&:hover": {
+                    backgroundColor: "action.hover",
+                  },
+                }}
+              >
+                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
             </Grid>
-            <Grid item xs={12}>
-              {filterApplied && (
-                <Button
-                  onClick={() => {
-                    onFilter();
-                  }}
-                  variant="text"
-                  size="large"
-                  startIcon={<FilterAltOffIcon />}
+
+            {/* Centered Tabs */}
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{ display: "flex", justifyContent: "center" }}
+            >
+              <Tabs
+                value={tabValue}
+                onChange={handleTabChange}
+                variant={isMobile ? "fullWidth" : "standard"}
+                sx={{
+                  backgroundColor: "background.default",
+                  borderRadius: "50px",
+                  padding: "4px",
+                  width: isMobile ? "100%" : "auto",
+                  "& .MuiTabs-indicator": {
+                    display: "none",
+                  },
+                }}
+              >
+                <Tab
+                  label="Cotizaciones"
                   sx={{
-                    color: theme.palette.primary.main,
-                    fontSize: isMobile ? "18px" : "20px",
-                    display: "flex",
-                    margin: "auto",
-                    marginTop: "0.5rem",
-                    minHeight: "44px",
-                    padding: "8px 16px",
-                    "&:hover": {
-                      backgroundColor: `${theme.palette.primary.main}15`,
+                    borderRadius: "40px",
+                    color: "text.secondary",
+                    zIndex: 1,
+                    minHeight: "40px",
+                    px: 4,
+                    textTransform: "none",
+                    fontWeight: 600,
+                    "&.Mui-selected": {
+                      backgroundColor: "white",
+                      color: "primary.main",
+                      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
                     },
                   }}
-                >
-                  Limpiar Filtro
-                </Button>
-              )}
+                />
+                <Tab
+                  label="Calculadora"
+                  sx={{
+                    borderRadius: "40px",
+                    color: "text.secondary",
+                    zIndex: 1,
+                    minHeight: "40px",
+                    px: 4,
+                    textTransform: "none",
+                    fontWeight: 600,
+                    "&.Mui-selected": {
+                      backgroundColor: "white",
+                      color: "primary.main",
+                      boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+                    },
+                  }}
+                />
+              </Tabs>
+            </Grid>
+
+            {/* Theme Toggle Button - Desktop only */}
+            <Grid
+              item
+              xs={0}
+              md={4}
+              sx={{
+                display: { xs: "none", md: "flex" },
+                justifyContent: "flex-end",
+              }}
+            >
+              <IconButton
+                onClick={toggleTheme}
+                color="inherit"
+                sx={{
+                  borderRadius: "50%",
+                  backgroundColor: "background.default",
+                  "&:hover": {
+                    backgroundColor: "action.hover",
+                  },
+                }}
+              >
+                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+              </IconButton>
             </Grid>
           </Grid>
-        ))}
-      </Grid>
+        </Container>
+      </Paper>
+
+      <Container maxWidth="xl" sx={{ px: { xs: 2, md: 4 } }}>
+        <RefreshPrompt refreshData={refreshData} isLoading={loadingData} />
+
+        {/* Tab 0: Cotizaciones List */}
+        <div role="tabpanel" hidden={tabValue !== 0}>
+          {tabValue === 0 && (
+            <Box>
+              <Grid container spacing={2}>
+                {(resultadosFiltrados || []).map(
+                  (moneda: Moneda, index: number) => (
+                    <Grid
+                      key={`${moneda?.nombre}-${index}`}
+                      item
+                      xs={12}
+                      sm={6}
+                      md={4}
+                      lg={3}
+                      xl={2.4}
+                      // Removed manual sx overrides here (pl: 2, pb: 2)
+                    >
+                      <CardItem
+                        moneda={moneda.nombre}
+                        loadingData={loadingData}
+                        data={[
+                          { texto: "Venta", precio: moneda.venta },
+                          { texto: "Compra", precio: moneda.compra },
+                          { texto: "Promedio:", precio: moneda.promedio },
+                        ]}
+                        esRealBrasileño={moneda.nombre === "Real Brasileño"}
+                        EsEuro={moneda.nombre.split(" ")[0] === "Euro"}
+                        onClick={handleCardClick}
+                      />
+                    </Grid>
+                  ),
+                )}
+              </Grid>
+
+              {filterApplied && (
+                <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
+                  <Button
+                    onClick={() => onFilter()}
+                    variant="text"
+                    startIcon={<FilterAltOffIcon />}
+                  >
+                    Mostrar todas
+                  </Button>
+                </Box>
+              )}
+            </Box>
+          )}
+        </div>
+
+        {/* Tab 1: Calculator */}
+        <div role="tabpanel" hidden={tabValue !== 1}>
+          {tabValue === 1 && (
+            <Box
+              sx={{ marginTop: 2, display: "flex", justifyContent: "center" }}
+            >
+              <InternationalCalculator
+                initialLocalSource={calculatorSource}
+                initialLocalTarget={calculatorTarget}
+              />
+            </Box>
+          )}
+        </div>
+      </Container>
       <Footer />
     </Box>
   );

@@ -37,34 +37,25 @@ export default function Home() {
         if (Array.isArray(monedas)) {
           const monedasFiltradas = monedas.filter(
             (moneda: { nombre: string }) =>
-              moneda.nombre.toLowerCase().includes(filtro.toLowerCase())
+              moneda.nombre.toLowerCase().includes(filtro.toLowerCase()),
           );
           setResultadosFiltrados(monedasFiltradas);
         }
       }
     },
-    [monedas, refresh]
+    [monedas, refresh],
   );
 
   return (
     <Layout onFilter={handleFilter} refreshData={refresh}>
       <CustomHead />
-      <Box
-        component="main"
-        className={`${inter.className}`}
-        sx={{
-          marginTop: { xs: "56px", sm: "56px", md: "64px" },
-          backgroundColor: theme.palette.primary.contrastText,
-        }}
-      >
-        <MainContainer
-          filterApplied={filterApplied}
-          loadingData={isLoading}
-          resultadosFiltrados={resultadosFiltrados}
-          onFilter={handleFilter}
-          refreshData={refresh}
-        />
-      </Box>
+      <MainContainer
+        filterApplied={filterApplied}
+        loadingData={isLoading}
+        resultadosFiltrados={resultadosFiltrados}
+        onFilter={handleFilter}
+        refreshData={refresh}
+      />
     </Layout>
   );
 }
