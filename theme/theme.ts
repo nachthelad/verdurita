@@ -13,52 +13,87 @@ const baseTheme: ThemeOptions = {
   },
   palette: {
     primary: {
-      main: "#698550",
-      light: "#8fb070",
-      dark: "#4a5e3a",
-      contrastText: "#f0fff0",
+      main: "#1E3A2F", // Deep Forest Green - Modern & Premium
+      light: "#3E6B58",
+      dark: "#0F261C",
+      contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#4f7330",
-      light: "#759852",
-      dark: "#355020",
-      contrastText: "#f0fff0",
+      main: "#8FB339", // Vibrant Fresh Green for accents
+      light: "#B8D66A",
+      dark: "#6A8C21",
+      contrastText: "#1A1A1A",
     },
     background: {
-      default: "#f0fff0",
-      paper: "#ffffff",
+      default: "#F4F6F8", // Modern Soft Gray
+      paper: "#FFFFFF",
     },
     text: {
-      primary: "#1a1a1a",
-      secondary: "#666666",
+      primary: "#1A2027", // Soft Black
+      secondary: "#5E6C7C", // Cool Gray
     },
     error: {
-      main: "#d32f2f",
-      light: "#ef5350",
-      dark: "#c62828",
-      contrastText: "#ffffff",
+      main: "#D32F2F",
     },
     success: {
-      main: "#2e7d32",
-      light: "#4caf50",
-      dark: "#1b5e20",
-      contrastText: "#ffffff",
+      main: "#2E7D32",
     },
   },
-  spacing: (factor: number) => `${0.25 * factor}rem`,
-  components: {
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          fontFamily: inter.style.fontFamily,
-        },
-      },
+  shape: {
+    borderRadius: 16, // Softer, more modern corners
+  },
+  typography: {
+    fontFamily: inter.style.fontFamily,
+    h1: {
+      fontWeight: 700,
+      fontSize: "2rem",
+      letterSpacing: "-0.02em",
     },
+    h2: {
+      fontWeight: 700,
+      fontSize: "1.75rem",
+      letterSpacing: "-0.01em",
+    },
+    h3: {
+      fontWeight: 700,
+      fontSize: "1.5rem",
+    },
+    subtitle1: {
+      fontWeight: 500,
+      color: "#5E6C7C",
+    },
+  },
+  components: {
     MuiButton: {
       styleOverrides: {
         root: {
-          minHeight: "44px", // Ensure all buttons meet touch target guidelines
-          textTransform: "none", // Preserve case for better readability
+          minHeight: "48px", // Larger touch targets
+          textTransform: "none",
+          fontWeight: 600,
+          boxShadow: "none",
+          "&:hover": {
+            boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+          },
+        },
+        contained: {
+          borderRadius: "50px", // Pill shaped buttons
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          boxShadow: "0px 4px 20px rgba(0,0,0,0.05)", // Soft, diffused shadow
+          border: "1px solid rgba(0,0,0,0.03)",
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "12px",
+          },
         },
       },
     },
@@ -80,36 +115,18 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#8fb070",
-      light: "#b3c596",
-      dark: "#698550",
-      contrastText: "#000000",
-    },
-    secondary: {
-      main: "#759852",
-      light: "#9bb374",
-      dark: "#4f7330",
+      main: "#8FB339", // Lighter green for dark mode
+      light: "#B8D66A",
+      dark: "#6A8C21",
       contrastText: "#000000",
     },
     background: {
-      default: "#0a0f0a",
-      paper: "#1a1f1a",
+      default: "#121212",
+      paper: "#1E1E1E",
     },
     text: {
-      primary: "#ffffff",
-      secondary: "#b0b0b0",
-    },
-    error: {
-      main: "#f44336",
-      light: "#ef5350",
-      dark: "#c62828",
-      contrastText: "#ffffff",
-    },
-    success: {
-      main: "#4caf50",
-      light: "#66bb6a",
-      dark: "#2e7d32",
-      contrastText: "#000000",
+      primary: "#FFFFFF",
+      secondary: "#B0B8C4",
     },
   },
 });

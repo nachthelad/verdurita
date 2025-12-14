@@ -31,7 +31,7 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "img-src 'self' data: https: blob:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://dolarapi.com https://api.bluelytics.com.ar https://www.google-analytics.com",
+              "connect-src 'self' https://dolarapi.com https://api.bluelytics.com.ar https://www.google-analytics.com https://api.frankfurter.app",
               "frame-src 'self' https://googleads.g.doubleclick.net",
               "object-src 'none'",
               "base-uri 'self'",

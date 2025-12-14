@@ -3,10 +3,12 @@ import type { AppProps } from "next/app";
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import PullToRefresh from "pulltorefreshjs";
-import { theme } from "@/theme/theme";
 import ErrorBoundary from "@/core/components/ErrorBoundary";
+import { ThemeModeProvider, useThemeMode } from "@/contexts/ThemeContext";
 
-export default function App({ Component, pageProps }: AppProps) {
+function AppContent({ Component, pageProps }: AppProps) {
+  const { currentTheme } = useThemeMode();
+
   const standalone =
     typeof window !== "undefined" &&
     window.matchMedia("(display-mode: standalone)").matches;
@@ -23,13 +25,19 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <ErrorBoundary>
-          <Component {...pageProps} />
-        </ErrorBoundary>
-      </ThemeProvider>
-    </>
+    <ThemeProvider theme={currentTheme}>
+      <CssBaseline />
+      <ErrorBoundary>
+        <Component {...pageProps} />
+      </ErrorBoundary>
+    </ThemeProvider>
+  );
+}
+
+export default function App(props: AppProps) {
+  return (
+    <ThemeModeProvider>
+      <AppContent {...props} />
+    </ThemeModeProvider>
   );
 }
