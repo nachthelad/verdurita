@@ -1,8 +1,7 @@
 import * as React from "react";
 const { memo, useCallback } = React;
-import { Card, CardContent, Typography, Box, Chip } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import { format } from "numerable";
-import { theme } from "@/theme/theme";
 import { hapticFeedback } from "@/utils/haptics";
 import LoadingShimmer from "../LoadingShimmer";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";

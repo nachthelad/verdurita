@@ -1,6 +1,5 @@
 import CardItem from "@/core/components/CardItem";
 import { Moneda } from "@/types/moneda";
-import { theme } from "@/theme/theme";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";

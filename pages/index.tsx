@@ -3,10 +3,7 @@ import MainContainer from "@/core/components/MainContainer";
 import Layout from "@/core/components/Layout";
 import { useState, useCallback, useMemo, useEffect } from "react";
 import { Moneda } from "@/types/moneda";
-import { inter } from "@/fonts/fonts";
-import { Box } from "@mui/material";
 import { defaultResults } from "@/constants/defaultResults";
-import { theme } from "@/theme/theme";
 import { useCurrencies } from "@/hooks/useCurrencies";
 
 export default function Home() {
