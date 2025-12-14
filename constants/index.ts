@@ -23,6 +23,7 @@ export const EXTERNAL_LINKS = {
   GITHUB: "https://github.com/nachthelad",
   CAFECITO: "https://cafecito.app/nachthelad",
   CAFECITO_BUTTON_BASE: "https://cdn.cafecito.app/imgs/buttons/button_1",
+  CAFECITO_BUTTON_DARK: "https://cdn.cafecito.app/imgs/buttons/button_4",
 } as const;
 
 // Currency Mappings
