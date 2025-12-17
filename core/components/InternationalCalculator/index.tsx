@@ -10,7 +10,7 @@ import {
   Grid,
   IconButton,
 } from "@mui/material";
-import SwapVertIcon from "@mui/icons-material/SwapVert";
+import SwapHorizIcon from "@mui/icons-material/SwapHoriz";
 import { useCurrencies } from "@/hooks/useCurrencies";
 import {
   useInternationalRates,
@@ -23,8 +23,8 @@ import {
 } from "@/utils/currencyConversion";
 import { format } from "numerable";
 import { es } from "numerable/locale";
-import { theme } from "@/theme/theme";
 import { hapticFeedback } from "@/utils/haptics";
+import { useTheme } from "@mui/material";
 
 interface InternationalCalculatorProps {
   initialLocalSource?: string;
@@ -35,6 +35,7 @@ const InternationalCalculator = ({
   initialLocalSource = "Dolar Blue",
   initialLocalTarget = "Peso Argentino",
 }: InternationalCalculatorProps) => {
+  const theme = useTheme();
   const [mode, setMode] = useState<"local" | "international">("local");
   const { currencies: localCurrencies } = useCurrencies();
 
@@ -153,7 +154,7 @@ const InternationalCalculator = ({
         width: "100%",
         margin: "auto",
         borderRadius: 4,
-        background: "white",
+        background: "background.paper",
         border: "1px solid",
         borderColor: "divider",
       }}
@@ -166,9 +167,9 @@ const InternationalCalculator = ({
           variant="scrollable"
           scrollButtons="auto"
           sx={{
-            background: "#f4f6f8",
+            backgroundColor: "background.default",
             borderRadius: "50px",
-            p: 0.5,
+            padding: "4px",
             "& .MuiTabs-indicator": { display: "none" },
           }}
         >
@@ -177,14 +178,15 @@ const InternationalCalculator = ({
             value="local"
             sx={{
               borderRadius: "40px",
+              color: "text.secondary",
               zIndex: 1,
               fontWeight: 600,
               textTransform: "none",
               minHeight: "40px",
               "&.Mui-selected": {
-                backgroundColor: "white",
+                backgroundColor: "background.paper",
                 color: "primary.main",
-                boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
+                boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
               },
             }}
           />
@@ -193,14 +195,15 @@ const InternationalCalculator = ({
             value="international"
             sx={{
               borderRadius: "40px",
+              color: "text.secondary",
               zIndex: 1,
               fontWeight: 600,
               textTransform: "none",
               minHeight: "40px",
               "&.Mui-selected": {
-                backgroundColor: "white",
+                backgroundColor: "background.paper",
                 color: "primary.main",
-                boxShadow: "0px 2px 8px rgba(0,0,0,0.1)",
+                boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
               },
             }}
           />
@@ -242,7 +245,7 @@ const InternationalCalculator = ({
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#F4F6F8",
+              background: "background.default",
               p: 2,
               borderRadius: 3,
             }}
@@ -278,9 +281,9 @@ const InternationalCalculator = ({
 
             <IconButton
               onClick={handleSwap}
-              sx={{ background: "white", boxShadow: 1 }}
+              sx={{ background: "background.paper", boxShadow: 1 }}
             >
-              <SwapVertIcon color="primary" />
+              <SwapHorizIcon color="primary" />
             </IconButton>
 
             {/* Target */}

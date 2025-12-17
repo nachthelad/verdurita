@@ -18,7 +18,7 @@ const monedas: { [key: string]: string } = {
   "dólar tarjeta": "Tarjeta",
   "dólar bolsa": "Bolsa",
   "dólar cripto": "Cripto",
-  "dólar contado con liqui": "Contado con liqui",
+  "dólar ccl": "CCL",
   "dólar mayorista": "Mayorista",
   "euro blue": "Euro Blue",
   "euro oficial": "Euro Oficial",

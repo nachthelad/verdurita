@@ -9,7 +9,6 @@ import {
   CircularProgress,
   Box,
 } from "@mui/material";
-import { theme } from "@/theme/theme";
 
 type RefreshPromptProps = {
   refreshData: () => void;
@@ -41,10 +40,9 @@ const RefreshPrompt = ({
     <>
       <Dialog
         PaperProps={{
-          style: {
-            backgroundColor: theme.palette.primary.contrastText,
+          sx: {
+            backgroundColor: "background.paper",
             borderRadius: "20px",
-            overflowY: "auto",
           },
         }}
         open={open}

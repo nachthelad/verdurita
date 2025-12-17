@@ -37,7 +37,7 @@ export const defaultResults = [
   {
     moneda: "USD",
     casa: "contadoconliqui",
-    nombre: "Dólar Contado con liquidación",
+    nombre: "Dólar CCL",
   },
   {
     moneda: "USD",
