@@ -16,7 +16,7 @@ const ordenMonedas = [
   "Dólar Tarjeta",
   "Dólar Bolsa",
   "Dólar Cripto",
-  "Dólar Contado con liquidación",
+  "Dólar CCL",
   "Dólar Mayorista",
   "Euro Blue",
   "Euro Oficial",
@@ -25,7 +25,7 @@ const ordenMonedas = [
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   // Only allow GET requests
   if (req.method !== "GET") {
@@ -53,16 +53,22 @@ export default async function handler(
           typeof d === "object" &&
           d.nombre &&
           typeof d.compra === "number" &&
-          typeof d.venta === "number"
+          typeof d.venta === "number",
       )
-      .map((d: any) => ({
-        moneda: "USD",
-        nombre: `Dólar ${String(d.nombre).replace(/[<>\"'&]/g, "")}`,
-        casa: String(d.casa || "").replace(/[<>\"'&]/g, ""),
-        compra: Number(d.compra) || 0,
-        venta: Number(d.venta) || 0,
-        promedio: (Number(d.compra) + Number(d.venta)) / 2 || 0,
-      }));
+      .map((d: any) => {
+        let cleanName = String(d.nombre).replace(/[<>\"'&]/g, "");
+        if (cleanName === "Contado con liquidación") {
+          cleanName = "CCL";
+        }
+        return {
+          moneda: "USD",
+          nombre: `Dólar ${cleanName}`,
+          casa: String(d.casa || "").replace(/[<>\"'&]/g, ""),
+          compra: Number(d.compra) || 0,
+          venta: Number(d.venta) || 0,
+          promedio: (Number(d.compra) + Number(d.venta)) / 2 || 0,
+        };
+      });
     const datosReal = (
       Array.isArray(responseReal.data) ? responseReal.data : [responseReal.data]
     )
@@ -71,7 +77,7 @@ export default async function handler(
           d &&
           typeof d === "object" &&
           typeof d.compra === "number" &&
-          typeof d.venta === "number"
+          typeof d.venta === "number",
       )
       .map((d: any) => ({
         moneda: "BRL",
@@ -121,7 +127,7 @@ export default async function handler(
         (moneda) =>
           moneda &&
           typeof moneda.compra === "number" &&
-          typeof moneda.venta === "number"
+          typeof moneda.venta === "number",
       )
       .map((moneda) => ({
         ...moneda,
@@ -141,7 +147,7 @@ export default async function handler(
     // Set cache headers
     res.setHeader(
       "Cache-Control",
-      "public, s-maxage=60, stale-while-revalidate=300"
+      "public, s-maxage=60, stale-while-revalidate=300",
     );
     res.status(200).json(datosProcesados);
   } catch (error) {

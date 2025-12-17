@@ -9,7 +9,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { TransitionProps } from "@mui/material/transitions";
-import { theme } from "@/theme/theme";
 
 type CurrencyModalProps = {
   open: boolean;
@@ -22,7 +21,7 @@ const Transition = React.forwardRef(function Transition(
   props: TransitionProps & {
     children: React.ReactElement<any, any>;
   },
-  ref: React.Ref<unknown>
+  ref: React.Ref<unknown>,
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
@@ -44,10 +43,9 @@ export default function CurrencyModal({
     <>
       <Dialog
         PaperProps={{
-          style: {
-            backgroundColor: theme.palette.primary.contrastText,
+          sx: {
+            backgroundColor: "background.paper",
             borderRadius: "20px",
-            overflowY: "auto",
           },
         }}
         open={open}
@@ -87,7 +85,7 @@ export default function CurrencyModal({
                     fontSize: "1rem",
                     marginY: "10px",
                     width: "100%",
-                    backgroundColor: theme.palette.secondary.main,
+                    backgroundColor: "secondary.main",
                     borderRadius: "2rem",
                     paddingX: "1.5rem",
                     paddingY: "0.3rem",
@@ -96,6 +94,7 @@ export default function CurrencyModal({
                   {(() => {
                     const variantText = variant.split(" ").slice(1).join(" ");
                     if (variantText === "bolsa") return "MEP / Bolsa";
+                    if (variantText === "ccl") return "CCL";
                     return (
                       variantText.charAt(0).toUpperCase() + variantText.slice(1)
                     );

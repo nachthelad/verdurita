@@ -8,7 +8,7 @@ type TitleItemProp = {
 
 const TitleItem = ({ titulo }: TitleItemProp) => {
   const isMobile = useMediaQuery((theme: Theme) =>
-    theme.breakpoints.down("md")
+    theme.breakpoints.down("md"),
   );
   return (
     <Typography
@@ -20,7 +20,7 @@ const TitleItem = ({ titulo }: TitleItemProp) => {
         textTransform: "uppercase",
       }}
     >
-      {titulo === "Dólar Contado con liquidación"
+      {titulo === "Dólar CCL"
         ? "Dólar CCL"
         : titulo && titulo === "Dólar Bolsa"
           ? "Dólar MEP / Bolsa"
