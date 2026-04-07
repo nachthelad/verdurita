@@ -3,6 +3,7 @@ import axios from "axios";
 import { rateLimit } from "@/utils/rateLimit";
 
 import { API_URLS } from "@/constants";
+import { fetchBinancePrices } from "./binance-rate";
 
 const {
   DOLAR: API_DOLAR_URL,
@@ -16,6 +17,7 @@ const ordenMonedas = [
   "Dólar Tarjeta",
   "Dólar Bolsa",
   "Dólar Cripto",
+  "Dólar Binance P2P",
   "Dólar CCL",
   "Dólar Mayorista",
   "Euro Blue",
@@ -39,11 +41,13 @@ export default async function handler(
   }
 
   try {
-    const [responseDolar, responseReal, responseEuro] = await Promise.all([
-      axios.get(API_DOLAR_URL),
-      axios.get(API_REAL_URL),
-      axios.get(API_EURO_URL),
-    ]);
+    const [responseDolar, responseReal, responseEuro, binancePrice] =
+      await Promise.all([
+        axios.get(API_DOLAR_URL),
+        axios.get(API_REAL_URL),
+        axios.get(API_EURO_URL),
+        fetchBinancePrices().catch(() => null),
+      ]);
 
     // Procesamiento de datos con validación
     const datosDolar = responseDolar.data
@@ -117,11 +121,26 @@ export default async function handler(
       nombre: "Euro Blue",
     };
 
+    const datosBinance =
+      binancePrice?.compra || binancePrice?.venta
+        ? [
+            {
+              moneda: "USD",
+              nombre: "Dólar Binance P2P",
+              casa: "binance",
+              compra: binancePrice?.compra ?? binancePrice?.venta ?? 0,
+              venta: binancePrice?.venta ?? binancePrice?.compra ?? 0,
+              promedio: 0, // recalculated below in .map()
+            },
+          ]
+        : [];
+
     const datosProcesados = [
       ...datosDolar,
       ...datosReal,
       datosEuroOficial,
       datosEuroBlue,
+      ...datosBinance,
     ]
       .filter(
         (moneda) =>

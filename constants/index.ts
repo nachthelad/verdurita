@@ -3,6 +3,7 @@ export const API_URLS = {
   DOLAR: "https://dolarapi.com/v1/dolares",
   REAL: "https://dolarapi.com/v1/cotizaciones/brl",
   EURO: "https://api.bluelytics.com.ar/v2/latest",
+  BINANCE_P2P: "https://p2p.binance.com/bapi/c2c/v2/friendly/c2c/adv/search",
 } as const;
 
 // AdSense Configuration
