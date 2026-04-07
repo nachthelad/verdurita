@@ -36,6 +36,11 @@ export const defaultResults = [
   },
   {
     moneda: "USD",
+    casa: "binance",
+    nombre: "Dólar Binance P2P",
+  },
+  {
+    moneda: "USD",
     casa: "contadoconliqui",
     nombre: "Dólar CCL",
   },
