@@ -71,7 +71,7 @@ const InternationalCalculator = ({
     const inset = Math.max(
       0,
       window.innerHeight - visibleBottom,
-      unobstructedViewport.current.height - visibleBottom,
+      unobstructedViewport.current.height - visibleBottom
     );
     setKeyboardInset(inset > 100 ? inset : 0);
 
@@ -121,66 +121,75 @@ const InternationalCalculator = ({
   }, [amount, result, keepResultVisible]);
 
   // Fetch International Rates
-  const { rates: intlRates } = useInternationalRates(intlSource);
+  const {
+    rates: intlRates,
+    isLoading: intlLoading,
+    error: intlError,
+  } = useInternationalRates(intlSource);
+
+  const numAmount = parseFloat(amount.replace(",", "."));
+  const hasAmount = Number.isFinite(numAmount) && numAmount !== 0;
+  const intlRate = intlRates[intlTarget];
+  const hasIntlRate =
+    typeof intlRate === "number" && Number.isFinite(intlRate) && intlRate > 0;
+  const intlResult = !hasAmount
+    ? null
+    : intlSource === intlTarget
+      ? numAmount
+      : !intlError && !intlLoading && hasIntlRate
+        ? convertInternational(numAmount, intlRate)
+        : null;
+  const displayedResult = mode === "international" ? intlResult : result;
+  const intlStatus =
+    mode === "international" &&
+    hasAmount &&
+    intlSource !== intlTarget &&
+    intlResult === null
+      ? intlError
+        ? "No se pudo cargar la cotización. Reintentá más tarde."
+        : intlLoading
+          ? "Cargando cotización..."
+          : "Cotización no disponible para este par."
+      : null;
 
   const formatCurrency = (val: number, symbol: string = "") => {
     return format(val, "0,0.00", { locale: es }) + " " + symbol;
   };
 
-  useEffect(() => {
-    calculate();
-  }, [
-    amount,
-    mode,
-    localSource,
-    localTarget,
-    intlSource,
-    intlTarget,
-    localCurrencies,
-    intlRates,
-  ]);
-
-  const calculate = () => {
+  const calculateLocal = useCallback(() => {
     const numAmount = parseFloat(amount.replace(",", "."));
     if (isNaN(numAmount) || numAmount === 0) {
       setResult(null);
       return;
     }
 
-    if (mode === "local") {
-      // ... (Same logic as before, omitted for brevity but preserved in mental model)
-      let sourceRate = 1;
-      let targetRate = 1;
-      if (localSource !== "Peso Argentino") {
-        const sourceCurrency = findLocalCurrency(
-          localSource,
-          localCurrencies || [],
-        );
-        sourceRate = sourceCurrency?.promedio ?? 0;
-      }
-      if (localTarget !== "Peso Argentino") {
-        const targetCurrency = findLocalCurrency(
-          localTarget,
-          localCurrencies || [],
-        );
-        targetRate = targetCurrency?.promedio ?? 0;
-      }
-      if (sourceRate > 0 && targetRate > 0) {
-        setResult(convertLocalPivot(numAmount, sourceRate, targetRate));
-      } else {
-        setResult(0);
-      }
-    } else {
-      const rate = intlRates[intlTarget];
-      if (rate) {
-        setResult(convertInternational(numAmount, rate));
-      } else if (intlSource === intlTarget) {
-        setResult(numAmount);
-      } else {
-        setResult(0);
-      }
+    // Keep the local conversion based on the ARS pivot.
+    let sourceRate = 1;
+    let targetRate = 1;
+    if (localSource !== "Peso Argentino") {
+      const sourceCurrency = findLocalCurrency(
+        localSource,
+        localCurrencies || []
+      );
+      sourceRate = sourceCurrency?.promedio ?? 0;
     }
-  };
+    if (localTarget !== "Peso Argentino") {
+      const targetCurrency = findLocalCurrency(
+        localTarget,
+        localCurrencies || []
+      );
+      targetRate = targetCurrency?.promedio ?? 0;
+    }
+    if (sourceRate > 0 && targetRate > 0) {
+      setResult(convertLocalPivot(numAmount, sourceRate, targetRate));
+    } else {
+      setResult(0);
+    }
+  }, [amount, localSource, localTarget, localCurrencies]);
+
+  useEffect(() => {
+    if (mode === "local") calculateLocal();
+  }, [mode, calculateLocal]);
 
   const handleSwap = () => {
     hapticFeedback.medium();
@@ -195,7 +204,7 @@ const InternationalCalculator = ({
 
   const handleModeChange = (
     _event: React.SyntheticEvent,
-    newValue: "local" | "international",
+    newValue: "local" | "international"
   ) => {
     setMode(newValue);
     setAmount("");
@@ -360,6 +369,7 @@ const InternationalCalculator = ({
             </TextField>
 
             <IconButton
+              aria-label="Intercambiar monedas"
               onClick={handleSwap}
               sx={{ background: "background.paper", boxShadow: 1 }}
             >
@@ -412,8 +422,13 @@ const InternationalCalculator = ({
             variant="h2"
             sx={{ fontWeight: 800, color: theme.palette.secondary.main }} // Use secondary/accent for result
           >
-            {result !== null ? formatCurrency(result) : "---"}
+            {displayedResult !== null ? formatCurrency(displayedResult) : "---"}
           </Typography>
+          {intlStatus && (
+            <Typography role="status" variant="body2" color="text.secondary">
+              {intlStatus}
+            </Typography>
+          )}
           {mode === "local" && (
             <Typography
               variant="caption"

@@ -1,38 +1,32 @@
 import useSWR from "swr";
 import axios from "axios";
 
-export const INTERNATIONAL_CURRENCIES = [
-  { code: "USD", name: "Dólar Estadounidense" },
-  { code: "EUR", name: "Euro" },
-  { code: "BRL", name: "Real Brasileño" },
-  { code: "GBP", name: "Libra Esterlina" },
-  { code: "JPY", name: "Yen Japonés" },
-  { code: "CAD", name: "Dólar Canadiense" },
-  { code: "AUD", name: "Dólar Australiano" },
-  { code: "CHF", name: "Franco Suizo" },
-  { code: "CNY", name: "Yuan Chino" },
-  { code: "CLP", name: "Peso Chileno" },
-  { code: "UYU", name: "Peso Uruguayo" },
-  { code: "MXN", name: "Peso Mexicano" },
-];
+export { INTERNATIONAL_CURRENCIES } from "@/constants/internationalCurrencies";
 
-const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+interface InternationalRatesResponse {
+  rates: Record<string, number>;
+}
+
+const fetcher = async (url: string): Promise<InternationalRatesResponse> => {
+  const { data } = await axios.get<InternationalRatesResponse>(url);
+  if (!data?.rates || typeof data.rates !== "object") {
+    throw new Error("Invalid international rates response");
+  }
+  return data;
+};
 
 export function useInternationalRates(baseCurrency: string = "USD") {
-  const { data, error, isLoading } = useSWR(
-    baseCurrency
-      ? `https://api.frankfurter.app/latest?from=${baseCurrency}`
-      : null,
+  const { data, error, isLoading } = useSWR<InternationalRatesResponse>(
+    baseCurrency ? `/api/international-rates?base=${baseCurrency}` : null,
     fetcher,
     {
-      refreshInterval: 0, // Don't auto-refresh international rates constantly
+      refreshInterval: 0,
       revalidateOnFocus: false,
-    },
+    }
   );
 
   return {
-    rates: data?.rates || {},
-    date: data?.date,
+    rates: data?.rates ?? {},
     isLoading,
     error,
   };
