@@ -1,6 +1,8 @@
 import CardItem from "@/core/components/CardItem";
+import QuoteOrganizer from "@/core/components/QuoteOrganizer";
 import { Moneda } from "@/types/moneda";
 import FilterAltOffIcon from "@mui/icons-material/FilterAltOff";
+import TuneIcon from "@mui/icons-material/Tune";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {
@@ -15,12 +17,14 @@ import {
   Container,
   Paper,
   IconButton,
+  Tooltip,
 } from "@mui/material";
 import RefreshPrompt from "../RefreshPrompt";
 import Footer from "./../Footer/index";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import InternationalCalculator from "../InternationalCalculator";
 import { useThemeMode } from "@/contexts/ThemeContext";
+import { useQuoteLayout } from "@/hooks/useQuoteLayout";
 
 type MainContainerProps = {
   resultadosFiltrados: Moneda[];
@@ -44,6 +48,21 @@ export default function MainContainer({
   const [tabValue, setTabValue] = useState(0);
   const [calculatorSource, setCalculatorSource] = useState("Dolar Blue");
   const [calculatorTarget, setCalculatorTarget] = useState("Peso Argentino");
+  const [organizerOpen, setOrganizerOpen] = useState(false);
+  const quoteNames = useMemo(
+    () => resultadosFiltrados.map((moneda) => moneda.nombre),
+    [resultadosFiltrados],
+  );
+  const { visible, hidden, reorder, hide, show, reset } =
+    useQuoteLayout(quoteNames);
+  const visibleQuotes = useMemo(() => {
+    const byName = new Map(
+      resultadosFiltrados.map((moneda) => [moneda.nombre, moneda]),
+    );
+    return visible
+      .map((name) => byName.get(name))
+      .filter((moneda): moneda is Moneda => !!moneda);
+  }, [resultadosFiltrados, visible]);
 
   const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
@@ -53,6 +72,11 @@ export default function MainContainer({
     setCalculatorSource(moneda);
     setCalculatorTarget("Peso Argentino");
     setTabValue(1); // Switch to Calculator Tab
+  };
+
+  const openOrganizer = () => {
+    setTabValue(0);
+    setOrganizerOpen(true);
   };
 
   return (
@@ -97,21 +121,25 @@ export default function MainContainer({
               >
                 verdurita.
               </Typography>
-              {/* Theme toggle - visible only on mobile */}
-              <IconButton
-                onClick={toggleTheme}
-                color="inherit"
-                sx={{
-                  display: { xs: "flex", md: "none" },
-                  borderRadius: "50%",
-                  backgroundColor: "background.default",
-                  "&:hover": {
-                    backgroundColor: "action.hover",
-                  },
-                }}
-              >
-                {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-              </IconButton>
+              <Box sx={{ display: { xs: "flex", md: "none" }, gap: 0.5 }}>
+                <Tooltip title="Organizar cotizaciones">
+                  <IconButton
+                    onClick={openOrganizer}
+                    aria-label="Organizar cotizaciones"
+                    sx={{ backgroundColor: "background.default" }}
+                  >
+                    <TuneIcon />
+                  </IconButton>
+                </Tooltip>
+                <IconButton
+                  onClick={toggleTheme}
+                  aria-label="Cambiar tema"
+                  color="inherit"
+                  sx={{ backgroundColor: "background.default" }}
+                >
+                  {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+                </IconButton>
+              </Box>
             </Grid>
 
             {/* Centered Tabs */}
@@ -172,7 +200,7 @@ export default function MainContainer({
               </Tabs>
             </Grid>
 
-            {/* Theme Toggle Button - Desktop only */}
+            {/* Header actions on desktop */}
             <Grid
               item
               xs={0}
@@ -180,10 +208,21 @@ export default function MainContainer({
               sx={{
                 display: { xs: "none", md: "flex" },
                 justifyContent: "flex-end",
+                gap: 0.5,
               }}
             >
+              <Tooltip title="Organizar cotizaciones">
+                <IconButton
+                  onClick={openOrganizer}
+                  aria-label="Organizar cotizaciones"
+                  sx={{ backgroundColor: "background.default" }}
+                >
+                  <TuneIcon />
+                </IconButton>
+              </Tooltip>
               <IconButton
                 onClick={toggleTheme}
+                aria-label="Cambiar tema"
                 color="inherit"
                 sx={{
                   borderRadius: "50%",
@@ -207,18 +246,17 @@ export default function MainContainer({
         <div role="tabpanel" hidden={tabValue !== 0}>
           {tabValue === 0 && (
             <Box>
-              <Grid container spacing={2}>
-                {(resultadosFiltrados || []).map(
-                  (moneda: Moneda, index: number) => (
+              {visibleQuotes.length > 0 ? (
+                <Grid container spacing={2}>
+                  {visibleQuotes.map((moneda: Moneda) => (
                     <Grid
-                      key={`${moneda?.nombre}-${index}`}
+                      key={moneda.nombre}
                       item
                       xs={12}
                       sm={6}
                       md={4}
                       lg={3}
-                      xl={2.4}
-                      // Removed manual sx overrides here (pl: 2, pb: 2)
+                      xl={2}
                     >
                       <CardItem
                         moneda={moneda.nombre}
@@ -228,14 +266,22 @@ export default function MainContainer({
                           { texto: "Compra", precio: moneda.compra },
                           { texto: "Promedio:", precio: moneda.promedio },
                         ]}
-                        esRealBrasileño={moneda.nombre === "Real Brasileño"}
-                        EsEuro={moneda.nombre.split(" ")[0] === "Euro"}
                         onClick={handleCardClick}
                       />
                     </Grid>
-                  ),
-                )}
-              </Grid>
+                  ))}
+                </Grid>
+              ) : (
+                <Box sx={{ textAlign: "center", py: 8 }}>
+                  <Typography variant="h6" sx={{ mb: 1 }}>
+                    No hay cotizaciones visibles
+                  </Typography>
+                  <Typography color="text.secondary" sx={{ mb: 2 }}>
+                    Usá el ícono de organizar del encabezado para volver a
+                    mostrarlas.
+                  </Typography>
+                </Box>
+              )}
 
               {filterApplied && (
                 <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
@@ -248,6 +294,17 @@ export default function MainContainer({
                   </Button>
                 </Box>
               )}
+              <QuoteOrganizer
+                open={organizerOpen}
+                isMobile={isMobile}
+                visible={visible}
+                hidden={hidden}
+                onClose={() => setOrganizerOpen(false)}
+                onReorder={reorder}
+                onHide={hide}
+                onShow={show}
+                onReset={reset}
+              />
             </Box>
           )}
         </div>

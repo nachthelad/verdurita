@@ -1,15 +1,19 @@
 import * as React from "react";
 const { memo, useCallback } = React;
-import { Card, CardContent, Typography, Box } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+} from "@mui/material";
+import CalculateOutlinedIcon from "@mui/icons-material/CalculateOutlined";
 import { format } from "numerable";
 import { hapticFeedback } from "@/utils/haptics";
 import LoadingShimmer from "../LoadingShimmer";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 type CardItemProps = {
   data: { texto: string; precio?: number }[];
-  esRealBrasileño?: boolean;
-  EsEuro?: boolean;
   loadingData: boolean;
   moneda: string;
   onClick: (moneda: string) => void;
@@ -22,84 +26,102 @@ const CardItem = memo(
       onClick(moneda);
     }, [moneda, onClick]);
 
-    // Extract key values for cleaner display
     const venta = data.find((d) => d.texto.includes("Venta"))?.precio;
     const compra = data.find((d) => d.texto.includes("Compra"))?.precio;
 
     return (
       <Card
-        onClick={handleClick}
         sx={{
           borderRadius: "16px",
           width: "100%",
-          cursor: "pointer",
-          transition: "all 0.2s ease-in-out",
+          height: "100%",
+          transition: "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
           "&:hover": {
             transform: "translateY(-4px)",
             boxShadow: "0px 8px 24px rgba(0,0,0,0.1)",
           },
         }}
       >
-        <CardContent sx={{ p: 3, "&:last-child": { pb: 3 } }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-start",
-              mb: 2,
-            }}
-          >
+        <CardActionArea
+          onClick={handleClick}
+          aria-label={`Abrir calculadora de ${moneda}`}
+          sx={{
+            height: "100%",
+            borderRadius: "inherit",
+            "&.Mui-focusVisible": {
+              outline: "2px solid",
+              outlineColor: "primary.main",
+              outlineOffset: "-2px",
+            },
+          }}
+        >
+          <CardContent sx={{ p: 3, "&:last-child": { pb: 3 } }}>
             <Typography
               variant="h6"
-              sx={{ fontWeight: 600, color: "text.primary" }}
+              sx={{ fontWeight: 600, color: "text.primary", mb: 1.5 }}
             >
               {moneda}
             </Typography>
-            <ArrowForwardIosIcon
-              sx={{ fontSize: 16, color: "text.secondary", mt: 0.5 }}
-            />
-          </Box>
 
-          {loadingData ? (
-            <LoadingShimmer width="100%" height="60px" />
-          ) : (
-            <Box>
-              {/* Main Price (Venta usually matters most) */}
-              <Box sx={{ display: "flex", alignItems: "baseline", mb: 1 }}>
-                <Typography
-                  variant="h3"
-                  sx={{ color: "primary.main", fontWeight: 700, mr: 1 }}
+            {loadingData ? (
+              <LoadingShimmer width="100%" height="60px" />
+            ) : (
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "flex-end",
+                  gap: 1,
+                  flexWrap: "wrap",
+                }}
+              >
+                <Box>
+                  <Typography variant="caption" color="text.secondary">
+                    Venta
+                  </Typography>
+                  <Typography
+                    variant="h3"
+                    sx={{
+                      color: "primary.main",
+                      fontWeight: 700,
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    ${format(venta ?? 0, "0,0.00")}
+                  </Typography>
+                  {compra !== undefined && (
+                    <Typography variant="body2" sx={{ mt: 1 }}>
+                      <Box
+                        component="span"
+                        sx={{ color: "text.secondary", mr: 0.75 }}
+                      >
+                        Compra
+                      </Box>
+                      <Box component="span" sx={{ fontWeight: 600 }}>
+                        ${format(compra, "0,0.00")}
+                      </Box>
+                    </Typography>
+                  )}
+                </Box>
+                <Box
+                  aria-hidden="true"
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    color: "primary.main",
+                    backgroundColor: "action.hover",
+                    borderRadius: 2,
+                    width: 36,
+                    height: 36,
+                  }}
                 >
-                  ${format(venta || 0, "0,0.00")}
-                </Typography>
+                  <CalculateOutlinedIcon fontSize="small" />
+                </Box>
               </Box>
-
-              {/* Sub Grid for Compra/Venta labels */}
-              <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
-                {compra && (
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography variant="caption" color="text.secondary">
-                      Compra
-                    </Typography>
-                    <Typography variant="body2" fontWeight={600}>
-                      ${format(compra, "0,0.00")}
-                    </Typography>
-                  </Box>
-                )}
-                {venta && (
-                  <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography variant="caption" color="text.secondary">
-                      Venta
-                    </Typography>
-                    <Typography variant="body2" fontWeight={600}>
-                      ${format(venta, "0,0.00")}
-                    </Typography>
-                  </Box>
-                )}
-              </Box>
-            </Box>
-          )}
-        </CardContent>
+            )}
+          </CardContent>
+        </CardActionArea>
       </Card>
     );
   },
