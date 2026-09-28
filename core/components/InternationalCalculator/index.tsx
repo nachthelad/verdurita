@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   Box,
   Typography,
@@ -55,6 +55,70 @@ const InternationalCalculator = ({
   // Shared State
   const [amount, setAmount] = useState<string>("");
   const [result, setResult] = useState<number | null>(null);
+  const [keyboardInset, setKeyboardInset] = useState(0);
+  const amountFocused = useRef(false);
+  const resultRef = useRef<HTMLDivElement>(null);
+  const unobstructedViewport = useRef({ width: 0, height: 0 });
+  const keyboardOpen = keyboardInset > 100;
+
+  const keepResultVisible = useCallback(() => {
+    if (!amountFocused.current) return;
+
+    const viewport = window.visualViewport;
+    const visibleBottom = viewport
+      ? viewport.offsetTop + viewport.height
+      : window.innerHeight;
+    const inset = Math.max(
+      0,
+      window.innerHeight - visibleBottom,
+      unobstructedViewport.current.height - visibleBottom,
+    );
+    setKeyboardInset(inset > 100 ? inset : 0);
+
+    requestAnimationFrame(() => {
+      if (!amountFocused.current) return;
+      const resultBottom = resultRef.current?.getBoundingClientRect().bottom;
+      if (resultBottom && resultBottom + 16 > visibleBottom) {
+        window.scrollBy({
+          top: resultBottom + 16 - visibleBottom,
+          behavior: "auto",
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    const viewport = window.visualViewport;
+    unobstructedViewport.current = {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    };
+    const handleWindowResize = () => {
+      if (
+        !amountFocused.current ||
+        unobstructedViewport.current.width !== window.innerWidth
+      ) {
+        unobstructedViewport.current = {
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      }
+      keepResultVisible();
+    };
+    viewport?.addEventListener("resize", keepResultVisible);
+    viewport?.addEventListener("scroll", keepResultVisible);
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      viewport?.removeEventListener("resize", keepResultVisible);
+      viewport?.removeEventListener("scroll", keepResultVisible);
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, [keepResultVisible]);
+
+  useEffect(() => {
+    if (amountFocused.current) keepResultVisible();
+  }, [amount, result, keepResultVisible]);
 
   // Fetch International Rates
   const { rates: intlRates } = useInternationalRates(intlSource);
@@ -149,7 +213,7 @@ const InternationalCalculator = ({
     <Paper
       elevation={0}
       sx={{
-        padding: 4,
+        padding: keyboardOpen ? 2 : { xs: 2.5, md: 4 },
         maxWidth: 600,
         width: "100%",
         margin: "auto",
@@ -157,10 +221,17 @@ const InternationalCalculator = ({
         background: "background.paper",
         border: "1px solid",
         borderColor: "divider",
+        mb: keyboardInset > 0 ? `${keyboardInset + 24}px` : undefined,
       }}
     >
       {/* Toggle Mode */}
-      <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          mb: keyboardOpen ? 1.5 : 4,
+        }}
+      >
         <Tabs
           value={mode}
           onChange={handleModeChange}
@@ -210,19 +281,27 @@ const InternationalCalculator = ({
         </Tabs>
       </Box>
 
-      <Grid container spacing={3} alignItems="center">
+      <Grid container spacing={keyboardOpen ? 1.5 : 3} alignItems="center">
         {/* Row 1: Amount Input (Hero) */}
         <Grid item xs={12}>
           <TextField
             fullWidth
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
+            onFocus={() => {
+              amountFocused.current = true;
+              keepResultVisible();
+            }}
+            onBlur={() => {
+              amountFocused.current = false;
+              setKeyboardInset(0);
+            }}
             placeholder="0"
             variant="standard"
             InputProps={{
               disableUnderline: true,
               style: {
-                fontSize: "4rem",
+                fontSize: keyboardOpen ? "3rem" : "4rem",
                 fontWeight: 700,
                 textAlign: "center",
                 color: theme.palette.primary.main,
@@ -231,6 +310,7 @@ const InternationalCalculator = ({
             inputProps={{
               style: { textAlign: "center" }, // Ensure placeholder is centered too
               inputMode: "decimal",
+              "aria-label": "Monto a convertir",
             }}
           />
           <Typography align="center" variant="subtitle2" color="text.secondary">
@@ -239,7 +319,7 @@ const InternationalCalculator = ({
         </Grid>
 
         {/* Row 2: Selectors */}
-        <Grid item xs={12} sx={{ mt: 2 }}>
+        <Grid item xs={12} sx={{ mt: keyboardOpen ? 0 : 2 }}>
           <Box
             sx={{
               display: "flex",
@@ -319,7 +399,12 @@ const InternationalCalculator = ({
         </Grid>
 
         {/* Row 3: Result */}
-        <Grid item xs={12} sx={{ textAlign: "center", mt: 4 }}>
+        <Grid
+          item
+          xs={12}
+          ref={resultRef}
+          sx={{ textAlign: "center", mt: keyboardOpen ? 1 : 4 }}
+        >
           <Typography variant="h6" color="text.secondary" gutterBottom>
             Es igual a
           </Typography>
